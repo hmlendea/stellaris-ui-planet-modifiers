@@ -8,7 +8,7 @@
 | Vanilla planet modifier identifiers | Host data | Supplies identifiers referenced by conditions: `pm_bleak`, `pm_tidal_locked`, `pm_low_gravity`, `pm_weak_magnetic_field`, `pm_strong_magnetic_field` | `has_planet_modifier` conditions | A host-side rename changes or disables eligibility logic silently |
 | Vanilla planet classes | Host data | 13 classes used as spawn conditions, from `pc_arctic` to `pc_savannah` | `is_planet_class` conditions | An introduced class is never covered until conditions are revised |
 | Vanilla static modifiers | Host data | Two effect keys bound by the override file: `weak_magnetic_field` and `strong_magnetic_field` | Definition `modifier` fields | If one is renamed, the corresponding definition resolves to no effect |
-| Steam Workshop platform | Distribution | Publishes the mod to players | Steam client and launcher | Availability depends on the platform, not the repository |
+| Steam Workshop platform | Distribution | Publishes the mod to players | `.github/workflows/steam-workshop-release.yml` | Availability depends on the platform, not the repository |
 | GitHub Releases | Distribution | Publishes a release archive | `.github/workflows/github-release.yml` | The archive is built from the tagged revision, so it matches the release tag rather than the working tree |
 | GIMP | Development tooling only | Produces the DDS icons from `src/planet_modifier.xcf` | Icon asset pipeline | Not required to use or review the mod, only to produce new artwork |
 | Image editor with DDS support | Development tooling only | Writing DDS output | Icon asset pipeline | A malformed export may render incorrectly with no repository-visible signal |
@@ -47,7 +47,7 @@ Dotted and solid edges are equally brittle; the distinction is only whether a fi
 | Package manager | No third-party code is vendored or restored |
 | Test framework | No automated verification is possible |
 | Linter or validator | Definition syntax is checked only by the host at load time |
-| Continuous integration | No check runs on a change; `.github/workflows/github-release.yml` only packages the archive when a release is published |
+| Continuous integration | No check runs on a change; `.github/workflows/github-release.yml` only packages the archive when a release is published, and `.github/workflows/steam-workshop-release.yml` only uploads to the Steam Workshop on tag pushes |
 | Code generator | Icons and localisation are edited by hand |
 
 The absence is not an oversight; a static-data mod legitimately requires none of these. The cost is that every cross-file invariant in [invariants.md](./invariants.md) relies on contributor discipline.

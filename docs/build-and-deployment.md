@@ -2,7 +2,7 @@
 
 ## Build
 
-There is no build step. The repository contains no compiler input, no packaging script, and no task runner; the only workflow packages the committed content at release time. Every shipped artefact is either authored text or an authored texture.
+There is no build step. The repository contains no compiler input, no packaging script, and no task runner; the workflows only package and publish the committed content at release time. Every shipped artefact is either authored text or an authored texture.
 
 | Activity | Status |
 |----------|--------|
@@ -11,7 +11,7 @@ There is no build step. The repository contains no compiler input, no packaging 
 | Minification | Not applicable |
 | Asset generation | Manual: DDS icons are exported from `src/planet_modifier.xcf` by an editor |
 | Dependency restoration | Not applicable |
-| Continuous integration | Release packaging only: `.github/workflows/github-release.yml` builds the archive on release publication; no validation runs on changes |
+| Continuous integration | Release packaging only: `.github/workflows/github-release.yml` builds the archive on release publication and `.github/workflows/steam-workshop-release.yml` uploads the mod to the Steam Workshop on `v*.*.*` tag pushes; no validation runs on changes |
 
 ## Delivery layout
 
@@ -58,7 +58,7 @@ The verified archive layout matches the delivery layout above exactly: both desc
 
 ## Release process
 
-The archive is produced by `.github/workflows/github-release.yml`, which runs when a GitHub release is published, checks out the tagged revision, derives the version from the tag with the leading `v` removed, zips `ui-planet-modifiers.mod` and `ui-planet-modifiers/`, and uploads the result as `ui-planet-modifiers_<version>.zip` to that release. The workshop publication remains a separate manual step. The archive therefore always matches the tagged repository state, but nothing prevents a release from being created on a revision that was never validated in game.
+The archive is produced by `.github/workflows/github-release.yml`, which runs when a GitHub release is published, checks out the tagged revision, derives the version from the tag with the leading `v` removed, zips `ui-planet-modifiers.mod` and `ui-planet-modifiers/`, and uploads the result as `ui-planet-modifiers_<version>.zip` to that release. The workshop item is published by `.github/workflows/steam-workshop-release.yml`, which runs when a `v*.*.*` tag is pushed, zips and extracts the same descriptor and content directory, and uploads the extracted content directory to the Steam Workshop item with a changenote linking the matching release tag. Both therefore match the tagged repository state, but nothing prevents a tag or release from being created on a revision that was never validated in game.
 
 ## Deployment topology
 
