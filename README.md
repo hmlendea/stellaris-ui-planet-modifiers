@@ -36,3 +36,11 @@ See the [Architecture Documentation](./ARCHITECTURE.md) for the system context, 
 Universum Infinitum: Planet Modifiers consists of Stellaris mod definition, localisation, and image files and does not execute code or handle user data.
 
 For information on reporting security vulnerabilities, see the [Security Policy](./SECURITY.md).
+
+## 💝 Project Engagement
+
+Discovered a problem with Universum Infinitum: Planet Modifiers or have a suggestion for it? [Open an issue](https://github.com/hmlendea/stellaris-ui-planet-modifiers/issues)!
+
+If you find this project useful, consider [funding it](https://hmlendea.go.ro/funding) or starring ⭐️ it on GitHub!
+
+[![Donate](https://raw.githubusercontent.com/hmlendea/readme-assets/master/donate_generic.png)](https://hmlendea.go.ro/funding)
