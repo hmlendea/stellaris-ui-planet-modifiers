@@ -116,6 +116,7 @@ The mod defines no data categories: it has no accounts, no telemetry, no diagnos
 | Workflow | Purpose | What it does |
 |----------|---------|--------------|
 | [ GitHub Release ](https://github.com/hmlendea/stellaris-ui-planet-modifiers/blob/master/.github/workflows/github-release.yml) | Publish the mod archive for a release | Runs when a release is published: checks out the tagged revision, strips the leading `v` from the tag to derive the version, zips `ui-planet-modifiers.mod` and `ui-planet-modifiers/` into `ui-planet-modifiers_<version>.zip`, and uploads the archive to the release |
+| [ Steam Workshop ](https://github.com/hmlendea/stellaris-ui-planet-modifiers/blob/master/.github/workflows/steam-workshop-release.yml) | Publish the mod to the Steam Workshop | Runs when a `v*.*.*` tag is pushed: checks out the tagged revision, zips `ui-planet-modifiers/` and `ui-planet-modifiers.mod`, extracts the archive, and uploads the content directory to the workshop item with a changenote linking the matching GitHub release tag |
 
 ## 🗂️ Project Structure
 
