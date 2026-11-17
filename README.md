@@ -13,6 +13,10 @@ When doing so, please:
 
 See the [Contributing Guidelines](./CONTRIBUTING.md) for details on how to report issues, suggest enhancements, and submit changes.
 
+## 📜 Code of Conduct
+
+See the [Code of Conduct](./CODE_OF_CONDUCT.md) for the standards of conduct expected in all project spaces.
+
 ## 🛡️ Privacy and Data
 
 Universum Infinitum: Planet Modifiers does not request, collect, transmit, or store personal data; its files define planet modifiers for Stellaris.
