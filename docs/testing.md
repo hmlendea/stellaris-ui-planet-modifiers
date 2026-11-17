@@ -2,7 +2,7 @@
 
 ## Current state
 
-The repository contains no test suite, no validation script, no linting configuration, and no continuous integration. Verification is manual and requires the host game.
+The repository contains no test suite, no validation script, and no linting configuration. The only workflow, `.github/workflows/github-release.yml`, packages the release archive when a release is published; it validates nothing. Verification is manual and requires the host game.
 
 | Verification type | Present |
 |-------------------|---------|
@@ -12,7 +12,7 @@ The repository contains no test suite, no validation script, no linting configur
 | Definition schema validation | No |
 | Cross-file consistency check | No |
 | Static analysis or linting | No |
-| Continuous integration | No |
+| Continuous integration | Release packaging only (`.github/workflows/github-release.yml`); no checks |
 | Manual in-game verification | Yes, by the contributor |
 
 The absence is not anomalous for a static-data mod, but it has a specific cost: every cross-file invariant in [invariants.md](./invariants.md) relies entirely on contributor discipline.

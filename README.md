@@ -20,6 +20,7 @@ A Stellaris mod that adds four new planet modifiers — extreme temperatures, ab
 - [Localisation](#-localisation)
 - [Compatibility](#-compatibility)
 - [Privacy and Data](#-privacy-and-data)
+- [GitHub Actions](#-github-actions)
 - [Project Structure](#-project-structure)
   - [Directories](#directories)
 - [Architecture](#-architecture)
@@ -109,6 +110,12 @@ Universum Infinitum - Planet Modifiers does not request, collect, transmit, or s
 For the detailed description of how the application handles privacy and personal data, see the [Privacy Statement](./PRIVACY.md).
 
 The mod defines no data categories: it has no accounts, no telemetry, no diagnostics, and no built-in transfers of personal data.
+
+## ⚙️ GitHub Actions
+
+| Workflow | Purpose | What it does |
+|----------|---------|--------------|
+| [ GitHub Release ](https://github.com/hmlendea/stellaris-ui-planet-modifiers/blob/master/.github/workflows/github-release.yml) | Publish the mod archive for a release | Runs when a release is published: checks out the tagged revision, strips the leading `v` from the tag to derive the version, zips `ui-planet-modifiers.mod` and `ui-planet-modifiers/` into `ui-planet-modifiers_<version>.zip`, and uploads the archive to the release |
 
 ## 🗂️ Project Structure
 

@@ -13,7 +13,7 @@ The mod integrates with the host and with distribution platforms. There are no t
 | Localisation system | Inbound | `l_english` keys matching the effect key, with `_desc` variants | Stellaris engine | The raw identifier is displayed |
 | Vanilla data space | Outbound | `pc_*`, `sc_*`, and `pm_*` identifiers referenced in conditions | Stellaris game data | A renamed or removed identifier makes the condition unevaluable |
 | Steam Workshop | Outbound | Published workshop item for the mod | Steam platform | Players cannot obtain or update the mod through that channel |
-| GitHub Releases | Outbound | Release archive | Repository maintainer | The archive can drift from the repository because it is built manually |
+| GitHub Releases | Outbound | Release archive | `.github/workflows/github-release.yml` | The archive reflects the tagged revision, not uncommitted or untagged changes |
 
 ## Host integration in detail
 
@@ -51,7 +51,7 @@ A change in any of these on the host side is invisible in the repository and man
 | Channel | Evidence | Status |
 |---------|----------|--------|
 | Steam Workshop | Item identifier `2072966604`, titled `[DISCONTINUED] Universum Infinitum - Planet Modifiers` | Published but marked discontinued by its author, and reaches a Stellaris-specific audience through the Steam client |
-| GitHub Releases | Release `v1.0` with archive `ui-planet-modifiers_1.0.zip` | Published |
+| GitHub Releases | Release `v1.0` with archive `ui-planet-modifiers_1.0.zip`; `.github/workflows/github-release.yml` builds the archive for every published release | Published |
 
 The Steam Workshop listing's title carries a `[DISCONTINUED]` prefix, which is an author-declared status rather than a repository artefact. It is a material signal for users and is recorded in [ambiguities-and-open-questions.md](./ambiguities-and-open-questions.md).
 

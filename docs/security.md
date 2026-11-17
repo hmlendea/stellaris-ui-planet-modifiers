@@ -52,7 +52,7 @@ The residual risk is therefore concentrated in three places: the host's own hand
 |--------|--------|
 | Third-party dependencies | None |
 | Build-time downloads | None |
-| Release automation executing remote scripts | None |
+| Release automation executing remote scripts | None; `.github/workflows/github-release.yml` runs only local `zip` and pinned actions with read-only repository content |
 | Signed artefacts | Not applicable |
 | Provenance | Repository history, release tag `v1.0`, and the workshop item |
 
