@@ -335,7 +335,7 @@ The mod is delivered as a descriptor plus a content directory that is copied int
 
 ## ✅ Testing and Verification
 
-The repository contains no test suite, no validation script, and no continuous integration workflow. Verification is manual and requires the host game.
+The repository contains no test suite, no validation script, and no continuous integration workflow that runs checks on changes. Verification is manual and requires the host game. The only workflow, `.github/workflows/github-release.yml`, packages and publishes the release archive when a release is published.
 
 Material coverage gaps and constraints:
 - Spawn-weight changes cannot be verified deterministically; only repeated in-game generation reveals distribution shifts.

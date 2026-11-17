@@ -108,11 +108,11 @@ Rationale for the shape of the definition set, as reconstructed from the artefac
 
 ## Decision: distribute through platforms rather than a build pipeline
 
-**Decision.** The repository contains no build step, packaging script, or release automation.
+**Decision.** The repository contains no build step and no packaging script; release packaging is delegated to `.github/workflows/github-release.yml`.
 
-**Evidence.** No workflow directory, no manifest, no script; the published GitHub release carries a single pre-built archive.
+**Evidence.** The only workflow is `.github/workflows/github-release.yml`, which zips the descriptor and content directory on release publication; no manifest or script compiles anything.
 
-**Why.** A mod of static data files requires no compilation. The archive is produced manually and uploaded. The cost is that the release archive can drift from the repository, since nothing regenerates it automatically.
+**Why.** A mod of static data files requires no compilation, so the workflow only archives the committed content. The archive is produced from the tagged revision, which removes the drift that a manually uploaded archive allowed; it does not validate the content, so in-game verification remains a manual prerequisite for a release.
 
 ## Related documentation
 

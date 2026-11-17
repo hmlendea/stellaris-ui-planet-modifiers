@@ -94,7 +94,7 @@ No existing file requires modification, because localisation is additive.
 1. Edit `supported_version` in both descriptors to the same value.
 2. Verify by loading the mod on the target version and confirming that all four modifiers generate, present correctly, and apply their effects.
 3. Confirm that no referenced vanilla identifier has been renamed; a rename manifests as an unevaluable condition rather than a load error.
-4. Rebuild the release archive, since nothing regenerates it automatically.
+4. Publish a release; `.github/workflows/github-release.yml` builds the archive from the tagged revision automatically.
 
 ## Changing the mod name, path, or content directory
 

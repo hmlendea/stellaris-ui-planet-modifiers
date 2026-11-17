@@ -2,7 +2,7 @@
 
 ## Build
 
-There is no build step. The repository contains no compiler input, no packaging script, no task runner, and no workflow. Every shipped artefact is either authored text or an authored texture.
+There is no build step. The repository contains no compiler input, no packaging script, and no task runner; the only workflow packages the committed content at release time. Every shipped artefact is either authored text or an authored texture.
 
 | Activity | Status |
 |----------|--------|
@@ -11,7 +11,7 @@ There is no build step. The repository contains no compiler input, no packaging 
 | Minification | Not applicable |
 | Asset generation | Manual: DDS icons are exported from `src/planet_modifier.xcf` by an editor |
 | Dependency restoration | Not applicable |
-| Continuous integration | None |
+| Continuous integration | Release packaging only: `.github/workflows/github-release.yml` builds the archive on release publication; no validation runs on changes |
 
 ## Delivery layout
 
@@ -58,7 +58,7 @@ The verified archive layout matches the delivery layout above exactly: both desc
 
 ## Release process
 
-The repository contains no release automation. A release consists of a manually produced archive attached to a GitHub release and, separately, a workshop publication. The observable consequence is that the archive can diverge from the repository state, because nothing regenerates it when files change.
+The archive is produced by `.github/workflows/github-release.yml`, which runs when a GitHub release is published, checks out the tagged revision, derives the version from the tag with the leading `v` removed, zips `ui-planet-modifiers.mod` and `ui-planet-modifiers/`, and uploads the result as `ui-planet-modifiers_<version>.zip` to that release. The workshop publication remains a separate manual step. The archive therefore always matches the tagged repository state, but nothing prevents a release from being created on a revision that was never validated in game.
 
 ## Deployment topology
 
@@ -77,7 +77,7 @@ The repository contains no release automation. A release consists of a manually 
 | Risk | Impact | Mitigation available within the repository |
 |------|--------|------------------------------------------|
 | Declared version drift | The mod may behave differently on a newer engine | None; only in-game verification |
-| Archive divergence | Players receive content that differs from the repository | Regenerate the archive as part of the release procedure |
+| Archive divergence | Players receive content that differs from the repository | None; the release workflow archives the tagged revision, so the archive matches the tag |
 | Identifier removal | Existing saves retain dangling identifiers | Avoid removing or renaming identifiers |
 | Host identifier rename | Conditions become unevaluable | None; requires a mod update |
 

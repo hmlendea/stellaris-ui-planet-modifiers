@@ -5,7 +5,9 @@
 ```text
 stellaris-ui-planet-modifiers/
 ├── .github/
-│   └── FUNDING.yml                     # Funding platforms consumed by GitHub
+│   ├── FUNDING.yml                     # Funding platforms consumed by GitHub
+│   └── workflows/
+│       └── github-release.yml          # Packages and publishes the release archive
 ├── src/
 │   └── planet_modifier.xcf             # Editable GIMP source for the icon set
 ├── ui-planet-modifiers/
@@ -46,7 +48,7 @@ stellaris-ui-planet-modifiers/
 | `ui-planet-modifiers/common/static_modifiers/` | Effect definitions bound to icons and localisation keys. |
 | `ui-planet-modifiers/gfx/interface/icons/planet_modifiers/` | DDS icon textures, one per new modifier, named `pm_ui_<name>.dds`. |
 | `ui-planet-modifiers/localisation/english/` | English localisation, one language directory per locale. |
-| `.github/` | GitHub platform configuration. Contains only the funding declaration. |
+| `.github/` | GitHub platform configuration: the funding declaration and the `github-release.yml` release-packaging workflow. |
 | `docs/` | This knowledge base. Not shipped with the mod. |
 
 ## Naming conventions observed by the repository
@@ -65,7 +67,7 @@ The `ui_` element in these names originates from the repository name rather than
 
 ## Structural observations
 
-- There is no build directory, no dependency manifest, no workflow directory, and no test directory. The absence is meaningful: nothing is compiled, downloaded, or verified automatically.
+- There is no build directory, no dependency manifest, and no test directory. The only automation is `.github/workflows/github-release.yml`, which packages the archive when a release is published; nothing is compiled, downloaded, or verified automatically.
 - `ui-planet-modifiers/thumbnail.png` and `ui-planet-modifiers/descriptor.mod` are the only artefacts addressed at the launcher rather than at the game engine.
 - `src/` sits outside the mod content directory deliberately, so that the GIMP source is not shipped as part of the mod content.
 
