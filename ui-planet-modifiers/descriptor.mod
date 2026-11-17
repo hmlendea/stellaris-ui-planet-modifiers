@@ -3,4 +3,4 @@ path="mod/ui-planet-modifiers"
 tags={
     "Galaxy Generation"
 }
-supported_version="2.6.*"
+supported_version="v4.5.*"

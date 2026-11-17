@@ -12,8 +12,8 @@ stellaris-ui-planet-modifiers/
 │   ├── descriptor.mod                  # Local mod descriptor
 │   ├── common/
 │   │   ├── planet_modifiers/
-│   │   │   ├── ui-planet-modifiers.txt            # Eight new planet modifiers
-│   │   │   └── ui-planet-modifiers-vanillas.txt   # pm_null plus nine redefinitions
+│   │   │   ├── ui-planet-modifiers.txt            # Four new planet modifiers
+│   │   │   └── ui-planet-modifiers-vanillas.txt   # two re-declared vanilla spawn chances
 │   │   └── static_modifiers/
 │   │       └── ui-planet-modifiers_static_modifiers.txt  # Eight effect blocks
 │   ├── gfx/

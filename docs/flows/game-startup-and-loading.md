@@ -42,7 +42,7 @@ sequenceDiagram
 ## Step by step
 
 1. **Descriptor resolution.** The launcher reads `ui-planet-modifiers.mod` (or the archive's `descriptor.mod`) to obtain `name`, `path`, `tags`, and `supported_version`. The `path` value determines which directory is scanned; if it does not resolve, no content is loaded.
-2. **Compatibility verdict.** `supported_version="2.6.*"` is compared against the running game version. A mismatch is a launcher-level warning, not a load abort; the mod may still be loaded.
+2. **Compatibility verdict.** `supported_version="v4.5.*"` is compared against the running game version. A mismatch is a launcher-level warning, not a load abort; the mod may still be loaded.
 3. **Definition enumeration.** Both files under `common/planet_modifiers/` are parsed. Parsing is per-key, so a malformed block is discarded without necessarily discarding its siblings. Distinct keys merge into one candidate pool; a duplicate key in two files resolves to one winner.
 4. **Effect enumeration.** `common/static_modifiers/ui-planet-modifiers_static_modifiers.txt` is parsed into the effect registry keyed by `ui_*` identifiers. The `modifier` strings in the definition file are not resolved at this point; the binding is by shared key space.
 5. **Icon registration.** Each effect block's `icon` string is registered as a path. Paths are resolved against the mod content directory, so the value must omit the `ui-planet-modifiers/` prefix.

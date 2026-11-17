@@ -36,10 +36,10 @@ sequenceDiagram
 
 1. **Block resolution.** The assigned definition's `modifier` string is looked up in the effect registry. A miss here is the most consequential presentation failure, because no effect, icon, or importance flag is available.
 2. **Icon resolution.** The block's `icon` value is resolved relative to the mod content directory. Success yields a texture; failure yields a missing or placeholder icon while the modifier remains otherwise functional.
-3. **Frame selection.** `icon_frame` selects the frame within the icon presentation slot. All eight new modifiers use frame 1, 2, or 3.
+3. **Frame selection.** `icon_frame` selects the frame within the icon presentation slot. All four new modifiers use frame 1, 2, or 3.
 4. **Name resolution.** The block's key is looked up directly. `ui_salty` resolves to the string *Salty*.
 5. **Description resolution.** The key with `_desc` appended is looked up. `ui_salty_desc` resolves to the salinity description.
-6. **Emphasis.** A block carrying `important = yes` is presented in the prominent form. Only `ui_microorganisms` sets it.
+6. **Emphasis.** A block carrying `important = yes` would be presented in the prominent form. No block in this repository sets it; the flag is reserved for nameplate-bearing modifiers such as terraforming candidates.
 7. **Rendering.** The planet interface composes the icon, name, and description.
 
 ## Degradation ladder
@@ -61,7 +61,7 @@ The last two rows are the reason a binding error is worse than a cosmetic error:
 
 ## Emphasis and slot cost
 
-`pm_null` exists to occupy a slot with no effect. `ui_microorganisms` occupies a slot and sets `important = yes` with no effect keys. Both therefore consume planetary modifier capacity without changing statistics, which is a deliberate presentation and pacing choice rather than a defect; the relaxed accumulation guard on `pm_ui_microorganisms` (`num_modifiers > 2` instead of `> 1`) is consistent with that reading.
+`pm_null` exists to occupy a slot with no effect. Every effect block in this repository, by contrast, declares at least one effect, so every assigned modifier penalises the planet.
 
 ## Related documentation
 

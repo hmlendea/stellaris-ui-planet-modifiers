@@ -4,7 +4,7 @@
 
 1. Obtain the mod from a supported distribution channel: the Steam Workshop, or the release archive published on GitHub.
 2. Activate it in the Stellaris launcher's playset for the intended game version.
-3. Start a new game. The eight new planet modifiers become eligible during galaxy generation; existing saves are unaffected because modifiers are assigned at generation time.
+3. Start a new game. The four new planet modifiers become eligible during galaxy generation; existing saves are unaffected because modifiers are assigned at generation time.
 4. Inspect colonised and surveyed planets to confirm that modifier names, descriptions, and icons render correctly.
 
 If a modifier does not appear at all, it is most often excluded by a condition rather than missing. See [troubleshooting.md](./troubleshooting.md).
@@ -36,7 +36,7 @@ The detailed procedure, with the conventions that must be preserved, is in [chan
 - The `modifier` field of a definition must equal the static modifier key exactly.
 - Spawn weights are relative. Changing one weight changes every other modifier's effective probability.
 - Description keys are the static modifier key with `_desc` appended.
-- The descriptors declare `supported_version="2.6.*"`.
+- The descriptors declare `supported_version="v4.5.*"`.
 
 ## Related documentation
 

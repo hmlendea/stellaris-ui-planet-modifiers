@@ -2,11 +2,9 @@
 [![Latest Release](https://img.shields.io/github/v/release/hmlendea/stellaris-ui-planet-modifiers)](https://github.com/hmlendea/stellaris-ui-planet-modifiers/releases/latest)
 [![License](https://img.shields.io/github/license/hmlendea/stellaris-ui-planet-modifiers)](https://github.com/hmlendea/stellaris-ui-planet-modifiers/blob/master/LICENSE)
 
-# Universum Infinitum: Planet Modifiers
+# Universum Infinitum - Planet Modifiers
 
-A Stellaris mod that adds eight new planet modifiers — perpetual twilight, extreme temperatures, absence of a magnetic field, salinity, swampland, microorganisms, giant earthworms, and sea monsters — each with its own icon and English localisation, together with revised spawn chances for existing planet modifiers so that the enlarged pool remains internally consistent.
-
-> **Project status:** Maintenance is dormant. The Steam Workshop listing is published with a `[DISCONTINUED]` prefix, and both descriptors declare `supported_version="2.6.*"`, which predates the current Stellaris release line, so newer game versions are unverified.
+A Stellaris mod that adds four new planet modifiers — extreme temperatures, absence of a magnetic field, salinity, and swampland — each with its own icon and English localisation, weighted to match the vanilla v4.5 planet modifier pool.
 
 ## 📑 Table of Contents
 
@@ -38,11 +36,13 @@ A Stellaris mod that adds eight new planet modifiers — perpetual twilight, ext
 
 ## ✨ Capabilities
 
-- Adds eight new planet modifiers with distinct names, descriptions, and icons.
-- Gates each new modifier with class, size, moon, and star-system conditions so that it appears on thematically plausible worlds.
-- Excludes mutually contradictory modifiers, so a planet never carries both perpetual twilight and extreme temperatures, two magnetic-field variants, or two gravity variants.
-- Revises the spawn chances of ten existing planet modifiers so that the new additions and the existing ones share one consistent selection pool.
-- Caps modifier accumulation per planet, with two deliberate exceptions.
+- Adds four new planet modifiers with distinct names, descriptions, and icons.
+- Gates each new modifier with planet-class and star-system conditions so that it appears on thematically plausible worlds.
+- Excludes mutually contradictory modifiers, so a planet never carries both a tidal lock and extreme temperatures, or two magnetic-field variants.
+- Excludes the new modifiers from vanilla modifiers that already cover the same theme, so no duplicate concept enters the pool.
+- Reproduces the vanilla v4.5 spawn conditions for the two vanilla modifiers it re-declares, changing only their exclusions.
+- Scales every effect within the vanilla v4.5 band for comparable modifiers.
+- Caps modifier accumulation per planet.
 - Provides English localisation for every new modifier.
 
 ## 🚀 Usage
@@ -53,7 +53,7 @@ Inspect surveyed or colonised planets to confirm that each modifier presents its
 
 ## ⚠️ Known Limitations
 
-- Both descriptors declare `supported_version="2.6.*"`, which predates the current Stellaris release line; behaviour on newer versions is unverified.
+- The descriptors declare `supported_version="v4.5.*"`; other release lines are untested.
 - Spawn chances are relative, so changing one modifier's weight shifts the effective probability of every other candidate.
 - The mod references vanilla planet-class, star-class, and planet-modifier identifiers that it neither defines nor validates, so a host-side rename changes eligibility silently.
 - Modifier identifiers are recorded in save files; renaming or removing one leaves existing saves with dangling references.
@@ -64,7 +64,7 @@ Inspect surveyed or colonised planets to confirm that each modifier presents its
 
 | Component | Minimum | Recommended |
 |-----------|---------|-------------|
-| Stellaris | `2.6.*` as declared by the mod descriptors | A game version verified in practice against these definitions |
+| Stellaris | `v4.5.*` as declared by the mod descriptors | A game version verified in practice against these definitions |
 
 ## 📦 Installation
 
@@ -92,19 +92,19 @@ Display names and descriptions are supplied through the host localisation system
 
 | Language | Locale | Status |
 |----------|--------|--------|
-| English | `en` | Complete: one name and one description for each of the eight new modifiers |
+| English | `en` | Complete: one name and one description for each of the four new modifiers |
 
 ## 🧩 Compatibility
 
 | Component | Supported Versions | Notes |
 |-----------|--------------------|-------|
-| Stellaris | `2.6.*` as declared | Newer release lines are unverified |
+| Stellaris | `v4.5.*` as declared | Other release lines are unverified |
 | Multiplayer sessions | Same mod version on every client | Divergent mod sets produce inconsistent presentation and statistics |
 | Other mods | No dependency | Conditions reference identifiers such as `pm_titanic_life` and `pm_lush` opportunistically; no other mod is required |
 
 ## 🛡️ Privacy and Data
 
-Universum Infinitum: Planet Modifiers does not request, collect, transmit, or store personal data; its files define planet modifiers for Stellaris.
+Universum Infinitum - Planet Modifiers does not request, collect, transmit, or store personal data; its files define planet modifiers for Stellaris.
 
 For the detailed description of how the application handles privacy and personal data, see the [Privacy Statement](./PRIVACY.md).
 
@@ -119,7 +119,7 @@ The repository is a Stellaris mod: a descriptor plus a content directory of defi
 | Directory | Purpose |
 |-----------|---------|
 | `ui-planet-modifiers/` | The mod content directory named by the descriptor `path` field |
-| `ui-planet-modifiers/common/planet_modifiers/` | Spawn-chance definitions: eight new modifiers and ten redefinitions |
+| `ui-planet-modifiers/common/planet_modifiers/` | Spawn-chance definitions: four new modifiers and two vanilla redefinitions |
 | `ui-planet-modifiers/common/static_modifiers/` | Effect blocks, icon bindings, icon frames, and importance flags |
 | `ui-planet-modifiers/gfx/interface/icons/planet_modifiers/` | DDS icon textures, one per new modifier |
 | `ui-planet-modifiers/localisation/english/` | English display names and descriptions |
@@ -128,7 +128,7 @@ The repository is a Stellaris mod: a descriptor plus a content directory of defi
 
 ## 🏗️ Architecture
 
-Universum Infinitum: Planet Modifiers is a declarative Stellaris mod that defines planet modifiers, their spawn conditions, static effects, icons, and localisation through static data files consumed by the game engine.
+Universum Infinitum - Planet Modifiers is a declarative Stellaris mod that defines planet modifiers, their spawn conditions, static effects, icons, and localisation through static data files consumed by the game engine.
 
 See the [Architecture Documentation](./ARCHITECTURE.md) for the system context, principal components, runtime flows, ownership boundaries, dependencies, constraints, and extension points.
 
@@ -173,19 +173,19 @@ See the [Code of Conduct](./CODE_OF_CONDUCT.md) for the standards of conduct exp
 
 ## 🔗 Related Projects
 
-- [Universum Infinitum: Deposit Blockers](https://github.com/hmlendea/stellaris-ui-deposit-blockers): Adds seven planet deposit blockers and one matching society technology to clear each of them.
-- [Universum Infinitum: Flags](https://github.com/hmlendea/stellaris-ui-flags): Adds hundreds of new flag designs matching the vanilla flag style.
-- [Universum Infinitum: Galaxy Sizes](https://github.com/hmlendea/stellaris-ui-galaxy-sizes): Adds six galaxy sizes ranging from 100 to 2,000 stars, with scaled generation defaults.
-- [Universum Infinitum: Name Lists](https://github.com/hmlendea/stellaris-ui-name-lists): Provides numerous detailed name lists, including the Human - Extended variant.
-- [Universum Infinitum: Planet Modifiers](https://github.com/hmlendea/stellaris-ui-planet-modifiers): Adds eight new planet modifiers with their own icons and English localisation.
-- [Universum Infinitum: Prescripted Countries](https://github.com/hmlendea/stellaris-ui-prescripted-countries): Adds prescripted countries for players to select or for the AI to use.
-- [Universum Infinitum: Species Names](https://github.com/hmlendea/stellaris-ui-species-names): Adds hundreds of new species names to the game.
-- [Universum Infinitum: Species Traits](https://github.com/hmlendea/stellaris-ui-species-traits): Adds 58 custom species traits and extends several trait families with additional tiers.
-- [Universum Infinitum: Star Names](https://github.com/hmlendea/stellaris-ui-star-names): Adds thousands of new names for stars, nebulas, asteroids, and black holes.
+- [Universum Infinitum - Deposit Blockers](https://github.com/hmlendea/stellaris-ui-deposit-blockers): Adds seven planet deposit blockers and one matching society technology to clear each of them.
+- [Universum Infinitum - Flags](https://github.com/hmlendea/stellaris-ui-flags): Adds hundreds of new flag designs matching the vanilla flag style.
+- [Universum Infinitum - Galaxy Sizes](https://github.com/hmlendea/stellaris-ui-galaxy-sizes): Adds six galaxy sizes ranging from 100 to 2,000 stars, with scaled generation defaults.
+- [Universum Infinitum - Name Lists](https://github.com/hmlendea/stellaris-ui-name-lists): Provides numerous detailed name lists, including the Human - Extended variant.
+- [Universum Infinitum - Planet Modifiers](https://github.com/hmlendea/stellaris-ui-planet-modifiers): Adds four new planet modifiers with their own icons and English localisation.
+- [Universum Infinitum - Prescripted Countries](https://github.com/hmlendea/stellaris-ui-prescripted-countries): Adds prescripted countries for players to select or for the AI to use.
+- [Universum Infinitum - Species Names](https://github.com/hmlendea/stellaris-ui-species-names): Adds hundreds of new species names to the game.
+- [Universum Infinitum - Species Traits](https://github.com/hmlendea/stellaris-ui-species-traits): Adds 58 custom species traits and extends several trait families with additional tiers.
+- [Universum Infinitum - Star Names](https://github.com/hmlendea/stellaris-ui-star-names): Adds thousands of new names for stars, nebulas, asteroids, and black holes.
 
 ## 🔒 Security
 
-Universum Infinitum: Planet Modifiers consists of Stellaris mod definition, localisation, and image files and does not execute code or handle user data.
+Universum Infinitum - Planet Modifiers consists of Stellaris mod definition, localisation, and image files and does not execute code or handle user data.
 
 For information on reporting security vulnerabilities, see the [Security Policy](./SECURITY.md).
 
@@ -195,7 +195,7 @@ For support, please [open an issue](https://github.com/hmlendea/stellaris-ui-pla
 
 ## 💝 Project Engagement
 
-Discovered a problem with Universum Infinitum: Planet Modifiers or have a suggestion for it? [Open an issue](https://github.com/hmlendea/stellaris-ui-planet-modifiers/issues)!
+Discovered a problem with Universum Infinitum - Planet Modifiers or have a suggestion for it? [Open an issue](https://github.com/hmlendea/stellaris-ui-planet-modifiers/issues)!
 
 If you find this project useful, consider [funding it](https://hmlendea.go.ro/funding) or starring ⭐️ it on GitHub, or giving it a thumbs up and adding it as a favourite on the [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2072966604)!
 

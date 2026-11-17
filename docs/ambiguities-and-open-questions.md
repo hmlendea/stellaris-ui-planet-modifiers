@@ -2,47 +2,23 @@
 
 Unresolved items identified during documentation, with the evidence that leaves each open. None is presented as a defect; each is a place where the repository is silent or where a reasonable reader could reach two conclusions.
 
-## Why `pm_ui_swampy` has no guard or exclusion clauses
+## Why `pm_ui_swampy` used to have no guard or exclusion clauses
 
-**Observation.** Every other new definition carries a `num_modifiers` guard and at least one exclusion or self-exclusion. `pm_ui_swampy` declares only two `add` clauses.
+**Observation.** An earlier revision gave `pm_ui_swampy` only two `add` clauses, with no `num_modifiers` guard, no self-exclusion, and no conflict exclusion. Every other definition carried both.
 
-**Consequences.** It can be assigned to a planet that already carries one or more modifiers, and it has no self-exclusion, so duplication depends entirely on whether the engine prevents re-selecting an already-assigned modifier.
+**Resolution.** The definition now declares the standard `num_modifiers > 1` guard and a mutual exclusion against `pm_ui_salty`. The asymmetry is therefore resolved rather than open.
 
-**Possible readings.** A deliberate soft limit, allowing swamps to layer onto otherwise-modified worlds; or an omission introduced when the definition was written.
+## Why accumulated modifiers were capped inconsistently
 
-**Evidence needed.** The engine's own re-selection behaviour, which is not observable from the repository.
+**Observation.** An earlier revision used `num_modifiers > 1` for seven definitions, `num_modifiers > 2` for `pm_ui_microorganisms`, and no guard at all for `pm_ui_swampy`.
 
-## Why accumulated modifiers are capped inconsistently
-
-**Observation.** Seven definitions use `num_modifiers > 1`, `pm_ui_microorganisms` uses `num_modifiers > 2`, and `pm_ui_swampy` uses none, while `pm_null` treats increasing counts as a reason to *increase* its own weight through three escalating `factor = 3` clauses.
-
-**Consequences.** The effective cap depends on which modifier is being considered, and `pm_null` becomes a progressively more likely outcome as a planet accumulates modifiers.
-
-**Possible readings.** Microorganisms is permitted a third slot because it has no effect and is meant to be visible. `pm_null` may function as a budget-balancer. Neither reading is stated anywhere.
-
-## Whether `pm_null` should carry all three `factor = 3` clauses
-
-**Observation.** The three clauses test `num_modifiers > 2`, `> 1`, and `> 0` respectively, and all three can apply simultaneously.
-
-**Consequence.** On a planet with three or more modifiers, the effective weight is $275 \times 3 \times 3 \times 3 = 7425$, which dwarfs every other candidate.
-
-**Possible readings.** Intentional, to make slot-filling outcomes dominate on crowded planets; or the clauses were written incrementally and their compounding was not intended.
+**Resolution.** Every definition now uses the vanilla `num_modifiers > 1` guard, so the cap no longer depends on which modifier is considered. Vanilla `pm_null` still treats increasing counts as a reason to increase its own weight through three escalating `factor = 3` clauses; that behaviour belongs to the host and is unchanged.
 
 ## Whether the vanilla originals are still reachable
 
-**Observation.** The override file declares new `pm_ui_*` keys bound to host effect keys, and several redefinitions exclude the vanilla original (`pm_hazardous_weather`, `pm_tidal_locked`, `pm_asteroid_impacts`, `pm_wild_storms`, `pm_low_gravity`, `pm_high_gravity`, `pm_unstable_tectonics`, plus the magnetic pair). But whether the host's own definitions remain in the candidate pool at all, and whether the exclusions therefore matter, depends on key-merging behaviour the repository cannot observe.
+**Observation.** An earlier revision declared parallel `pm_ui_*` keys bound to host effect keys, leaving the host's own definitions in the pool. Whether the host definitions remained eligible, and whether the exclusions therefore mattered, depended on key-merging behaviour the repository cannot observe.
 
-**Consequence.** If the host definitions remain eligible, the mod reduces their effective probability rather than replacing them, which changes the observed distribution in a way the repository does not document.
-
-## Which modifier actually wins for `pm_hazardous_weather` and its siblings
-
-**Observation.** Both `pm_ui_hazardous_weather` and a hypothetical host-side `pm_hazardous_weather` would apply the same effect if both are eligible, and both are excluded by the mod's own definition. Whether the host's definition is superseded, shadowed, or coexists is not determinable from the repository.
-
-## `pm_ui_microorganisms` configures no effect but is marked important
-
-**Observation.** The block sets `important = yes` and declares no effect keys, so it consumes a modifier slot and presents prominently while changing nothing.
-
-**Possible reading.** A narrative element, analogous to `pm_null` in structure but visible. Its relaxed accumulation guard is consistent with that reading.
+**Resolution.** The override file now re-declares the vanilla keys themselves (`pm_weak_magnetic_field`, `pm_strong_magnetic_field`). Because mod files load after `00_planet_modifiers.txt`, the mod's definition replaces the host's, so no duplicate candidate exists. The remaining uncertainty is only whether a future game version changes the load order, which a single generation test will reveal.
 
 ## Naming diverges between the mod title and its identifiers
 
@@ -52,7 +28,7 @@ Unresolved items identified during documentation, with the evidence that leaves 
 
 ## `supported_version` is unverified
 
-**Observation.** Both descriptors declare `2.6.*`, which predates the current Stellaris release line by many versions.
+**Observation.** Both descriptors declare `v4.5.*`, matching the release line against which the definitions were recalibrated.
 
 **Consequence.** The compatibility claim is an assertion, not a verified fact. A contributor cannot tell from the repository whether the definitions still behave as intended on any given version, nor which vanilla identifiers may since have been renamed.
 
@@ -62,23 +38,17 @@ Unresolved items identified during documentation, with the evidence that leaves 
 
 **Consequence.** A reader cannot determine from the repository whether the mod is actively maintained, superseded, or merely no longer updated on one channel.
 
-## Exclusions reference other mods' identifiers
+## Exclusions reference host identifiers that are not defined here
 
-**Observation.** Conditions reference `pm_titanic_life`, `pm_lush`, and `pm_bleak`, which are not vanilla identifiers defined in this repository.
+**Observation.** Conditions reference `pm_titanic_life`, `pm_lush`, and `pm_bleak`, which the repository does not define.
 
-**Consequence.** If those identifiers belong to other mods, then some conditions silently never fire for players without those mods. Whether they are host-provided, other-mod-provided, or originally vanilla and since removed is not determinable from the repository.
+**Consequence.** None. `pm_lush`, `pm_bleak`, `pm_titanic_life`, `pm_dangerous_wildlife`, `pm_docile_fauna`, `pm_rich_mircoflora`, `pm_low_gravity`, and `pm_high_gravity` are all vanilla v4.5 planet modifiers, verified against the installed game's `common/planet_modifiers/00_planet_modifiers.txt`. They are referenced but not defined here, which is the normal way a mod reads host state.
 
-## Whether `is_planet_class` with unquoted identifiers is intentional
+## Identifiers were once quoted inconsistently
 
-**Observation.** Early definitions quote the class identifier; the gravity redefinitions use the bare form.
+**Observation.** Earlier revisions quoted class identifiers in some blocks and used the bare form in others.
 
-**Consequence.** None observed; the parser accepts both. Recorded because a future contributor might "normalise" the inconsistency without knowing it is harmless.
-
-## The gravity exclusions are one-directional against unstable tectonics
-
-**Observation.** `pm_ui_unstable_tectonics` excludes `pm_ui_high_gravity` and `pm_high_gravity`, but high gravity does not exclude unstable tectonics, and tectonics therefore has no counterpart in the gravity lists.
-
-**Consequence.** The combination is prevented by the accumulation guard rather than by a declared conflict, so the intent is satisfied but through a different mechanism than the other families use.
+**Resolution.** Every identifier is now quoted uniformly, including in the re-declared vanilla blocks. The parser accepts both forms, so this was cosmetic rather than functional.
 
 ## Related documentation
 

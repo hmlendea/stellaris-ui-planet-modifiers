@@ -2,11 +2,11 @@
 
 ## Responsibility
 
-Declare the eight new planet modifiers and the relative probability with which the engine may assign each to a generated planet.
+Declare the four new planet modifiers and the relative probability with which the engine may assign each to a generated planet.
 
 ## Location
 
-`ui-planet-modifiers/common/planet_modifiers/ui-planet-modifiers.txt` — a single file containing eight top-level `pm_ui_*` definitions.
+`ui-planet-modifiers/common/planet_modifiers/ui-planet-modifiers.txt` — a single file containing four top-level `pm_ui_*` definitions.
 
 ## Structure
 
@@ -28,117 +28,66 @@ Only the final `modifier` string and the `spawn_chance` block are structurally r
 
 ## Per-modifier specification
 
-### `pm_ui_twilight` → `ui_twilight`
-
-| Clause | Effect |
-|--------|--------|
-| `add = 2` when planet class is any of `pc_arctic`, `pc_tundra`, `pc_alpine`, `pc_desert`, `pc_frozen`, `pc_barren`, `pc_barren_cold` | Base weight 2 on those classes |
-| `factor = 2` when `has_planet_modifier = "pm_bleak"` | Doubled on bleak worlds |
-| `factor = 4` when the planet already has `pm_ui_tidal_locked` or `pm_tidal_locked` | Quadrupled on tidally locked worlds |
-| `factor = 0` when `num_modifiers > 1` | Excluded once more than one modifier is present |
-
 ### `pm_ui_extreme_temperatures` → `ui_extreme_temperatures`
 
 | Clause | Effect |
 |--------|--------|
-| `add = 5` on `pc_alpine`, `pc_desert`, `pc_arid`, `pc_nuked`, `pc_barren`, `pc_barren_cold` | Base weight 5 on those classes |
+| `add = 10` on `pc_desert`, `pc_arid`, `pc_alpine`, `pc_nuked` | Base weight 10 on the hottest classes |
+| `add = 5` on `pc_barren`, `pc_barren_cold` | Base weight 5 on barren worlds |
 | `factor = 2` when `has_planet_modifier = "pm_bleak"` | Doubled on bleak worlds |
-| `factor = 0` when the planet already has `pm_ui_twilight`, `pm_ui_tidal_locked`, or `pm_tidal_locked` | Excludes the twilight and tidal-lock combinations |
+| `factor = 0` when the planet already has `pm_ui_extreme_temperatures` or `pm_tidal_locked` | Excludes the duplicate and the tidal-lock overlap |
 | `factor = 0` when `num_modifiers > 1` | Accumulation guard |
-
-Note the asymmetry with `pm_ui_twilight`: twilight multiplies when a tidal lock is present, while extreme temperatures excludes the tidal-lock pair outright.
 
 ### `pm_ui_no_magnetic_field` → `ui_no_magnetic_field`
 
 | Clause | Effect |
 |--------|--------|
-| `add = 20` on `pc_barren`, `pc_barren_cold` | High base weight on barren worlds |
+| `add = 10` on `pc_barren`, `pc_barren_cold` | Base weight 10 on barren worlds |
 | `factor = 2` when `has_planet_modifier = "pm_low_gravity"` | Doubled on low-gravity worlds |
-| `factor = 0` when any of `pm_ui_no_magnetic_field`, `pm_ui_weak_magnetic_field`, `pm_ui_strong_magnetic_field`, `pm_weak_magnetic_field`, `pm_strong_magnetic_field` is present | Excludes the whole magnetic-field family, both new and vanilla |
+| `factor = 0` when any of `pm_ui_no_magnetic_field`, `pm_weak_magnetic_field`, `pm_strong_magnetic_field` is present | Excludes the magnetic-field family |
 | `factor = 0` when `num_modifiers > 1` | Accumulation guard |
 
 ### `pm_ui_salty` → `ui_salty`
 
 | Clause | Effect |
 |--------|--------|
-| `add = 30` on `pc_barren` | Highest single base weight in the file |
-| `add = 5` on `pc_barren_cold` | Moderate weight |
-| `add = 10` on `pc_desert`, `pc_arid`, `pc_ocean` | Moderate weight on arid and wet classes |
-| `factor = 0` when `num_modifiers > 1` | Accumulation guard |
-
-`pm_ui_salty` declares no exclusion conditions at all, so its only interaction constraint is the accumulation guard.
-
-### `pm_ui_microorganisms` → `ui_microorganisms`
-
-| Clause | Effect |
-|--------|--------|
-| `add = 5` on `pc_barren`, `pc_barren_cold` | Base weight 5 |
-| `factor = 0` when `has_planet_modifier = "pm_ui_no_magnetic_field"` | Excluded when the planet has no magnetic field |
-| `factor = 0` when the system's star class is `sc_black_hole`, `sc_neutron_star`, or `sc_pulsar` | Excluded around hostile stellar remnants |
-| `factor = 0` when `num_modifiers > 2` | Relaxed accumulation guard permitting a third modifier |
-
-This is the only definition with a system-scope condition, expressed as `solar_system = { OR = { ... } }`, and the only one whose accumulation guard uses the threshold `2` rather than `1`.
-
-### `pm_ui_giant_earthworms` → `ui_giant_earthworms`
-
-| Clause | Effect |
-|--------|--------|
-| `add = 10` on `pc_desert`, `pc_arid`, `pc_savannah` | Base weight 10 |
-| `factor = 2` when `has_planet_modifier = "pm_lush"` | Doubled on lush worlds |
-| `factor = 2` when the planet has `pm_ui_high_gravity` or `pm_high_gravity` | Doubled under high gravity |
-| `factor = 0` when the planet has `pm_ui_giant_earthworms` or `pm_titanic_life` | Excludes itself and titanic life |
-| `factor = 0` when `num_modifiers > 1` | Accumulation guard |
-
-### `pm_ui_sea_monsters` → `ui_sea_monsters`
-
-| Clause | Effect |
-|--------|--------|
-| `add = 5` on `pc_continental` | Base weight 5 |
-| `add = 10` on `pc_ocean` | Heavier weight on ocean worlds |
-| `factor = 2` when the planet has `pm_ui_high_gravity` or `pm_high_gravity` | Doubled under high gravity |
-| `factor = 0` when the planet has `pm_ui_sea_monsters` or `pm_titanic_life` | Excludes itself and titanic life |
+| `add = 10` on `pc_barren` | Base weight 10 on barren worlds |
+| `add = 5` on `pc_barren_cold`, `pc_desert`, `pc_arid`, `pc_ocean` | Base weight 5 elsewhere |
+| `factor = 0` when the planet already has `pm_ui_salty` or `pm_ui_swampy` | Excludes the water-quality conflict |
 | `factor = 0` when `num_modifiers > 1` | Accumulation guard |
 
 ### `pm_ui_swampy` → `ui_swampy`
 
 | Clause | Effect |
 |--------|--------|
-| `add = 3` on `pc_ocean` | Base weight 3 |
-| `add = 6` on `pc_tropical` | Base weight 6 |
+| `add = 10` on `pc_tropical` | Base weight 10 on tropical worlds |
+| `add = 5` on `pc_ocean` | Base weight 5 on ocean worlds |
+| `factor = 0` when the planet already has `pm_ui_swampy` or `pm_ui_salty` | Excludes the water-quality conflict |
+| `factor = 0` when `num_modifiers > 1` | Accumulation guard |
 
-`pm_ui_swampy` has **no** `factor` clauses: no exclusions, no multipliers, and no accumulation guard. It is therefore the only new modifier that can be assigned alongside an already-present modifier without limit, and the only one that never excludes a conflicting candidate.
+All four definitions carry an accumulation guard and at least one exclusion.
+
+## Weight calibration
+
+Vanilla v4.5 uses `add = 10` for a common class outcome, `add = 5` for an uncommon one, and `add = 1` for a rare one. The new definitions follow the same scale, so a `add = 10` entry competes on equal terms with `pm_low_gravity` or `pm_titanic_life` on the same class rather than dominating the pool.
 
 ## Interaction matrix
 
 Read each cell as: the row's modifier, when already assigned, causes the column's modifier to be excluded.
 
-| Already assigned ↓ excludes → | twilight | extreme temps | no magnetic field | microorganisms | earthworms | sea monsters |
-|-------------------------------|----------|---------------|-------------------|----------------|------------|--------------|
-| `pm_ui_twilight` | — | yes | no | no | no | no |
-| `pm_ui_extreme_temperatures` | yes | — | no | no | no | no |
-| `pm_ui_no_magnetic_field` | no | no | yes (self, family) | yes | no | no |
-| `pm_ui_microorganisms` | no | no | no | no | no | no |
-| `pm_ui_giant_earthworms` | no | no | no | no | yes (self, plus titanic life) | no |
-| `pm_ui_sea_monsters` | no | no | no | no | no | yes (self, plus titanic life) |
-
-| Already assigned ↓ excludes → | tidal locked | vanilla magnetic family | titanic life | vanilla magnetics |
-|-------------------------------|--------------|-------------------------|--------------|-------------------|
-| `pm_ui_twilight` | no (multiplies instead) | no | no | no |
+| Already assigned ↓ excludes → | extreme temps | no magnetic field | salty | swampy |
+|-------------------------------|---------------|-------------------|-------|--------|
 | `pm_ui_extreme_temperatures` | yes | no | no | no |
-| `pm_ui_no_magnetic_field` | no | yes | no | yes |
-| `pm_ui_giant_earthworms` | no | no | yes | no |
-| `pm_ui_sea_monsters` | no | no | yes | no |
+| `pm_ui_no_magnetic_field` | no | yes | no | no |
+| `pm_ui_salty` | no | no | yes | yes |
+| `pm_ui_swampy` | no | no | yes | yes |
 
-The matrix reveals three properties worth noting:
-
-- **No self-exclusion for the vanilla counterparts.** `pm_ui_no_magnetic_field` excludes itself and both new siblings, but the *vanilla* keys it excludes are `pm_weak_magnetic_field` and `pm_strong_magnetic_field`. Since the override file declares `pm_ui_weak_magnetic_field` and `pm_ui_strong_magnetic_field` as the spawn-chance owners, the vanilla keys may never be assigned at all; the exclusion then operates on the new counterparts, which do not exclude `pm_ui_no_magnetic_field` in return.
-- **Asymmetry in the magnetic family.** `pm_ui_no_magnetic_field` excludes the weak and strong variants, and both weak and strong variants exclude all three, so the family is mutually exclusive in the relevant directions. The two gravity and two magnetic-variant groups are the only places where exclusion lists repeat a five-identifier set.
-- **`pm_ui_twilight` multiplies on a tidal lock while `pm_ui_extreme_temperatures` excludes it.** The two therefore cannot coexist, but the reason differs per branch rather than being a symmetric exclusion.
+Every conflict is symmetric, so no pair depends on evaluation order. `pm_ui_extreme_temperatures` additionally excludes, and is excluded by, the vanilla `pm_tidal_locked` through the override file.
 
 ## Dependants
 
 - [components/static-modifiers.md](./static-modifiers.md) — the `modifier` field of each definition must equal a static modifier key.
-- [components/vanilla-spawn-overrides.md](./vanilla-spawn-overrides.md) — several exclusion lists here name keys declared in the override file.
+- [components/vanilla-spawn-overrides.md](./vanilla-spawn-overrides.md) — the magnetic exclusions here name the two vanilla keys redefined there.
 
 ## Failure behaviour
 

@@ -2,7 +2,7 @@
 
 ## Responsibility
 
-Supply the human-readable display name and description for each of the eight new planet modifiers.
+Supply the human-readable display name and description for each of the four new planet modifiers.
 
 ## Location
 
@@ -14,7 +14,7 @@ Supply the human-readable display name and description for each of the eight new
 |----------|-------|
 | Encoding | UTF-8 with byte-order mark (`EF BB BF`) |
 | Document root | `l_english:` |
-| Entries | 16 (eight names, eight descriptions) |
+| Entries | 8 (four names, four descriptions) |
 | Language directory | `english/` |
 | Naming | `<mod>_l_<locale>.yml` |
 
@@ -36,15 +36,12 @@ Because resolution is by convention, a key typo produces no parse error. The int
 | Name key | Display name | Description key |
 |----------|--------------|-----------------|
 | `ui_extreme_temperatures` | Extreme Temperatures | `ui_extreme_temperatures_desc` |
-| `ui_giant_earthworms` | Giant Earthworms | `ui_giant_earthworms_desc` |
-| `ui_microorganisms` | Microorganisms | `ui_microorganisms_desc` |
+
 | `ui_no_magnetic_field` | No Magnetic Field | `ui_no_magnetic_field_desc` |
 | `ui_salty` | Salty | `ui_salty_desc` |
-| `ui_sea_monsters` | Sea Monsters | `ui_sea_monsters_desc` |
 | `ui_swampy` | Swampy | `ui_swampy_desc` |
-| `ui_twilight` | Perpetual Twilight | `ui_twilight_desc` |
 
-All eight effect keys have both entries. Note that the display name for `ui_twilight` is *Perpetual Twilight*, which does not match its key stem, so key-derived assumptions do not hold for display text.
+All four effect keys have both entries, so key-derived assumptions hold for every display name in the file.
 
 ## Ordering
 
@@ -54,16 +51,13 @@ Entries are grouped in pairs and the file order is alphabetical by key, not by t
 
 | Key | Description theme |
 |-----|-------------------|
-| `ui_extreme_temperatures_desc` | Sub-zero nights and blazing days |
-| `ui_giant_earthworms_desc` | Giant earthworms present on the world |
-| `ui_microorganisms_desc` | Primitive microorganisms present |
+| `ui_extreme_temperatures_desc` | Blistering days and freezing nights, with almost no atmosphere to buffer the surface |
+
 | `ui_no_magnetic_field_desc` | No magnetic field, leaving the world exposed to cosmic radiation |
 | `ui_salty_desc` | Extremely saline soils and waters, hostile to growth |
-| `ui_sea_monsters_desc` | Dangerous fauna in the waters |
 | `ui_swampy_desc` | Dense swamps rendering large areas dangerous and unworkable |
-| `ui_twilight_desc` | Perpetual twilight with no clear day or night |
 
-Descriptions are thematic narrative rather than a statement of numeric effects, so they do not need to be revised when an effect value changes in the [static modifier component](./static-modifiers.md). They should, however, be revised if a modifier's concept changes, as would happen if `ui_microorganisms` gained an effect.
+Descriptions are thematic narrative rather than a statement of numeric effects, so they do not need to be revised when an effect value changes in the [static modifier component](./static-modifiers.md). They were revised alongside the v4.5 rebalance wherever the concept sharpened, and they should be revised again if a modifier's concept changes.
 
 ## Adding a locale
 

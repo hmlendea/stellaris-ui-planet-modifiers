@@ -21,7 +21,7 @@ path="mod/ui-planet-modifiers"
 tags={
     "Galaxy Generation"
 }
-supported_version="2.6.*"
+supported_version="v4.5.*"
 ```
 
 | Field | Value | Meaning |
@@ -29,7 +29,7 @@ supported_version="2.6.*"
 | `name` | `Universum Infinitum - Planet Modifiers` | Display name in the launcher and mod browser |
 | `path` | `mod/ui-planet-modifiers` | Relative content location; must name the content directory |
 | `tags` | `Galaxy Generation` | Single classification tag shown in the mod browser |
-| `supported_version` | `2.6.*` | Declared compatible game version range |
+| `supported_version` | `v4.5.*` | Declared compatible game version range |
 
 ## Why two descriptors exist
 

@@ -38,7 +38,7 @@ This document describes the current architecture of the Stellaris mod "Universum
 
 ## 🎯 Purpose
 
-The mod extends Stellaris planetary generation by contributing eight new planet modifiers, each with a spawn-chance definition, a static modifier effect block, a DDS icon, and English localisation. It also overrides selected vanilla planet-modifier spawn definitions to exclude the newly added modifiers from conflicting combinations. The system boundary is the set of data files consumed by the Stellaris engine; the mod executes no code of its own. This document records those boundaries so that contributors can locate ownership, follow the selection process, and evaluate the impact of a change.
+The mod extends Stellaris planetary generation by contributing four new planet modifiers, each with a spawn-chance definition, a static modifier effect block, a DDS icon, and English localisation. It also overrides selected vanilla planet-modifier spawn definitions to exclude the newly added modifiers from conflicting combinations. The system boundary is the set of data files consumed by the Stellaris engine; the mod executes no code of its own. This document records those boundaries so that contributors can locate ownership, follow the selection process, and evaluate the impact of a change.
 
 ## 🌐 System Context
 
@@ -76,7 +76,7 @@ flowchart TB
 
 The principal architecture boundaries are:
 - **Mod Metadata:** Declares mod identity, filesystem path, tags, and declared game version; owns no behaviour.
-- **Planet Modifier Definitions:** Owns spawn-chance conditions for the eight new modifiers.
+- **Planet Modifier Definitions:** Owns spawn-chance conditions for the four new modifiers.
 - **Vanilla Spawn Overrides:** Owns revised spawn-chance conditions for selected vanilla and mod-extended modifiers.
 - **Static Modifier Definitions:** Owns modifier effects, icon path references, icon frames, and the `important` flag.
 - **Localisation:** Owns English display names and descriptions keyed to the static modifier identifiers.
@@ -91,7 +91,7 @@ sequenceDiagram
     participant Engine
     participant Spawn as Planet Modifier Spawn System
     Player->>Launcher: Activates "Universum Infinitum - Planet Modifiers" in playset
-    Launcher->>Engine: Registers descriptors (supported_version 2.6.*)
+    Launcher->>Engine: Registers descriptors (supported_version v4.5.*)
     Player->>Engine: Starts a new game
     Engine->>Engine: Loads planet modifier definitions, static modifiers, localisation, icons
     Engine->>Spawn: Evaluates spawn_chance for each candidate modifier
@@ -113,7 +113,7 @@ The principal runtime sequence is:
 |-----------|----------------|------------------------|-----------------------|
 | `ui-planet-modifiers.mod` | Root mod descriptor: name, path, tags, declared game version | Stellaris launcher mod loader | Static file, owned by mod author |
 | `ui-planet-modifiers/descriptor.mod` | Local mod descriptor with identical metadata | Stellaris launcher mod loader | Static file, owned by mod author |
-| `ui-planet-modifiers/common/planet_modifiers/ui-planet-modifiers.txt` | Defines the eight new `pm_ui_*` planet modifiers and their spawn chances | Stellaris planet modifier spawn system | Static file, owned by mod author |
+| `ui-planet-modifiers/common/planet_modifiers/ui-planet-modifiers.txt` | Defines the four new `pm_ui_*` planet modifiers and their spawn chances | Stellaris planet modifier spawn system | Static file, owned by mod author |
 | `ui-planet-modifiers/common/planet_modifiers/ui-planet-modifiers-vanillas.txt` | Overrides spawn chances for selected vanilla and mod-extended modifiers | Stellaris planet modifier spawn system | Static file, owned by mod author |
 | `ui-planet-modifiers/common/static_modifiers/ui-planet-modifiers_static_modifiers.txt` | Defines effects, icons, icon frames, and importance for the new modifiers | Stellaris static modifier system; icon assets | Static file, owned by mod author |
 | `ui-planet-modifiers/gfx/interface/icons/planet_modifiers/*.dds` | Supplies one DDS icon per new modifier | Stellaris icon asset loader | Static binary assets, owned by mod author |
@@ -238,9 +238,9 @@ sequenceDiagram
 
 Ordering and invariants:
 - `add` values establish the base weight; `factor` values then multiply or nullify it, and `factor = 0` always results in the modifier being ineligible.
-- Six of the eight new modifiers cap accumulation through `num_modifiers > 1` or `num_modifiers > 2`, and `pm_ui_swampy` declares no accumulation guard.
-- The mod explicitly excludes combinations that overlap semantically, such as `pm_ui_twilight` with `pm_ui_extreme_temperatures`, and `pm_ui_no_magnetic_field` with the weak and strong magnetic-field variants.
-- `pm_ui_hazardous_weather`, `pm_ui_weak_magnetic_field`, `pm_ui_strong_magnetic_field`, `pm_ui_unstable_tectonics`, `pm_ui_tidal_locked`, `pm_ui_asteroid_impacts`, `pm_ui_wild_storms`, `pm_ui_low_gravity`, and `pm_ui_high_gravity` are redefined in the vanilla-override file so their exclusions account for the new modifiers, and each maps to an existing vanilla static modifier rather than a new one.
+- Every one of the four new modifiers caps accumulation through `num_modifiers > 1`, matching the vanilla guard.
+- The mod explicitly excludes combinations that overlap semantically, such as `pm_ui_salty` with `pm_ui_swampy`, and `pm_ui_no_magnetic_field` with the weak and strong magnetic-field variants.
+- `pm_weak_magnetic_field` and `pm_strong_magnetic_field` are re-declared in the vanilla-override file so their exclusions account for the new modifiers. Each re-declaration reproduces the v4.5 spawn conditions for the same key and adds only the exclusion.
 
 ## ⚙️ Planet Modifier Spawn Weighting
 
@@ -330,7 +330,7 @@ The mod is delivered as a descriptor plus a content directory that is copied int
 | Static modifier keys `ui_*` | Static modifier definitions | Keys remain stable because localisation and definitions reference them | Manual cross-check against localisation keys | Renaming requires updating definitions and localisation together |
 | Icon path and file name | Static modifier definitions | `gfx/interface/icons/planet_modifiers/pm_ui_<name>.dds` resolves for each modifier | Manual cross-check against the icon directory | Renaming requires updating the static modifier definition |
 | Localisation keys | Localisation | One name key and one `_desc` key per modifier identifier | Manual review of key coverage | Missing keys fall back to raw identifiers |
-| `supported_version` | Mod descriptors | Both descriptors declare `2.6.*` | Direct inspection of both descriptors | Must be raised deliberately when the definitions are validated against a newer game version |
+| `supported_version` | Mod descriptors | Both descriptors declare `v4.5.*` | Direct inspection of both descriptors | Must be raised deliberately when the definitions are validated against a newer game version |
 | Vanilla identifier references | Planet modifier definitions | Referenced vanilla identifiers remain valid in the targeted game version | In-game behaviour and engine logs | A host-side rename requires revising the affected conditions |
 
 ## ✅ Testing and Verification
@@ -341,20 +341,20 @@ Material coverage gaps and constraints:
 - Spawn-weight changes cannot be verified deterministically; only repeated in-game generation reveals distribution shifts.
 - Exclusion conditions are unverified against vanilla identifiers, so a host-side rename produces no repository-visible failure.
 - Localisation key coverage, icon path resolution, and static modifier binding have no automated check.
-- The declared `supported_version` of `2.6.*` is not verified against the current engine by any repository artefact.
+- The declared `supported_version` of `v4.5.*` is not verified by any repository artefact; in-game confirmation is still required.
 
 Manual verification procedure:
 - Activate the mod in a playset and start a new game, then inspect generated planets for the new modifiers and their icons.
 - Confirm that each new modifier displays its localised name and description rather than a raw key.
-- Confirm that mutually exclusive modifiers, such as `pm_ui_twilight` and `pm_ui_extreme_temperatures`, are not assigned to the same planet.
+- Confirm that mutually exclusive modifiers, such as `pm_ui_salty` and `pm_ui_swampy`, are not assigned to the same planet.
 - Inspect the engine log for definition parsing errors after changing any definition file.
 
 ## ⚠️ Design Constraints
 
-- **Declared version drift:** Both descriptors declare `supported_version="2.6.*"`, which predates the current Stellaris release line. The definitions are therefore not validated against recent engine versions.
+- **Declared version scope:** Both descriptors declare `supported_version="v4.5.*"`. The definitions were recalibrated against the v4.5 vanilla planet modifier set; only that release line is supported.
 - **Host-owned identifiers:** Eligibility depends on vanilla planet-class, star-class, and modifier identifiers that the repository neither defines nor verifies.
 - **Relative weighting:** Spawn chances are relative, so a change to one modifier's weight changes every other modifier's effective probability.
-- **Duplicate exclusion lists:** Exclusion conditions repeat the same identifier sets across several definitions, including magnets, gravity, and titanic-life groups, so a new modifier must be added to each affected list manually.
+- **Duplicate exclusion lists:** Exclusion conditions repeat the same identifier sets across several definitions, including the magnetic-field group, so a new modifier must be added to each affected list manually.
 - **Manual data synchronisation:** Definition keys, static modifier keys, localisation keys, and icon file names must agree, and nothing in the repository enforces that agreement.
 - **No independent verification path:** The absence of automated validation means every change requires in-game confirmation.
 - **Naming divergence:** The repository and mod title use the "Universum Infinitum" series name, while definition keys and the mod subdirectory retain the `ui_` prefix inherited from the original project layout.
