@@ -1,3 +1,5 @@
+[![Donate](https://img.shields.io/badge/-%E2%99%A5%20Donate-%23ff69b4)](https://hmlendea.go.ro/funding)
+
 # Contributing to Universum Infinitum: Planet Modifiers
 
 This document covers the guidelines and processes for contributing to this project, including how to report issues, suggest enhancements, submit code changes, and follow project standards.
@@ -13,8 +15,7 @@ This document covers the guidelines and processes for contributing to this proje
     - [Development Setup](#development-setup)
     - [Making Changes](#making-changes)
     - [Pull Request Guidelines](#pull-request-guidelines)
-  - [Documentation](#documentation)
-- [License](#-license)
+  - [Documentation](#documentation)- [Donations](#donations)- [License](#-license)
 - [Getting Assistance](#-getting-assistance)
 
 ## 🤝 Contributing
@@ -80,6 +81,10 @@ This project follows the [Code of Conduct](./CODE_OF_CONDUCT.md).
 ## 🔒 Security
 
 Report security vulnerabilities per the [Security Policy](./SECURITY.md).
+
+## 💝 Donations
+
+This project is developed and maintained during spare time. If you find it useful, consider [donating](https://hmlendea.go.ro/funding) and giving it a star ⭐️ on GitHub!
 
 ## 📄 License
 
