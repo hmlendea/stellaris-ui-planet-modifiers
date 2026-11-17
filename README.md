@@ -24,3 +24,9 @@ Universum Infinitum: Planet Modifiers does not request, collect, transmit, or st
 For the detailed description of how the application handles privacy and personal data, see [PRIVACY.md](./PRIVACY.md).
 
 The mod does not implement accounts, telemetry, diagnostics, or built-in transfers of personal data.
+
+## 🔒 Security
+
+Universum Infinitum: Planet Modifiers consists of Stellaris mod definition, localisation, and image files and does not execute code or handle user data.
+
+For information on reporting security vulnerabilities, see the [Security Policy](./SECURITY.md).
