@@ -25,6 +25,12 @@ For the detailed description of how the application handles privacy and personal
 
 The mod does not implement accounts, telemetry, diagnostics, or built-in transfers of personal data.
 
+## 🏗️ Architecture
+
+Universum Infinitum: Planet Modifiers is a declarative Stellaris mod that defines planet modifiers, their spawn conditions, static effects, icons, and localisation through static data files consumed by the game engine.
+
+See the [Architecture Documentation](./ARCHITECTURE.md) for the system context, principal components, runtime flows, ownership boundaries, dependencies, constraints, and extension points.
+
 ## 🔒 Security
 
 Universum Infinitum: Planet Modifiers consists of Stellaris mod definition, localisation, and image files and does not execute code or handle user data.
