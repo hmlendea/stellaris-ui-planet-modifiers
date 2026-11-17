@@ -22,23 +22,23 @@ erDiagram
 | `name` | String | `Universum Infinitum - Planet Modifiers` | Identical in both descriptors |
 | `path` | String | `mod/ui-planet-modifiers` | Identical in both descriptors; names the content directory |
 | `tags` | Block | `{ "Galaxy Generation" }` | Single tag; identical in both descriptors |
-| `supported_version` | String | `2.6.*` | Identical in both descriptors |
+| `supported_version` | String | `v4.5.*` | Identical in both descriptors |
 
 Two descriptors exist with identical content: `ui-planet-modifiers.mod` at the repository root and `ui-planet-modifiers/descriptor.mod` inside the content directory. The root descriptor is the one the launcher consumes from the user mod directory; the copy inside the content directory is the form used by distribution archives.
 
 ## Record type: planet modifier definition
 
-A definition is a top-level key of the form `pm_<name>` whose body contains one `spawn_chance` block and one `modifier` string.
+A definition is a top-level key of the form `pm_<name>` whose body contains one `spawn_chance` block and one `modifier` string. Keys in the override file are vanilla keys, so re-declaring them replaces the host definition.
 
 | Element | Type | Required | Meaning |
 |---------|------|----------|---------|
 | Key | Identifier | Yes | The modifier's internal identity, e.g. `pm_ui_salty` |
-| `spawn_chance.value` | Number | No | Base weight before `add` and `factor` are applied |
+| `spawn_chance.base` | Number | No | Base weight before `add` and `factor` are applied; used only by vanilla `pm_null` |
 | `spawn_chance.modifier` | Block | Yes (repeatable) | One condition-plus-weight clause |
 | `spawn_chance.modifier.add` | Number | No | Weight contributed when the block's conditions hold |
 | `spawn_chance.modifier.factor` | Number | No | Weight multiplier applied when the block's conditions hold; `0` excludes |
 | `modifier` | String | Yes | The effect-tier key this definition binds to |
-| `is_null` | Flag | No | Marks a slot-occupying placeholder; only `pm_null` uses it |
+| `is_null` | Flag | No | Marks a slot-occupying placeholder; only vanilla `pm_null` uses it, and the mod does not declare it |
 
 ### Condition vocabulary observed in this repository
 
@@ -53,7 +53,9 @@ A definition is a top-level key of the form `pm_<name>` whose body contains one 
 | `solar_system` | System scope wrapper | Wraps `OR` over `is_star_class` |
 | `OR` | Logical combinator | Groups alternatives inside a clause |
 
-Note that both quoted and unquoted identifier forms appear (`is_planet_class = "pc_barren"` and `is_planet_class = pc_barren`), and that `pc_barren` is written unquoted inside `OR` blocks in the override file. The engine accepts both, but the inconsistency is an incidental variation rather than a convention.
+`planet_size` and `is_moon` appear only in the re-declared vanilla blocks, which reproduce the vanilla conditions verbatim; the additions file does not use either.
+
+Every identifier is quoted in both files, including inside `OR` blocks.
 
 ## Record type: static modifier
 
@@ -71,19 +73,21 @@ A static modifier is a top-level key of the form `ui_<name>` whose body contains
 
 | Effect key | Direction | Modifiers using it |
 |-----------|-----------|--------------------|
-| `pop_environment_tolerance` | Negative | `ui_twilight`, `ui_extreme_temperatures`, `ui_no_magnetic_field`, `ui_salty`, `ui_swampy`, `ui_giant_earthworms`, `ui_sea_monsters` |
-| `pop_happiness` | Negative | `ui_twilight`, `ui_extreme_temperatures`, `ui_giant_earthworms`, `ui_sea_monsters` |
-| `pop_growth_speed` | Negative | `ui_no_magnetic_field` |
-| `planet_jobs_food_produces_mult` | Negative | `ui_salty`, `ui_swampy` |
-| `planet_jobs_society_research_produces_mult` | Positive | `ui_giant_earthworms`, `ui_sea_monsters` |
+| `pop_environment_tolerance` | Negative | All four blocks |
+| `pop_happiness` | Negative | `ui_extreme_temperatures` |
+| `logistic_growth_mult` | Negative | `ui_no_magnetic_field` |
+| `planet_jobs_food_produces_mult` | Negative | `ui_extreme_temperatures`, `ui_salty`, `ui_swampy` |
+| `planet_jobs_physics_research_produces_mult` | Negative | `ui_no_magnetic_field` |
+| `district_farming_max_add` | Negative | `ui_salty` |
+| `planet_structures_cost_mult` | Positive | `ui_swampy` |
 
 ### Icon frames in use
 
 | `icon_frame` | Modifiers | Count |
 |--------------|-----------|-------|
-| `1` | `ui_microorganisms` | 1 |
-| `2` | `ui_giant_earthworms`, `ui_sea_monsters` | 2 |
-| `3` | `ui_twilight`, `ui_extreme_temperatures`, `ui_no_magnetic_field`, `ui_salty`, `ui_swampy` | 5 |
+| `3` | `ui_extreme_temperatures`, `ui_no_magnetic_field`, `ui_salty`, `ui_swampy` | 4 |
+
+Every block uses frame 3, the vanilla convention for a net penalty.
 
 ## Record type: localisation key
 
@@ -104,52 +108,28 @@ Keys are resolved by name convention from the effect-tier key; no field referenc
 | Naming | `pm_ui_<name>.dds` |
 | Format | Microsoft DirectDraw Surface, 32-bit ARGB8888 |
 | Dimensions | 60 x 60 |
-| Count | Eight, one per new modifier |
+| Count | Four, one per new modifier |
 
 ## Full inventory of new modifiers
 
 | Definition key | Effect key | Icon file | `icon_frame` | `important` | Accumulation guard |
 |----------------|-----------|-----------|--------------|-------------|--------------------|
-| `pm_ui_twilight` | `ui_twilight` | `pm_ui_twilight.dds` | 3 | No | `num_modifiers > 1` |
 | `pm_ui_extreme_temperatures` | `ui_extreme_temperatures` | `pm_ui_extreme_temperatures.dds` | 3 | No | `num_modifiers > 1` |
 | `pm_ui_no_magnetic_field` | `ui_no_magnetic_field` | `pm_ui_no_magnetic_field.dds` | 3 | No | `num_modifiers > 1` |
 | `pm_ui_salty` | `ui_salty` | `pm_ui_salty.dds` | 3 | No | `num_modifiers > 1` |
-| `pm_ui_swampy` | `ui_swampy` | `pm_ui_swampy.dds` | 3 | No | None |
-| `pm_ui_microorganisms` | `ui_microorganisms` | `pm_ui_microorganisms.dds` | 1 | Yes | `num_modifiers > 2` |
-| `pm_ui_giant_earthworms` | `ui_giant_earthworms` | `pm_ui_giant_earthworms.dds` | 2 | No | `num_modifiers > 1` |
-| `pm_ui_sea_monsters` | `ui_sea_monsters` | `pm_ui_sea_monsters.dds` | 2 | No | `num_modifiers > 1` |
+| `pm_ui_swampy` | `ui_swampy` | `pm_ui_swampy.dds` | 3 | No | `num_modifiers > 1` |
 
-All eight definition keys, effect keys, and icon file stems agree.
+All four definition keys, effect keys, and icon file stems agree.
 
 ## Full inventory of spawn-chance redefinitions
 
-| Definition key | Bound effect key | Ownership of the effect | Accumulation guard |
-|----------------|------------------|-------------------------|--------------------|
-| `pm_null` | none (`is_null = yes`) | n/a | none; `value = 275` with three escalating `factor = 3` clauses |
-| `pm_ui_hazardous_weather` | `hazardous_weather` | Host | `num_modifiers > 1` |
-| `pm_ui_weak_magnetic_field` | `weak_magnetic_field` | Host | `num_modifiers > 1` |
-| `pm_ui_strong_magnetic_field` | `strong_magnetic_field` | Host | `num_modifiers > 1` |
-| `pm_ui_unstable_tectonics` | `unstable_tectonics` | Host | `num_modifiers > 1` |
-| `pm_ui_tidal_locked` | `tidal_locked` | Host | `num_modifiers > 1` |
-| `pm_ui_asteroid_impacts` | `asteroid_impacts` | Host | `num_modifiers > 1` |
-| `pm_ui_wild_storms` | `wild_storms` | Host | `num_modifiers > 1` |
-| `pm_ui_low_gravity` | `low_gravity` | Host | `num_modifiers > 1` |
-| `pm_ui_high_gravity` | `high_gravity` | Host | `num_modifiers > 1` |
+| Definition key | Bound effect key | Ownership of the effect | Change relative to vanilla v4.5 |
+|----------------|------------------|-------------------------|----------------------------------|
+| `pm_weak_magnetic_field` | `weak_magnetic_field` | Host | Adds an exclusion for `pm_ui_no_magnetic_field` |
+| `pm_strong_magnetic_field` | `strong_magnetic_field` | Host | Adds an exclusion for `pm_ui_no_magnetic_field` |
 
-Nine of the ten redefinitions introduce a new key that binds to a host-owned effect; only `pm_null` redefines a host key of the same name.
+Each re-declaration reproduces the vanilla v4.5 conditions for the same key, including weights, size multipliers, the Gaia exclusion, and the accumulation guard. Only the added exclusion differs. Because the keys are the vanilla keys, the mod's definitions replace the host's rather than coexisting with them.
 
-## Referenced but undefined identifiers
+## Records the mod does not own
 
-These identifiers appear in conditions but are defined neither in this repository nor by the eight new modifiers. They belong to the host or to other mods.
-
-| Category | Identifiers |
-|----------|-------------|
-| Planet modifiers | `pm_bleak`, `pm_lush`, `pm_tidal_locked`, `pm_low_gravity`, `pm_high_gravity`, `pm_titanic_life`, `pm_weak_magnetic_field`, `pm_strong_magnetic_field`, `pm_hazardous_weather`, `pm_asteroid_impacts`, `pm_wild_storms`, `pm_unstable_tectonics` |
-| Planet classes | `pc_arctic`, `pc_tundra`, `pc_alpine`, `pc_desert`, `pc_frozen`, `pc_barren`, `pc_barren_cold`, `pc_arid`, `pc_nuked`, `pc_ocean`, `pc_continental`, `pc_tropical`, `pc_savannah` |
-| Star classes | `sc_black_hole`, `sc_neutron_star`, `sc_pulsar` |
-
-## Related documentation
-
-- [components/](./components/planet-modifier-definitions.md) for per-component detail
-- [invariants.md](./invariants.md) for the constraints these records must satisfy
-- [configuration.md](./configuration.md) for how each record type alters behaviour
+Vanilla `pm_null` is neither re-declared nor referenced. `hazardous_weather`, `unstable_tectonics`, `asteroid_impacts`, `wild_storms`, `tidal_locked`, `low_gravity`, and `high_gravity` are not re-declared; the mod only reads `pm_low_gravity`, `pm_high_gravity`, `pm_bleak`, and `pm_tidal_locked` as weighting and exclusion signals.

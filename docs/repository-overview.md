@@ -2,25 +2,25 @@
 
 ## Purpose
 
-The repository delivers a single Stellaris mod, *Universum Infinitum - Planet Modifiers*, which broadens the planetary modifier pool available during galaxy generation. It contributes eight new modifiers and adjusts the spawn chances of ten existing planet modifiers so that the augmented pool remains internally consistent.
+The repository delivers a single Stellaris mod, *Universum Infinitum - Planet Modifiers*, which broadens the planetary modifier pool available during galaxy generation. It contributes four new modifiers, calibrated against the vanilla v4.5 set, and re-declares the two vanilla magnetic-field modifiers so the new third state cannot coexist with them.
 
 The delivered artefacts are entirely declarative:
 
 - two mod descriptors that declare identity, content path, tags, and the declared compatible game version;
 - planet modifier definitions that express spawn chances as conditions and weights;
 - static modifier definitions that express effects and bind an icon;
-- eight DDS icon textures, plus the retained GIMP source artwork;
+- four DDS icon textures, plus the retained GIMP source artwork;
 - one English localisation file containing display names and descriptions.
 
 ## Scope
 
 The repository owns:
 
-- the eight `pm_ui_*` planet modifier definitions and their spawn chances;
-- redefinitions of the spawn chances for `pm_null` and nine vanilla or mod-extended planet modifiers;
-- the eight `ui_*` static modifier effect blocks, their icon paths, icon frames, and importance flags;
-- the eight icon textures and their editable source;
-- the English localisation keys and strings for the eight new modifiers;
+- the four `pm_ui_*` planet modifier definitions and their spawn chances;
+- re-declarations of the spawn chances for `pm_weak_magnetic_field` and `pm_strong_magnetic_field`;
+- the four `ui_*` static modifier effect blocks, their icon paths, icon frames, and importance flags;
+- the four icon textures and their editable source;
+- the English localisation keys and strings for the four new modifiers;
 - both mod descriptors.
 
 ## Deliberate exclusions
@@ -40,8 +40,8 @@ The repository does not own, define, or verify:
 |-------------|------|-------------|
 | `ui-planet-modifiers.mod` | Launcher descriptor | Root descriptor the launcher reads to register the mod |
 | `ui-planet-modifiers/descriptor.mod` | Launcher descriptor | Local descriptor carrying identical metadata |
-| `ui-planet-modifiers/common/planet_modifiers/ui-planet-modifiers.txt` | Definition file | Eight new planet modifier definitions |
-| `ui-planet-modifiers/common/planet_modifiers/ui-planet-modifiers-vanillas.txt` | Definition file | `pm_null` and nine redefined spawn chances |
+| `ui-planet-modifiers/common/planet_modifiers/ui-planet-modifiers.txt` | Definition file | Four new planet modifier definitions |
+| `ui-planet-modifiers/common/planet_modifiers/ui-planet-modifiers-vanillas.txt` | Definition file | Two re-declared vanilla spawn chances |
 | `ui-planet-modifiers/common/static_modifiers/ui-planet-modifiers_static_modifiers.txt` | Definition file | Eight static modifier effect blocks |
 | `ui-planet-modifiers/localisation/english/ui-planet-modifiers_l_english.yml` | Localisation file | Sixteen English keys |
 | `ui-planet-modifiers/gfx/interface/icons/planet_modifiers/*.dds` | Asset directory | Eight icon textures |
@@ -61,7 +61,7 @@ The mod is passive. It supplies data; the host performs every operation. Consequ
 
 - It is not a library or an application programming interface. There are no endpoints, no public classes, and no callable surface other than the host's own definition formats.
 - It is not testable in isolation. Verification requires the host game.
-- It is not version-verified against current Stellaris: the descriptors declare `supported_version="2.6.*"`.
+- It is not testable in isolation: verification requires the host game. The descriptors declare `supported_version="v4.5.*"`.
 
 ## Related documentation
 

@@ -72,19 +72,19 @@ The two files under `common/planet_modifiers/` are not parallel halves of one co
 
 | Aspect | `ui-planet-modifiers.txt` | `ui-planet-modifiers-vanillas.txt` |
 |--------|---------------------------|-------------------------------------|
-| Purpose | Introduce new modifiers | Redefine spawn chances so existing modifiers account for the new pool |
-| Keys | Eight brand-new `pm_ui_*` keys | `pm_null` plus nine `pm_ui_*` keys that resolve to vanilla static modifier keys |
-| `modifier` target | Newly defined `ui_*` effect keys | Pre-existing vanilla effect keys (`hazardous_weather`, `tidal_locked`, and so on) |
+| Purpose | Introduce new modifiers | Replace a few host definitions so their spawn conditions exclude the new modifiers |
+| Keys | Four brand-new `pm_ui_*` keys | Two vanilla keys: `pm_weak_magnetic_field`, `pm_strong_magnetic_field` |
+| `modifier` target | Newly defined `ui_*` effect keys | The matching vanilla effect keys |
 | Effect tier owned here | Yes, in the sibling static modifier file | No, effects belong to the host |
-| Exclusions | Exclude the new modifiers and relevant vanilla modifiers | Exclude both the vanilla original and the new counterpart |
+| Exclusions | Exclude the new modifiers and relevant vanilla modifiers | Exclude the new modifier that overlaps the same theme |
 
-The override file therefore exists for one reason: the new modifiers can only be produced if some definition declares their spawn chance, and some of the modifiers the author wanted to extend are owned by the host. The override file re-declares those spawn chances under `pm_ui_*` keys that map onto the host's effect keys, which is how a mod adds conditions to a modifier it does not own.
+The override file therefore exists for one reason: mutual exclusivity. A mod cannot append a condition to a definition the host owns, so the only way to stop a vanilla modifier from coexisting with a thematically identical new one is to re-declare the vanilla key with the extra exclusion. Because mod files load after the host's `00_planet_modifiers.txt`, an identical key replaces the vanilla definition rather than adding a second candidate.
 
 ## Selection semantics
 
 The engine's selection model, as expressed by the definitions:
 
-- `value`, where present, establishes a base weight. Only `pm_null` uses it (`value = 275`).
+- `value`, where present, establishes a base weight. Vanilla `pm_null` uses it (`base = 275`); no definition in this repository declares a base weight.
 - `add` entries contribute weight when their condition set is satisfied. Multiple `add` entries can all apply to the same candidate.
 - `factor` entries multiply the accumulated weight. Multiple honoured factors compound multiplicatively.
 - `factor = 0` **removes** the candidate regardless of any accumulated weight. It is the only exclusion mechanism; there is no separate `allowed` or `forbidden` clause.

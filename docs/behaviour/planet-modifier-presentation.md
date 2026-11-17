@@ -4,7 +4,7 @@ This document describes what a player observes when inspecting a planet that car
 
 ## Observation: modifiers appear with a name, a description, and an icon
 
-Each of the eight new modifiers presents a short name, a one-sentence description, and a distinct icon.
+Each of the four new modifiers presents a short name, a one-sentence description, and a distinct icon.
 
 Why: each effect block declares an `icon` path to a DDS texture, and the engine resolves a name and a `_desc` description from the effect key by convention.
 
@@ -12,34 +12,30 @@ Why: each effect block declares an `icon` path to a DDS texture, and the engine 
 
 | Modifier | Display name | Description theme |
 |----------|--------------|-------------------|
-| `ui_twilight` | Perpetual Twilight | No clear day or night |
 | `ui_extreme_temperatures` | Extreme Temperatures | Sub-zero nights, blazing days |
 | `ui_no_magnetic_field` | No Magnetic Field | Exposed to cosmic radiation |
 | `ui_salty` | Salty | Saline soils and waters hostile to growth |
 | `ui_swampy` | Swampy | Dense swamps render areas unworkable |
-| `ui_microorganisms` | Microorganisms | Primitive microorganisms present |
-| `ui_giant_earthworms` | Giant Earthworms | Giant earthworms lurking |
-| `ui_sea_monsters` | Sea Monsters | Dangerous fauna in the waters |
 
-Why: descriptions are written as flavour text rather than as a restatement of numeric effects, so they remain accurate when an effect value is rebalanced. The single exception worth noting is that the display name *Perpetual Twilight* does not match its key stem `twilight`, which demonstrates that display text is independent of key naming.
+Why: descriptions are written as flavour text rather than as a restatement of numeric effects, so they remain accurate when an effect value is rebalanced.
 
-## Observation: microorganisms is emphasised
+## Observation: no modifier is emphasised
 
-The microorganisms modifier is presented in the prominent form, unlike the others.
+None of the new modifiers is presented in the prominent form.
 
-Why: its effect block sets `important = yes`, which is the only occurrence of that flag in the mod.
+Why: no effect block sets `important = yes`. The flag is reserved by vanilla for modifiers that must show a planet nameplate, such as terraforming candidates.
 
 ## Observation: icons are visually distinct but share a frame style
 
-Five modifiers use icon frame 3, two use frame 2, and one uses frame 1. Each has its own texture.
+All four modifiers use icon frame 3. Each has its own texture.
 
-Why: `icon_frame` selects a presentation frame independently of the texture, so the mod mixes a common frame with per-modifier artwork.
+Why: `icon_frame` selects a presentation frame independently of the texture, and frame 3 is the vanilla marker for a net penalty.
 
 ## Observation: tooltips show consistent effect wording
 
-Because all eight blocks reuse the same five effect keys, the tooltips read consistently regardless of which modifier is inspected.
+The tooltips read consistently because every effect is expressed through a standard host-provided key.
 
-Why: `pop_environment_tolerance`, `pop_happiness`, `pop_growth_speed`, `planet_jobs_food_produces_mult`, and `planet_jobs_society_research_produces_mult` are host-provided effect keys with host-provided wording.
+Why: `pop_environment_tolerance`, `pop_happiness`, `logistic_growth_mult`, `planet_jobs_food_produces_mult`, `planet_jobs_physics_research_produces_mult`, `district_farming_max_add`, and `planet_structures_cost_mult` are host-provided effect keys with host-provided wording. The mod adds no custom tooltip and no `custom_tooltip` override.
 
 ## Observation: modifiers integrate with the existing interface
 

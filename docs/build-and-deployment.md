@@ -52,7 +52,7 @@ The verified archive layout matches the delivery layout above exactly: both desc
 | Check | Expected result |
 |-------|-----------------|
 | Launcher listing | *Universum Infinitum - Planet Modifiers* appears with the Galaxy Generation tag |
-| Compatibility verdict | Consistent with the declared `2.6.*` version against the running game |
+| Compatibility verdict | Consistent with the declared `v4.5.*` version against the running game |
 | In-game inspection | Generated planets show the new modifiers with names, descriptions, and icons rather than raw keys |
 | Engine log | No parse errors relating to the mod's files |
 

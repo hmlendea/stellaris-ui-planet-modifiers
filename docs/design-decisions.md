@@ -6,7 +6,7 @@ Rationale for the shape of the definition set, as reconstructed from the artefac
 
 **Decision.** Modifier eligibility is expressed entirely as condition-and-weight clauses rather than as procedural logic.
 
-**Evidence.** All eighteen definitions use `spawn_chance` with `add`, `factor`, and condition tests.
+**Evidence.** All six definitions use `spawn_chance` with `add`, `factor`, and condition tests.
 
 **Why.** The format offers no procedural alternative. The consequence, however, is architectural: every exclusion is multiplication by zero, so the repository's correctness depends on authors remembering to write exclusions rather than on any guard.
 
@@ -14,53 +14,73 @@ Rationale for the shape of the definition set, as reconstructed from the artefac
 
 **Decision.** New modifiers live in `ui-planet-modifiers.txt`; redefinitions of host-owned modifiers live in `ui-planet-modifiers-vanillas.txt`.
 
-**Evidence.** The `-vanillas` suffix distinguishes overrides from additions, and the override file contains only keys that bind to host-owned effect keys, plus `pm_null`.
+**Evidence.** The `-vanillas` suffix distinguishes overrides from additions, and the override file contains only vanilla keys whose own definitions gain an exclusion.
 
 **Why.** The split makes the mod's interaction with host data auditable in one place. A contributor reviewing compatibility risk can read one file rather than hunting for host-key bindings throughout the additions.
 
 **Alternative displaced.** A single combined file, which would have obscured which definitions are additions and which are overrides.
 
+## Decision: re-declare vanilla keys rather than introduce parallel keys
+
+**Decision.** Overrides use the vanilla key (`pm_weak_magnetic_field`), not a parallel `pm_ui_weak_magnetic_field`.
+
+**Evidence.** The override file declares `pm_weak_magnetic_field` and `pm_strong_magnetic_field`, and binds each `modifier` to the matching vanilla effect key.
+
+**Why.** Mod files load after the host's `00_planet_modifiers.txt`, so re-declaring a key replaces the definition instead of adding a second candidate that applies the same effect. The earlier parallel-key approach let one effect be selected twice, distorting the pool and making the effective probability of the vanilla modifier depend on engine key-merging behaviour the repository cannot observe.
+
+**Trade-off accepted.** Each override must copy the vanilla conditions forward, so a later host balance change is not inherited automatically. The set is therefore kept as small as mutual exclusivity allows.
+
+## Decision: do not override modifiers the mod does not interact with
+
+**Decision.** Hazardous weather, unstable tectonics, asteroid impacts, wild storms, and both gravity modifiers are no longer overridden.
+
+**Evidence.** No definition in the additions file excludes or is excluded by those modifiers under a conflicting theme, and the mod reads `pm_low_gravity` and `pm_high_gravity` only as weighting signals.
+
+**Why.** A parallel candidate for a modifier the mod does not touch adds a second way to roll the same effect without any exclusivity benefit, inflating that outcome's probability. Removing those overrides restores vanilla odds.
+
 ## Decision: bind overrides to host effect keys rather than restating effects
 
 **Decision.** Redefinitions declare only `spawn_chance` and set `modifier` to the host's effect key.
 
-**Evidence.** `pm_ui_low_gravity` binds to `low_gravity` and declares no effect block; `low_gravity` is not defined anywhere in the repository.
+**Evidence.** `pm_weak_magnetic_field` binds to `weak_magnetic_field` and declares no effect block; `weak_magnetic_field` is not defined anywhere in the repository.
 
-**Why.** A mod cannot add conditions to a host definition, but it can introduce a new candidate that applies the same effect. Restating the effects would have risked diverging from the host's balance values and duplicating maintenance. The trade-off accepted is that a host-side rename of an effect key breaks the binding invisibly.
+**Why.** Restating the effects would risk diverging from the host's balance values and duplicating maintenance. The trade-off accepted is that a host-side rename of an effect key breaks the binding invisibly.
 
 ## Decision: write mutually exclusive exclusions symmetrically
 
 **Decision.** Where the mod introduces a conflict, both conflicting definitions exclude each other.
 
-**Evidence.** `pm_ui_twilight` excludes `pm_ui_extreme_temperatures` and vice versa; the magnetic family shares an identical five-identifier list in all three members.
+**Evidence.** `pm_ui_salty` and `pm_ui_swampy` exclude each other; the magnetic family shares an identical identifier list, closed from the vanilla side by the override file.
 
 **Why.** Selection can evaluate one candidate before or after another, so a one-sided exclusion would fire inconsistently. Symmetry removes the dependence on evaluation order. See [concurrency-and-scheduling.md](./concurrency-and-scheduling.md).
 
-**Where the decision was not applied.** `pm_ui_unstable_tectonics` excludes high gravity, but high gravity does not exclude unstable tectonics, and giant earthworms and sea monsters do not exclude one another. Accumulation guards prevent the combinations in practice.
+**Where symmetry requires an override.** A vanilla modifier cannot exclude a mod modifier unless the mod re-declares it. The two magnetic-field keys are therefore re-declared with the reciprocal exclusion added.
 
 ## Decision: cap accumulation per modifier
 
-**Decision.** Seven definitions carry `num_modifiers > 1`; microorganisms uses `num_modifiers > 2`; swampy carries no guard.
+**Decision.** Every definition carries `num_modifiers > 1`, matching the vanilla convention.
 
 **Evidence.** Read directly from the guard clauses.
 
-**Why.** The guard prevents a planet from accumulating an unbounded number of modifiers, which would compound the penalties. Microorganisms is permitted a third slot because it has no effect and is meant to be visible; swampy is unguarded, which reads as an oversight or a deliberate soft limit rather than a considered exception, and is recorded in [ambiguities-and-open-questions.md](./ambiguities-and-open-questions.md).
+**Why.** The guard prevents a planet from accumulating an unbounded number of modifiers, which would compound the penalties. An earlier revision exempted swampy and relaxed the guard for microorganisms on the reasoning that an effect-less modifier was worth a third slot; once microorganisms gained an effect, both exceptions lost their justification and were removed.
 
 ## Decision: make the new modifiers predominantly penalties
 
-**Decision.** All eight new modifiers are neutral or negative, with two carrying an offsetting research bonus.
+**Decision.** Every new modifier is negative; none carries a bonus.
 
-**Evidence.** The effect-block inventory shows mainly negative habitability, happiness, growth, and food values, plus two positive society-research values.
+**Evidence.** The effect-block inventory shows negative habitability, happiness, growth, food, physics, farming-district, and building-cost values only.
 
-**Why.** The mod's stated purpose is diversity of planetary generation. Adding powerful positive modifiers would change game balance rather than flavour. Giant earthworms and sea monsters carry a society bonus because their theme — large fauna — plausibly yields biological research.
+**Why.** The mod's stated purpose is diversity of planetary generation. Adding powerful positive modifiers would change game balance rather than flavour. Every magnitude stays inside the vanilla band for a comparable modifier so the new entries do not dominate the pool.
 
-## Decision: differentiate modifiers by eligibility rather than by effect
+## Decision: drop modifiers that duplicate a vanilla concept
 
-**Decision.** Giant earthworms and sea monsters have numerically identical effect blocks and differ only in their spawn conditions and icons.
+**Decision.** Perpetual Twilight, Microorganisms, Giant Earthworms, and Sea Monsters were removed.
 
-**Evidence.** Both declare `pop_environment_tolerance = -0.10`, `pop_happiness = -0.05`, and `planet_jobs_society_research_produces_mult = 0.20`; the eligibility tier separates them by planet class.
+**Evidence.** Vanilla v4.5 already provides `pm_tidal_locked` (a twilight terminator with an unusable half-planet), `pm_rich_mircoflora` (microbial soil with farming and society research), `pm_subterranean_wildlife` (burrowing fauna with mining and society research), and `pm_dangerous_wildlife` / `pm_titanic_life` (large fauna with a habitability penalty and society research).
 
-**Why.** Two thematically distinct phenomena were desired for arid and oceanic worlds respectively. Sharing an effect block avoids implying a balance difference that does not exist. The cost is that a player sees two differently named modifiers with identical tooltips.
+**Why.** A new modifier that only duplicates an existing one consumes a pool slot, dilutes the weights of genuinely new outcomes, and forces a long exclusion list to keep the two apart. Removing them leaves four modifiers with no vanilla equivalent, and the exclusion lists shrink to what the magnetic family and the salinity/swampland conflict require.
+
+**Cost.** Removing an identifier is save-breaking for a planet that already carries it; the affected saves lose the modifier and its localisation.
 
 ## Decision: keep the editable artwork outside the content directory
 

@@ -22,11 +22,9 @@ The repository avoids that outcome by writing symmetric exclusions where a confl
 
 | Pair | Both directions declared |
 |------|-------------------------|
-| Twilight and extreme temperatures | Yes |
-| Each magnetic-family member against the others | Yes, through an identical five-identifier list |
-| Each gravity variant against the others | Yes, through an identical four-identifier list |
-| Giant earthworms and sea monsters | No; both instead exclude `pm_titanic_life` and themselves |
-| Unstable tectonics against high gravity | No; only tectonics excludes high gravity |
+| Salty and swampy | Yes |
+| Extreme temperatures and `pm_tidal_locked` | No; only the mod's side excludes, because the vanilla definition is not re-declared |
+| Each magnetic-family member against the others | Yes, through an identical identifier list, closed from the vanilla side by the override file |
 
 For the two asymmetric rows, the accumulation guard (`num_modifiers > 1`) prevents the combination in practice rather than a declared conflict, so the outcome is still order-independent for the guarded modifiers.
 
@@ -55,9 +53,7 @@ None of these is observable from the repository, and none can be changed from it
 
 ## Reflexive exclusions
 
-Several definitions list their own identifier among their exclusions — `pm_ui_no_magnetic_field`, `pm_ui_giant_earthworms`, `pm_ui_sea_monsters`, and most of the overrides exclude themselves. A self-exclusion guarantees that a planet never receives the same modifier twice, which would otherwise be possible because `has_planet_modifier` is evaluated per candidate. This is the mod's only guard against duplication.
-
-`pm_ui_swampy` declares no exclusions at all and therefore has no self-exclusion. Whether duplication is possible depends on whether the engine prevents re-selecting an already-assigned modifier independently; if it does not, swampy is the one definition exposed to it. This is recorded in [ambiguities-and-open-questions.md](./ambiguities-and-open-questions.md).
+Every definition lists its own identifier among its exclusions, including the two re-declared vanilla keys. A self-exclusion guarantees that a planet never receives the same modifier twice, which would otherwise be possible because `has_planet_modifier` is evaluated per candidate. This is the mod's only guard against duplication.
 
 ## Related documentation
 

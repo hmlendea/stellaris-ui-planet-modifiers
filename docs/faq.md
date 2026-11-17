@@ -14,35 +14,27 @@ Only the host game. There are no third-party libraries, no package manifest, and
 
 ## What does it add?
 
-Eight new planet modifiers — perpetual twilight, extreme temperatures, absence of a magnetic field, salinity, swampland, microorganisms, giant earthworms, and sea monsters — each with its own icon and English localisation, plus revised spawn chances for existing modifiers so the enlarged pool stays consistent.
+Four new planet modifiers — extreme temperatures, absence of a magnetic field, salinity, and swampland — each with its own icon and English localisation, plus two vanilla magnetic-field redefinitions so the new entry cannot coexist with them.
 
 ## Do the new modifiers make planets better?
 
-Mostly worse. Seven of the eight reduce habitability, happiness, growth, or food production; giant earthworms and sea monsters offset their habitability penalty with a society research bonus, and microorganisms changes nothing at all. The mod adds variety and difficulty rather than power.
-
-## Why is microorganisms presented prominently if it changes nothing?
-
-Its effect block sets `important = yes` with no effect keys, so it occupies a modifier slot and is presented prominently while conferring no statistic change. Its accumulation guard is also the most permissive of the set, allowing it to join a planet that already carries two modifiers.
+They make planets worse. Every new modifier reduces habitability, and most also reduce happiness, growth, food production, or physics research. The mod adds variety and difficulty rather than power.
 
 ## Why does a planet already carrying a modifier seem to reject the new ones?
 
-Seven of the eight definitions carry a `num_modifiers > 1` condition evaluated with `factor = 0`, which excludes the modifier once another is present. `pm_ui_swampy` has no such guard, and microorganisms relaxes the threshold to two.
+All four definitions carry a `num_modifiers > 1` condition evaluated with `factor = 0`, which excludes the modifier once another is present. This matches the vanilla convention and is uniform across the set.
 
 ## Can two contradictory modifiers appear together?
 
-Not for the pairs the mod introduces. Twilight and extreme temperatures exclude each other, the magnetic-field variants share an identical exclusion list, and the gravity variants share theirs. Accumulation guards handle the remaining combinations.
+Not for the pairs the mod declares. Salty and swampy exclude each other, and the magnetic-field variants share an exclusion list. Extreme temperatures excludes `pm_tidal_locked` in one direction only, because the vanilla definition is no longer re-declared.
 
 ## Why can high gravity never appear on a small planet?
 
-The high-gravity redefinition includes `factor = 0` when `planet_size < 12`. Low gravity has no corresponding hard floor, only a penalty factor above size 19.
+Because the vanilla v4.5 definition says so: it carries `factor = 0` when `planet_size < 12`. The mod does not re-declare `pm_high_gravity`, so that behaviour is entirely the host's.
 
 ## Why is tidal locking more likely on moons?
 
 The redefinition applies `factor = 3` when the body is a moon, with a base weight of only `add = 1`. The moon multiplier is what makes the modifier observable.
-
-## Why do giant earthworms and sea monsters have identical effects?
-
-They share an effect block deliberately, differing only in spawn conditions and icon. Their differentiation is thematic rather than mechanical.
 
 ## Will the mod change my existing save?
 
@@ -54,7 +46,7 @@ The save retains the modifier identifiers. Without the mod, the engine cannot re
 
 ## Which game versions are supported?
 
-Both descriptors declare `supported_version="2.6.*"`, which predates the current release line. The claim has not been verified by any repository artefact, so treat newer versions as untested.
+Both descriptors declare `supported_version="v4.5.*"`. The definitions were rebalanced against the v4.5 vanilla planet modifier set; earlier release lines are untested.
 
 ## Are other languages available?
 

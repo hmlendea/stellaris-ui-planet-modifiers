@@ -4,86 +4,60 @@ This document describes what a player observes, and why, when the mod is active 
 
 ## Observation: additional modifiers appear on generated planets
 
-The most direct behavioural change is that planets can carry any of eight modifiers the base game does not provide: perpetual twilight, extreme temperatures, absence of a magnetic field, salinity, swampland, microorganisms, giant earthworms, and sea monsters.
+The most direct behavioural change is that planets can carry any of four modifiers the base game does not provide: extreme temperatures, absence of a magnetic field, salinity, and swampland.
 
 Why: the additions file declares a `spawn_chance` for each identifier, so each enters the candidate pool for every generated planet that satisfies its conditions.
 
-## Observation: barren and cold-barren worlds dominate the new appearances
+## Observation: three new modifiers also cover barren worlds
 
-Five of the eight new modifiers favour barren worlds through class conditions:
+The class conditions of three new modifiers include barren or cold-barren worlds:
 
 | Modifier | Barren weight contribution |
 |----------|---------------------------|
-| `pm_ui_no_magnetic_field` | `add = 20` |
-| `pm_ui_salty` | `add = 30` on barren, `add = 5` on cold barren |
-| `pm_ui_microorganisms` | `add = 5` |
-| `pm_ui_twilight` | `add = 2` |
+| `pm_ui_no_magnetic_field` | `add = 10` |
+| `pm_ui_salty` | `add = 10` on barren, `add = 5` on cold barren |
 | `pm_ui_extreme_temperatures` | `add = 5` |
 
-Why: barren and cold-barren worlds have no habitability penalty to protect, so the mod's uniformly negative effects are thematically appropriate there, and the author weighted the definitions accordingly. The highest single weight in the set, `add = 30` for salinity on a barren world, makes salty barren planets the most common new outcome.
+Why: barren worlds have no habitability to protect, so these effects are thematically appropriate there. The weights match vanilla's `add = 10` common and `add = 5` uncommon tiers.
 
 ## Observation: modifiers cluster around thematically compatible worlds
 
-Several definitions reward conditions that reinforce their theme:
-
 | Modifier | Reinforcing condition | Multiplier |
 |----------|----------------------|-----------|
-| `pm_ui_twilight` | Already tidally locked | ×4 |
-| `pm_ui_twilight` | Bleak | ×2 |
 | `pm_ui_extreme_temperatures` | Bleak | ×2 |
 | `pm_ui_no_magnetic_field` | Low gravity | ×2 |
-| `pm_ui_giant_earthworms` | Lush, or high gravity | ×2 each |
-| `pm_ui_sea_monsters` | High gravity | ×2 |
 
-Why: the multipliers encode narrative compatibility. A tidally locked world plausibly has a permanent twilight zone; a lush world plausibly supports large burrowing fauna. Because multipliers compound, a lush high-gravity arid world quadruples giant earthworm eligibility.
+Why: the multipliers encode narrative compatibility, and because multipliers compound a bleak low-gravity barren world favours both.
 
 ## Observation: contradictory modifiers do not appear together
 
-A planet does not carry both perpetual twilight and extreme temperatures, nor two magnetic-field conditions, nor both gravity variants.
+A planet does not carry both extreme temperatures and a tidal lock, nor two magnetic-field conditions, nor both salinity and swampland.
 
-Why: each conflicting pair is separated by `factor = 0` exclusion clauses. Where a conflict exists among the new modifiers, both sides exclude each other, so the outcome does not depend on assignment order.
+Why: each conflicting pair is separated by `factor = 0` exclusion clauses written symmetrically, so the outcome does not depend on assignment order. The tidal-lock pair is one-sided: `pm_ui_extreme_temperatures` excludes `pm_tidal_locked`, but the vanilla definition is no longer re-declared, so a tidal lock can still be rolled after extreme temperatures. The magnetic pair is the only one closed in both directions, through the override file.
 
-## Observation: new modifiers mostly stop at one modifier per planet
+## Observation: new modifiers never join an already-modified planet
 
-Seven of the eight new definitions carry a `num_modifiers > 1` guard, so a planet that already has one modifier cannot receive them.
+All four new definitions carry a `num_modifiers > 1` guard, matching the vanilla convention.
 
-Why: the guard limits how many modifiers a planet accumulates. `pm_ui_swampy` omits the guard, and `pm_ui_microorganisms` relaxes it to `num_modifiers > 2`, so those two are the exceptions that can join an already-modified planet.
+Why: the guard limits how many modifiers a planet accumulates. An earlier revision exempted swampy and relaxed the guard for microorganisms; both exceptions were removed so the cap is uniform.
 
-## Observation: gravity depends on planet size
+## Observation: gravity keeps its vanilla behaviour
 
-Low gravity favours small worlds and high gravity favours large worlds, with high gravity impossible below size 12.
+Low gravity favours small worlds and high gravity favours large worlds, with high gravity impossible below size 12. The mod no longer changes these odds.
 
-Why: both redefinitions use `planet_size` conditions with compounding multipliers. The low-gravity definition triples a ×2 factor on progressively smaller worlds for a cumulative ×8 below size 7, while the high-gravity definition applies ×2 twice above size 19 and 22 and forbids the modifier entirely below size 12.
+Why: an earlier revision re-declared gravity under parallel `pm_ui_*` keys, which could add a second gravity candidate. The mod now leaves the vanilla definitions untouched and only reads `pm_low_gravity` and `pm_high_gravity` when weighting its own spawns.
 
-## Observation: moon-specific tidal locking
+## Observation: tidal locking is untouched
 
-Tidally locked worlds are three times more likely among moons.
+Tidally locked worlds remain three times more likely among moons, exactly as in vanilla.
 
-Why: `pm_ui_tidal_locked` is the only definition using `is_moon = yes` with a `factor = 3`. Its base weight is also the lowest in the set, at `add = 1`, so the moon multiplier is what makes the modifier observable at all.
+Why: `pm_tidal_locked` is no longer re-declared. Its vanilla definition, including the `factor = 3` for `is_moon = yes` and the `add = 1` base weight, applies unchanged.
 
-## Observation: modifiers are absent near hostile stellar remnants
+## Observation: the new modifiers are all penalties
 
-Microorganisms cannot appear in a system whose primary star is a black hole, neutron star, or pulsar.
+Every new modifier reduces planetary statistics; none grants a bonus.
 
-Why: `pm_ui_microorganisms` declares a system-scope exclusion through `solar_system = { OR = { is_star_class = ... } }`. This is the only system-scope condition in the mod.
-
-## Observation: microorganisms is presented prominently but confers no statistical effect
-
-The microorganisms modifier appears with emphasis yet changes nothing numerically.
-
-Why: its effect block contains no effect keys and sets `important = yes`. It is a narrative and presentation entry; its presence occupies a modifier slot, which is why its accumulation guard is the more permissive `num_modifiers > 2`.
-
-## Observation: the new modifiers are mostly penalties
-
-Seven of the eight new modifiers reduce planetary statistics; the exception is the microorganisms entry, which changes nothing. Giant earthworms and sea monsters mitigate their habitability penalty with a society research bonus.
-
-Why: the effect blocks are dominated by negative `pop_environment_tolerance`, `pop_happiness`, and food-production values, with two positive society-research values. The mod is a difficulty and flavour layer rather than a power increase.
-
-## Observation: existing modifier behaviour is altered, not merely extended
-
-Vanilla modifiers such as hazardous weather, tidal locking, gravity, magnetic field, asteroid impacts, and wild storms still function, but their spawn chances are now governed by the mod's redefinitions.
-
-Why: the override file declares `pm_ui_*` keys bound to the host's effect keys. Because the mod's versions add the new identifiers to their exclusion lists, a planet cannot receive both the vanilla-flavoured and the mod-flavoured variant of a magnetic field or gravity modifier.
+Why: the effect blocks use negative `pop_environment_tolerance`, `pop_happiness`, `logistic_growth_mult`, food, physics, and building-cost values only. The mod is a difficulty and flavour layer rather than a power increase, and every magnitude stays inside the vanilla band for a comparable modifier.
 
 ## Non-observations
 

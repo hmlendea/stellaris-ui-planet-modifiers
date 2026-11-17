@@ -17,9 +17,8 @@ Symptom-organised diagnosis. Each entry names the probable cause and the check t
 | A definition block failed to parse | Read the engine log for the definition file |
 | Class conditions do not match the observed planets | Inspect the `is_planet_class` clause for the modifier in question |
 | An exclusion fires | Inspect the definition's `factor = 0` clauses |
-| An accumulation guard prevents it | Inspect the `num_modifiers` guard; seven of eight definitions require one modifier or fewer |
+| An accumulation guard prevents it | Inspect the `num_modifiers` guard; seven of four definitions require one modifier or fewer |
 | The modifier is expected on a large planet but high gravity forbids it | High gravity is forbidden below size 12 by design; low gravity is not |
-| The modifier is expected near a neutron star | Microorganisms is excluded in black hole, neutron star, and pulsar systems by design |
 
 ## The modifier appears with a raw key instead of a name
 
@@ -45,7 +44,6 @@ Symptom-organised diagnosis. Each entry names the probable cause and the check t
 |----------------|-------|
 | The definition's `modifier` field does not equal the effect key | Cross-check the two values character for character |
 | The effect block was removed | Confirm the effect key exists in the effect file |
-| The block is `ui_microorganisms` | It deliberately has no effect keys; this is not a defect |
 | A host-bound override key is unrecognised | Confirm the host still defines the bound effect key |
 
 ## Two contradictory modifiers appear on one planet
@@ -68,7 +66,7 @@ Symptom-organised diagnosis. Each entry names the probable cause and the check t
 
 | Probable cause | Check |
 |----------------|-------|
-| `supported_version` excludes the running game | It declares `2.6.*`; this is expected on newer releases |
+| `supported_version` excludes the running game | The descriptors declare `v4.5.*`; a warning means the game is a different release line |
 | One descriptor was updated and the other was not | Diff the two descriptor files |
 
 ## Multiplayer inconsistency
