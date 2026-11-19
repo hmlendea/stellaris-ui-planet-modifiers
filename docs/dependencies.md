@@ -48,7 +48,7 @@ Dotted and solid edges are equally brittle; the distinction is only whether a fi
 | Package manager | No third-party code is vendored or restored |
 | Test framework | No automated verification is possible |
 | Linter or validator | Definition syntax is checked only by the host at load time |
-| Continuous integration | No check runs on a change; `.github/workflows/github-release.yml` only packages the archive when a release is published, `.github/workflows/nexus-mods-release.yml` only uploads to Nexus Mods on tag pushes or manual dispatch, and `.github/workflows/steam-workshop-release.yml` only uploads to the Steam Workshop on tag pushes |
+| Continuous integration | No check runs on a change; `.github/workflows/github-release.yml` only packages the archive when a release is published, and `.github/workflows/nexus-mods-release.yml` and `.github/workflows/steam-workshop-release.yml` only upload to Nexus Mods and the Steam Workshop on tag pushes or manual dispatch |
 | Code generator | Icons and localisation are edited by hand |
 
 The absence is not an oversight; a static-data mod legitimately requires none of these. The cost is that every cross-file invariant in [invariants.md](./invariants.md) relies on contributor discipline.

@@ -52,7 +52,7 @@ The residual risk is therefore concentrated in three places: the host's own hand
 |--------|--------|
 | Third-party dependencies | None |
 | Build-time downloads | None |
-| Release automation executing remote scripts | `.github/workflows/github-release.yml` runs only local `zip` and pinned actions with read-only repository content; `.github/workflows/nexus-mods-release.yml` runs the same local `zip`, edits the descriptors in place, and uploads through the pinned `Nexus-Mods/upload-action` action using an API key supplied from repository secrets; `.github/workflows/steam-workshop-release.yml` runs the same local `zip` and `unzip`, then uploads through the pinned `hmlendea/steam-workshop-update` action using Steam credentials supplied from repository secrets |
+| Release automation executing remote scripts | `.github/workflows/github-release.yml` runs only local `zip` and pinned actions with read-only repository content; `.github/workflows/nexus-mods-release.yml` and `.github/workflows/steam-workshop-release.yml` run the same local `zip`, edit the descriptors in place, and upload through the pinned `Nexus-Mods/upload-action` and `hmlendea/steam-workshop-update` actions using an API key and Steam credentials supplied from repository secrets, the latter also running a local `unzip` |
 | Signed artefacts | Not applicable |
 | Provenance | Repository history, release tag `v1.0`, and the workshop item |
 

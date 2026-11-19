@@ -51,7 +51,7 @@ A change in any of these on the host side is invisible in the repository and man
 
 | Channel | Evidence | Status |
 |---------|----------|--------|
-| Steam Workshop | Item identifier `2072966604` for Stellaris app `281990`, titled `[DISCONTINUED] Universum Infinitum - Planet Modifiers`; `.github/workflows/steam-workshop-release.yml` uploads the tagged content on every `v*.*.*` tag push | Published but marked discontinued by its author, and reaches a Stellaris-specific audience through the Steam client |
+| Steam Workshop | Item identifier `2072966604` for Stellaris app `281990`, titled `[DISCONTINUED] Universum Infinitum - Planet Modifiers`; `.github/workflows/steam-workshop-release.yml` sets the descriptor version and uploads the tagged content on every `v*.*.*` tag push or manual dispatch | Published but marked discontinued by its author, and reaches a Stellaris-specific audience through the Steam client |
 | Nexus Mods | Mod page `nexusmods.com/stellaris/mods/223` with file identifier `8417199`; `.github/workflows/nexus-mods-release.yml` uploads `ui-planet-modifiers.zip` on every `v*.*.*` tag push or manual dispatch, archiving the previous version and updating the mod version | Published |
 | GitHub Releases | Release `v1.0` with archive `ui-planet-modifiers_1.0.zip`; `.github/workflows/github-release.yml` builds the archive for every published release | Published |
 

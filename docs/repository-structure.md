@@ -69,7 +69,7 @@ The `ui_` element in these names originates from the repository name rather than
 
 ## Structural observations
 
-- There is no build directory, no dependency manifest, and no test directory. The only automation is `.github/workflows/github-release.yml`, which packages the archive when a release is published, `.github/workflows/nexus-mods-release.yml`, which uploads the mod to Nexus Mods when a `v*.*.*` tag is pushed or the workflow is manually dispatched, and `.github/workflows/steam-workshop-release.yml`, which uploads the mod to the Steam Workshop when a `v*.*.*` tag is pushed; nothing is compiled or verified automatically.
+- There is no build directory, no dependency manifest, and no test directory. The only automation is `.github/workflows/github-release.yml`, which packages the archive when a release is published, and `.github/workflows/nexus-mods-release.yml` and `.github/workflows/steam-workshop-release.yml`, which upload the mod to Nexus Mods and the Steam Workshop when a `v*.*.*` tag is pushed or the workflow is manually dispatched; nothing is compiled or verified automatically.
 - `ui-planet-modifiers/thumbnail.png` and `ui-planet-modifiers/descriptor.mod` are the only artefacts addressed at the launcher rather than at the game engine.
 - `src/` sits outside the mod content directory deliberately, so that the GIMP source is not shipped as part of the mod content.
 
