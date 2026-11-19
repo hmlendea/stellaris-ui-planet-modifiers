@@ -4,14 +4,38 @@ on:
   push:
     tags:
     - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to release'
+        required: true
 
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
 
+    env:
+      VERSION: ${{ inputs.tag || github.ref_name }}
+
     steps:
     - uses: actions/checkout@v7
+      with:
+        ref: ${{ env.VERSION }}
+
+    - name: Update the mod version
+      run: |
+        MOD_VERSION="${VERSION#v}"
+
+        for DESCRIPTOR in "ui-planet-modifiers.mod" "ui-planet-modifiers/descriptor.mod"
+        do
+          if grep -q '^version=' "${DESCRIPTOR}"; then
+            sed -i "s/^version=.*/version=\"${MOD_VERSION}\"/" "${DESCRIPTOR}"
+          else
+            printf 'version="%s"\n' "${MOD_VERSION}" | cat - "${DESCRIPTOR}" > "${DESCRIPTOR}.tmp"
+            mv "${DESCRIPTOR}.tmp" "${DESCRIPTOR}"
+          fi
+        done
 
     - name: Build the release archive
       run: |
@@ -27,7 +51,7 @@ jobs:
         appid: 281990
         itemid: 2072966604
         path: "release/ui-planet-modifiers/"
-        changenote: "[url=https://github.com/hmlendea/stellaris-ui-planet-modifiers/releases/tag/${{github.ref_name}}]Version ${{github.ref_name}}[/url]"
+        changenote: "[url=https://github.com/hmlendea/stellaris-ui-planet-modifiers/releases/tag/${{env.VERSION}}]Version ${{env.VERSION}}[/url]"
       env:
         STEAM_USERNAME: ${{secrets.STEAM_USERNAME}}
         STEAM_PASSWORD: ${{secrets.STEAM_PASSWORD}}
