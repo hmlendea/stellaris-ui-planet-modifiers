@@ -335,7 +335,7 @@ The mod is delivered as a descriptor plus a content directory that is copied int
 
 ## ✅ Testing and Verification
 
-The repository contains no test suite, no validation script, and no continuous integration workflow that runs checks on changes. Verification is manual and requires the host game. `.github/workflows/github-release.yml` packages and publishes the release archive when a release is published, and `.github/workflows/steam-workshop-release.yml` uploads the mod to the Steam Workshop when a `v*.*.*` tag is pushed.
+The repository contains no test suite, no validation script, and no continuous integration workflow that runs checks on changes. Verification is manual and requires the host game. `.github/workflows/github-release.yml` packages and publishes the release archive when a release is published, `.github/workflows/nexus-mods-release.yml` uploads the mod to Nexus Mods when a `v*.*.*` tag is pushed or the workflow is manually dispatched, and `.github/workflows/steam-workshop-release.yml` uploads the mod to the Steam Workshop when a `v*.*.*` tag is pushed.
 
 Material coverage gaps and constraints:
 - Spawn-weight changes cannot be verified deterministically; only repeated in-game generation reveals distribution shifts.

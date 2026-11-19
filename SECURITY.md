@@ -16,8 +16,8 @@ Use this table to indicate which project versions currently receive security mai
 | Version | Distribution Channel | Supported |
 |---------|--------------------|-----------|
 | Latest version | Steam Workshop | ✅ |
+| Latest version | Nexus Mods | ✅ |
 | Latest version | GitHub Releases | ✅ |
-| Latest version | Nexus Mods | ❌ |
 | Latest version | Paradox Mods | ❌ |
 | Latest version | Unofficial third-party distribution channels | ❌ |
 | Preceding versions | Any distribution channel | ❌ |

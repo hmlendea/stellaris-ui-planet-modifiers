@@ -11,7 +11,7 @@ There is no build step. The repository contains no compiler input, no packaging 
 | Minification | Not applicable |
 | Asset generation | Manual: DDS icons are exported from `src/planet_modifier.xcf` by an editor |
 | Dependency restoration | Not applicable |
-| Continuous integration | Release packaging only: `.github/workflows/github-release.yml` builds the archive on release publication and `.github/workflows/steam-workshop-release.yml` uploads the mod to the Steam Workshop on `v*.*.*` tag pushes; no validation runs on changes |
+| Continuous integration | Release packaging only: `.github/workflows/github-release.yml` builds the archive on release publication, `.github/workflows/nexus-mods-release.yml` uploads the mod to Nexus Mods on `v*.*.*` tag pushes or manual dispatch, and `.github/workflows/steam-workshop-release.yml` uploads the mod to the Steam Workshop on `v*.*.*` tag pushes; no validation runs on changes |
 
 ## Delivery layout
 
@@ -34,6 +34,7 @@ The `path` field is relative to the user mod location, so the layout above must 
 | Route | Artefact | Notes |
 |-------|----------|-------|
 | Steam Workshop subscription | Published workshop item | The launcher manages placement and updates; the workshop listing is marked discontinued by its author |
+| Nexus Mods download | `ui-planet-modifiers.zip` uploaded by `.github/workflows/nexus-mods-release.yml` | The platform manages placement and updates; the upload archives the previous version and sets the mod version from the tag |
 | GitHub release archive | `ui-planet-modifiers_1.0.zip` from release `v1.0` | Verified to contain `ui-planet-modifiers.mod` and `ui-planet-modifiers/descriptor.mod` at the archive root plus the content directory, 25 entries totalling about 252 KiB uncompressed |
 | Manual from source | Repository clone | The clone can be placed directly where the launcher looks, or the content directory can be copied into an existing mod location |
 
@@ -58,7 +59,7 @@ The verified archive layout matches the delivery layout above exactly: both desc
 
 ## Release process
 
-The archive is produced by `.github/workflows/github-release.yml`, which runs when a GitHub release is published, checks out the tagged revision, derives the version from the tag with the leading `v` removed, zips `ui-planet-modifiers.mod` and `ui-planet-modifiers/`, and uploads the result as `ui-planet-modifiers_<version>.zip` to that release. The workshop item is published by `.github/workflows/steam-workshop-release.yml`, which runs when a `v*.*.*` tag is pushed, zips and extracts the same descriptor and content directory, and uploads the extracted content directory to the Steam Workshop item with a changenote linking the matching release tag. Both therefore match the tagged repository state, but nothing prevents a tag or release from being created on a revision that was never validated in game.
+The archive is produced by `.github/workflows/github-release.yml`, which runs when a GitHub release is published, checks out the tagged revision, derives the version from the tag with the leading `v` removed, zips `ui-planet-modifiers.mod` and `ui-planet-modifiers/`, and uploads the result as `ui-planet-modifiers_<version>.zip` to that release. The Nexus Mods copy is published by `.github/workflows/nexus-mods-release.yml`, which runs when a `v*.*.*` tag is pushed or the workflow is manually dispatched with a tag: it checks out that tag, sets `version` in both descriptors, zips the descriptor and content directory into `release.zip`, and uploads it to file `8417199` as `ui-planet-modifiers.zip` with the changelog link. The workshop item is published by `.github/workflows/steam-workshop-release.yml`, which runs when a `v*.*.*` tag is pushed, zips and extracts the same descriptor and content directory, and uploads the extracted content directory to the Steam Workshop item with a changenote linking the matching release tag. All therefore match the tagged repository state, but nothing prevents a tag or release from being created on a revision that was never validated in game.
 
 ## Deployment topology
 

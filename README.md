@@ -69,6 +69,7 @@ Inspect surveyed or colonised planets to confirm that each modifier presents its
 
 ## 📦 Installation
 
+[![Obtain it from Nexus Mods](https://raw.githubusercontent.com/hmlendea/readme-assets/master/badges/stores/nexus.png)](https://nexusmods.com/stellaris/mods/223)
 [![Obtain it from Steam Workshop](https://raw.githubusercontent.com/hmlendea/readme-assets/master/badges/stores/steam-workshop.png)](https://steamcommunity.com/sharedfiles/filedetails/?id=2072966604)
 [![Obtain it from GitHub](https://raw.githubusercontent.com/hmlendea/readme-assets/master/badges/stores/github.png)](https://github.com/hmlendea/stellaris-ui-planet-modifiers/releases)
 
@@ -116,6 +117,7 @@ The mod defines no data categories: it has no accounts, no telemetry, no diagnos
 | Workflow | Purpose | What it does |
 |----------|---------|--------------|
 | [ GitHub Release ](https://github.com/hmlendea/stellaris-ui-planet-modifiers/blob/master/.github/workflows/github-release.yml) | Publish the mod archive for a release | Runs when a release is published: checks out the tagged revision, strips the leading `v` from the tag to derive the version, zips `ui-planet-modifiers.mod` and `ui-planet-modifiers/` into `ui-planet-modifiers_<version>.zip`, and uploads the archive to the release |
+| [ Nexus Mods ](https://github.com/hmlendea/stellaris-ui-planet-modifiers/blob/master/.github/workflows/nexus-mods-release.yml) | Publish the mod to Nexus Mods | Runs when a `v*.*.*` tag is pushed or manually dispatched: checks out the tag, sets `version` in both descriptors, zips `ui-planet-modifiers.mod` and `ui-planet-modifiers/` into `release.zip`, and uploads it to Nexus Mods file `8417199` as `ui-planet-modifiers.zip` with a changelog link |
 | [ Steam Workshop ](https://github.com/hmlendea/stellaris-ui-planet-modifiers/blob/master/.github/workflows/steam-workshop-release.yml) | Publish the mod to the Steam Workshop | Runs when a `v*.*.*` tag is pushed: checks out the tagged revision, zips `ui-planet-modifiers/` and `ui-planet-modifiers.mod`, extracts the archive, and uploads the content directory to the workshop item with a changenote linking the matching GitHub release tag |
 
 ## 🗂️ Project Structure

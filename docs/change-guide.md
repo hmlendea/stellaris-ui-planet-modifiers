@@ -94,7 +94,7 @@ No existing file requires modification, because localisation is additive.
 1. Edit `supported_version` in both descriptors to the same value.
 2. Verify by loading the mod on the target version and confirming that all four modifiers generate, present correctly, and apply their effects.
 3. Confirm that no referenced vanilla identifier has been renamed; a rename manifests as an unevaluable condition rather than a load error.
-4. Push a `v*.*.*` tag when the Steam Workshop item should be updated; `.github/workflows/steam-workshop-release.yml` uploads the tagged content to the workshop item automatically.
+4. Push a `v*.*.*` tag when the Nexus Mods entry or the Steam Workshop item should be updated; `.github/workflows/nexus-mods-release.yml` uploads the tagged content to Nexus Mods and `.github/workflows/steam-workshop-release.yml` uploads it to the workshop item automatically. A Nexus Mods upload can also be triggered manually by dispatching the workflow with the tag to release.
 5. Publish a release; `.github/workflows/github-release.yml` builds the archive from the tagged revision automatically.
 
 ## Changing the mod name, path, or content directory

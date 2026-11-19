@@ -2,7 +2,7 @@
 
 ## As a player
 
-1. Obtain the mod from a supported distribution channel: the Steam Workshop, or the release archive published on GitHub.
+1. Obtain the mod from a supported distribution channel: the Steam Workshop, the Nexus Mods page, or the release archive published on GitHub.
 2. Activate it in the Stellaris launcher's playset for the intended game version.
 3. Start a new game. The four new planet modifiers become eligible during galaxy generation; existing saves are unaffected because modifiers are assigned at generation time.
 4. Inspect colonised and surveyed planets to confirm that modifier names, descriptions, and icons render correctly.

@@ -97,7 +97,7 @@ Universum Infinitum: Planet Modifiers is a declarative Stellaris mod. It contrib
 | Icon assets | Complete | Directory enumerated; texture format inspected |
 | Localisation | Complete | Localisation file inspected in full |
 | Engine selection semantics | Partially inferred | Descriptor and definition evidence only; engine internals not available |
-| Distribution platforms | Partially verified | Steam Workshop item resolved through the Steam Web API; other channels unverified |
+| Distribution platforms | Partially verified | Steam Workshop item resolved through the Steam Web API and the Nexus Mods page and file identifiers resolved through the Nexus Mods GraphQL API; other channels unverified |
 
 ## Maintenance metadata
 

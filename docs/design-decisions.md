@@ -108,9 +108,9 @@ Rationale for the shape of the definition set, as reconstructed from the artefac
 
 ## Decision: distribute through platforms rather than a build pipeline
 
-**Decision.** The repository contains no build step and no packaging script; release packaging is delegated to `.github/workflows/github-release.yml`, and workshop publication to `.github/workflows/steam-workshop-release.yml`.
+**Decision.** The repository contains no build step and no packaging script; release packaging is delegated to `.github/workflows/github-release.yml`, Nexus Mods publication to `.github/workflows/nexus-mods-release.yml`, and workshop publication to `.github/workflows/steam-workshop-release.yml`.
 
-**Evidence.** The only workflows are `.github/workflows/github-release.yml`, which zips the descriptor and content directory on release publication, and `.github/workflows/steam-workshop-release.yml`, which uploads the same content to the Steam Workshop on `v*.*.*` tag pushes; no manifest or script compiles anything.
+**Evidence.** The workflows are `.github/workflows/github-release.yml`, which zips the descriptor and content directory on release publication, `.github/workflows/nexus-mods-release.yml`, which sets the descriptor version and uploads the same content to Nexus Mods on `v*.*.*` tag pushes or manual dispatch, and `.github/workflows/steam-workshop-release.yml`, which uploads the same content to the Steam Workshop on `v*.*.*` tag pushes; no manifest or script compiles anything.
 
 **Why.** A mod of static data files requires no compilation, so the workflow only archives the committed content. The archive is produced from the tagged revision, which removes the drift that a manually uploaded archive allowed; it does not validate the content, so in-game verification remains a manual prerequisite for a release.
 
