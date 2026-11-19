@@ -2,7 +2,7 @@
 
 ## Current state
 
-The repository contains no test suite, no validation script, and no linting configuration. The only workflows, `.github/workflows/github-release.yml` and `.github/workflows/steam-workshop-release.yml`, package the release archive when a release is published and upload the mod to the Steam Workshop on `v*.*.*` tag pushes respectively; neither validates anything. Verification is manual and requires the host game.
+The repository contains no test suite, no validation script, and no linting configuration. The workflows, `.github/workflows/github-release.yml`, `.github/workflows/nexus-mods-release.yml`, and `.github/workflows/steam-workshop-release.yml`, package the release archive when a release is published and upload the mod to Nexus Mods and to the Steam Workshop on `v*.*.*` tag pushes respectively; none of them validates anything. Verification is manual and requires the host game.
 
 | Verification type | Present |
 |-------------------|---------|
@@ -12,7 +12,7 @@ The repository contains no test suite, no validation script, and no linting conf
 | Definition schema validation | No |
 | Cross-file consistency check | No |
 | Static analysis or linting | No |
-| Continuous integration | Release packaging only (`.github/workflows/github-release.yml`) and workshop publication only (`.github/workflows/steam-workshop-release.yml`); no checks |
+| Continuous integration | Release packaging only (`.github/workflows/github-release.yml`), Nexus Mods publication only (`.github/workflows/nexus-mods-release.yml`), and workshop publication only (`.github/workflows/steam-workshop-release.yml`); no checks |
 | Manual in-game verification | Yes, by the contributor |
 
 The absence is not anomalous for a static-data mod, but it has a specific cost: every cross-file invariant in [invariants.md](./invariants.md) relies entirely on contributor discipline.

@@ -8,6 +8,7 @@ stellaris-ui-planet-modifiers/
 │   ├── FUNDING.yml                     # Funding platforms consumed by GitHub
 │   └── workflows/
 │       ├── github-release.yml          # Packages and publishes the release archive
+│       ├── nexus-mods-release.yml      # Uploads the mod to Nexus Mods
 │       └── steam-workshop-release.yml  # Uploads the mod to the Steam Workshop
 ├── src/
 │   └── planet_modifier.xcf             # Editable GIMP source for the icon set
@@ -49,7 +50,7 @@ stellaris-ui-planet-modifiers/
 | `ui-planet-modifiers/common/static_modifiers/` | Effect definitions bound to icons and localisation keys. |
 | `ui-planet-modifiers/gfx/interface/icons/planet_modifiers/` | DDS icon textures, one per new modifier, named `pm_ui_<name>.dds`. |
 | `ui-planet-modifiers/localisation/english/` | English localisation, one language directory per locale. |
-| `.github/` | GitHub platform configuration: the funding declaration and the `github-release.yml` release-packaging workflow and `steam-workshop-release.yml` workshop-publication workflow. |
+| `.github/` | GitHub platform configuration: the funding declaration and the `github-release.yml` release-packaging workflow, the `nexus-mods-release.yml` Nexus Mods publication workflow, and the `steam-workshop-release.yml` workshop-publication workflow. |
 | `docs/` | This knowledge base. Not shipped with the mod. |
 
 ## Naming conventions observed by the repository
@@ -68,7 +69,7 @@ The `ui_` element in these names originates from the repository name rather than
 
 ## Structural observations
 
-- There is no build directory, no dependency manifest, and no test directory. The only automation is `.github/workflows/github-release.yml`, which packages the archive when a release is published, and `.github/workflows/steam-workshop-release.yml`, which uploads the mod to the Steam Workshop when a `v*.*.*` tag is pushed; nothing is compiled or verified automatically.
+- There is no build directory, no dependency manifest, and no test directory. The only automation is `.github/workflows/github-release.yml`, which packages the archive when a release is published, `.github/workflows/nexus-mods-release.yml`, which uploads the mod to Nexus Mods when a `v*.*.*` tag is pushed or the workflow is manually dispatched, and `.github/workflows/steam-workshop-release.yml`, which uploads the mod to the Steam Workshop when a `v*.*.*` tag is pushed; nothing is compiled or verified automatically.
 - `ui-planet-modifiers/thumbnail.png` and `ui-planet-modifiers/descriptor.mod` are the only artefacts addressed at the launcher rather than at the game engine.
 - `src/` sits outside the mod content directory deliberately, so that the GIMP source is not shipped as part of the mod content.
 
