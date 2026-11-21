@@ -3,6 +3,8 @@
  ui_dense_atmosphere:0 "Dense Atmosphere"
  ui_extreme_temperatures_desc:0 "This planet has almost no atmosphere to buffer it, so the surface swings between blistering heat in the light and freezing cold in the dark."
  ui_extreme_temperatures:0 "Extreme Temperatures"
+ ui_geological_instability_desc:0 "This world's crust is restless, with frequent tremors and shifting ground that make large-scale construction on its surface hazardous."
+ ui_geological_instability:0 "Geological Instability"
  ui_no_magnetic_field_desc:0 "This world has no magnetic field, leaving its surface and its settlers completely exposed to cosmic radiation."
  ui_no_magnetic_field:0 "No Magnetic Field"
  ui_salty_desc:0 "This world has extremely salty soils and waters, making it very hard for anything to grow on it."

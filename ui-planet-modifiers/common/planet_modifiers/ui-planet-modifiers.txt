@@ -236,3 +236,35 @@ pm_ui_toxic_soil = {
 
     modifier = "ui_toxic_soil"
 }
+
+pm_ui_geological_instability = {
+    spawn_chance = {
+        modifier = {
+            add = 10
+            is_planet_class = "pc_volcanic"
+        }
+        modifier = {
+            add = 5
+            OR = {
+                is_planet_class = "pc_arid"
+                is_planet_class = "pc_desert"
+                is_planet_class = "pc_alpine"
+            }
+        }
+        modifier = {
+            factor = 0
+            OR = {
+                has_planet_modifier = "pm_ui_geological_instability"
+                has_planet_modifier = "pm_unstable_tectonics"
+                has_planet_modifier = "pm_abundant_geothermal_activity"
+            }
+        }
+
+        modifier = {
+            factor = 0
+            num_modifiers > 1
+        }
+    }
+
+    modifier = "ui_geological_instability"
+}

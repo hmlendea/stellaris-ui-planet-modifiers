@@ -38,8 +38,8 @@ An earlier revision also redefined `hazardous_weather`, `unstable_tectonics`, `a
 | Modifier | Reason for removal |
 |----------|--------------------|
 | `hazardous_weather` | The mod adds no weather modifier, so the duplicate candidate distorted the vanilla pool for no benefit |
-| `unstable_tectonics` | Same: no mod modifier interacts with it |
-| `asteroid_impacts` | Same |
+| `unstable_tectonics` | No mod modifier interacted with it at the time; `pm_ui_geological_instability` now excludes it one-sidedly without a re-declaration |
+| `asteroid_impacts` | Same: no mod modifier interacts with it |
 | `wild_storms` | Same |
 | `low_gravity` | The vanilla definition already covers every habitable class; the parallel key added a second gravity candidate |
 | `high_gravity` | Same |
@@ -47,7 +47,9 @@ An earlier revision also redefined `hazardous_weather`, `unstable_tectonics`, `a
 
 Gravity is now governed solely by the vanilla definition. The mod's own definitions still test `pm_low_gravity` and `pm_high_gravity` when weighting their spawns, which is the intended interaction.
 
-## `pm_null`
+### One-sided exclusions left unclosed
+
+`pm_ui_geological_instability` excludes `pm_unstable_tectonics` and `pm_abundant_geothermal_activity` without either vanilla key being re-declared. The exclusions are therefore one-sided: the vanilla modifier does not exclude the mod's, so the vanilla one can still be assigned after the mod's. The accumulation guard (`num_modifiers > 1`) prevents the two coexisting in practice. Closing the pair would require re-declaring both vanilla keys, which would copy two more host definitions forward for a conflict the guard already prevents.
 
 `pm_null` is not overridden. The vanilla definition applies unchanged.
 

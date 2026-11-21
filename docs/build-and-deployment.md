@@ -71,7 +71,7 @@ The archive is produced by `.github/workflows/github-release.yml`, which runs wh
 | Services | None |
 | Persistent state | None owned by the mod; assigned modifiers persist in the engine's save file |
 | Scaling | Inherits the host model; multiplayer requires identical mod activation on every client |
-| Resource footprint | Static text plus seven 15 KiB textures and a 400 x 400 thumbnail |
+| Resource footprint | Static text plus nine 15 KiB textures and a 400 x 400 thumbnail |
 | Migration mechanism | None; see [state-and-persistence.md](./state-and-persistence.md) |
 | Rollback | Replace the installed content with an earlier release, or deactivate the mod; existing saves retain any identifiers already recorded |
 

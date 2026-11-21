@@ -9,7 +9,7 @@ The repository has no configuration files, no environment variables, no command-
 | Area | Source | Controls | Superseded by | Secrets |
 |------|--------|----------|---------------|---------|
 | Mod identity | `ui-planet-modifiers.mod`, `ui-planet-modifiers/descriptor.mod` | Name, content path, tags, declared game version | Nothing; both must agree | None |
-| Spawn eligibility | `common/planet_modifiers/ui-planet-modifiers.txt` | Whether and how strongly each of the seven new modifiers enters the candidate pool | Nothing | None |
+| Spawn eligibility | `common/planet_modifiers/ui-planet-modifiers.txt` | Whether and how strongly each of the eight new modifiers enters the candidate pool | Nothing | None |
 | Host-modifier eligibility | `common/planet_modifiers/ui-planet-modifiers-vanillas.txt` | Re-declared spawn chances for the two vanilla magnetic-field modifiers | The host's own definitions, which the mod's versions replace | None |
 | Effects and icon binding | `common/static_modifiers/ui-planet-modifiers_static_modifiers.txt` | Effect values, icon path, icon frame, importance | Nothing | None |
 | Display strings | `localisation/english/ui-planet-modifiers_l_english.yml` | Names and descriptions | Nothing | None |

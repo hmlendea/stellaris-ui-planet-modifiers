@@ -6,7 +6,7 @@ Rationale for the shape of the definition set, as reconstructed from the artefac
 
 **Decision.** Modifier eligibility is expressed entirely as condition-and-weight clauses rather than as procedural logic.
 
-**Evidence.** All seven definitions use `spawn_chance` with `add`, `factor`, and condition tests.
+**Evidence.** All eight definitions use `spawn_chance` with `add`, `factor`, and condition tests.
 
 **Why.** The format offers no procedural alternative. The consequence, however, is architectural: every exclusion is multiplication by zero, so the repository's correctness depends on authors remembering to write exclusions rather than on any guard.
 

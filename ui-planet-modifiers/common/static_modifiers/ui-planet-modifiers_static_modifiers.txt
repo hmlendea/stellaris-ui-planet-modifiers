@@ -66,3 +66,11 @@ ui_thin_atmosphere = {
     icon = "gfx/interface/icons/planet_modifiers/pm_ui_thin_atmosphere.dds"
     icon_frame = 3
 }
+
+ui_geological_instability = {
+    pop_environment_tolerance = -0.05
+    planet_structures_cost_mult = 0.15
+
+    icon = "gfx/interface/icons/planet_modifiers/pm_ui_geological_instability.dds"
+    icon_frame = 3
+}

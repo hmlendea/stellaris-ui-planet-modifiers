@@ -2,11 +2,11 @@
 
 ## Responsibility
 
-Declare the seven new planet modifiers and the relative probability with which the engine may assign each to a generated planet.
+Declare the eight new planet modifiers and the relative probability with which the engine may assign each to a generated planet.
 
 ## Location
 
-`ui-planet-modifiers/common/planet_modifiers/ui-planet-modifiers.txt` — a single file containing seven top-level `pm_ui_*` definitions.
+`ui-planet-modifiers/common/planet_modifiers/ui-planet-modifiers.txt` — a single file containing eight top-level `pm_ui_*` definitions.
 
 ## Structure
 
@@ -92,7 +92,16 @@ Only the final `modifier` string and the `spawn_chance` block are structurally r
 | `factor = 0` when the planet already has `pm_ui_dense_atmosphere`, `pm_ui_thin_atmosphere`, or `pm_ui_extreme_temperatures` | Excludes the duplicate and the atmosphere-composition overlaps |
 | `factor = 0` when `num_modifiers > 1` | Accumulation guard |
 
-All seven definitions carry an accumulation guard and at least one exclusion.
+### `pm_ui_geological_instability` → `ui_geological_instability`
+
+| Clause | Effect |
+|--------|--------|
+| `add = 10` on `pc_volcanic` | Base weight 10 on volcanic worlds |
+| `add = 5` on `pc_arid`, `pc_desert`, `pc_alpine` | Base weight 5 elsewhere |
+| `factor = 0` when the planet already has `pm_ui_geological_instability`, `pm_unstable_tectonics`, or `pm_abundant_geothermal_activity` | Excludes the duplicate and the vanilla tectonic and geothermal concepts |
+| `factor = 0` when `num_modifiers > 1` | Accumulation guard |
+
+All eight definitions carry an accumulation guard and at least one exclusion.
 
 ## Weight calibration
 
@@ -102,17 +111,18 @@ Vanilla v4.5 uses `add = 10` for a common class outcome, `add = 5` for an uncomm
 
 Read each cell as: the row's modifier, when already assigned, causes the column's modifier to be excluded.
 
-| Already assigned ↓ excludes → | extreme temps | no magnetic field | salty | swampy | thin atmosphere | dense atmosphere | toxic soil |
-|-------------------------------|---------------|-------------------|-------|--------|-----------------|------------------|-----------|
-| `pm_ui_extreme_temperatures` | yes | no | no | no | yes | yes | no |
-| `pm_ui_no_magnetic_field` | no | yes | no | no | no | no | no |
-| `pm_ui_salty` | no | no | yes | yes | no | no | yes |
-| `pm_ui_swampy` | no | no | yes | yes | no | no | yes |
-| `pm_ui_thin_atmosphere` | yes | no | no | no | yes | yes | no |
-| `pm_ui_dense_atmosphere` | yes | no | no | no | yes | yes | no |
-| `pm_ui_toxic_soil` | no | no | yes | yes | no | no | yes |
+| Already assigned ↓ excludes → | extreme temps | no magnetic field | salty | swampy | thin atmosphere | dense atmosphere | toxic soil | geological instability |
+|-------------------------------|---------------|-------------------|-------|--------|-----------------|------------------|-----------|------------------------|
+| `pm_ui_extreme_temperatures` | yes | no | no | no | yes | yes | no | no |
+| `pm_ui_no_magnetic_field` | no | yes | no | no | no | no | no | no |
+| `pm_ui_salty` | no | no | yes | yes | no | no | yes | no |
+| `pm_ui_swampy` | no | no | yes | yes | no | no | yes | no |
+| `pm_ui_thin_atmosphere` | yes | no | no | no | yes | yes | no | no |
+| `pm_ui_dense_atmosphere` | yes | no | no | no | yes | yes | no | no |
+| `pm_ui_toxic_soil` | no | no | yes | yes | no | no | yes | no |
+| `pm_ui_geological_instability` | no | no | no | no | no | no | no | yes |
 
-Two mutually exclusive trios exist. `pm_ui_thin_atmosphere`, `pm_ui_dense_atmosphere`, and `pm_ui_extreme_temperatures` form the atmosphere-composition trio; `pm_ui_salty`, `pm_ui_swampy`, and `pm_ui_toxic_soil` form the soil-quality trio. Within each trio every member excludes the other two, and every other conflict is symmetric, so no pair depends on evaluation order. `pm_ui_extreme_temperatures` additionally excludes, and is excluded by, the vanilla `pm_tidal_locked` through the override file; `pm_ui_thin_atmosphere` excludes the vanilla `pm_bleak`, which is not re-declared, so that pair is one-sided.
+Two mutually exclusive trios exist. `pm_ui_thin_atmosphere`, `pm_ui_dense_atmosphere`, and `pm_ui_extreme_temperatures` form the atmosphere-composition trio; `pm_ui_salty`, `pm_ui_swampy`, and `pm_ui_toxic_soil` form the soil-quality trio. Within each trio every member excludes the other two, and every other mod-to-mod conflict is symmetric, so no pair depends on evaluation order. Four exclusions against vanilla keys are one-sided, because those vanilla keys are not re-declared: `pm_ui_extreme_temperatures` against `pm_tidal_locked`, `pm_ui_thin_atmosphere` against `pm_bleak`, and `pm_ui_geological_instability` against `pm_unstable_tectonics` and `pm_abundant_geothermal_activity`. Each of those vanilla modifiers can still be assigned after the mod's modifier occupies the slot, which the accumulation guard prevents in practice.
 
 ## Dependants
 

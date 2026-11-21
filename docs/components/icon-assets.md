@@ -8,7 +8,7 @@ Provide the visual representation of each new planet modifier in the interface, 
 
 | Path | Role |
 |------|------|
-| `ui-planet-modifiers/gfx/interface/icons/planet_modifiers/` | Seven DDS textures consumed by the engine |
+| `ui-planet-modifiers/gfx/interface/icons/planet_modifiers/` | Nine DDS textures consumed by the engine |
 | `src/planet_modifier.xcf` | Editable GIMP source, outside the content directory |
 
 ## Inventory
@@ -22,8 +22,10 @@ Provide the visual representation of each new planet modifier in the interface, 
 | `pm_ui_thin_atmosphere.dds` | 14,528 bytes | DDS, 32-bit ARGB8888 | 60 x 60 | `ui_thin_atmosphere` |
 | `pm_ui_dense_atmosphere.dds` | 14,528 bytes | DDS, 32-bit ARGB8888 | 60 x 60 | `ui_dense_atmosphere` |
 | `pm_ui_toxic_soil.dds` | 14,528 bytes | DDS, 32-bit ARGB8888 | 60 x 60 | `ui_toxic_soil` |
+| `pm_ui_geological_instability.dds` | 14,528 bytes | DDS, 32-bit ARGB8888 | 60 x 60 | `ui_geological_instability` |
+| `pm_ui_radioactive.dds` | 14,528 bytes | DDS, 32-bit ARGB8888 | 60 x 60 | Not referenced (staged for a future modifier) |
 
-Every file is the same size and format, and all seven are referenced, so the asset set and the effect set are in exact correspondence.
+Every file is the same size and format. Eight of the nine are referenced; `pm_ui_radioactive.dds` is present but not yet referenced by an effect block, staged for a future `ui_radioactive`.
 
 ## Source artwork
 
