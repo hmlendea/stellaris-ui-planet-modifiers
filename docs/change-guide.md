@@ -92,7 +92,7 @@ No existing file requires modification, because localisation is additive.
 ## Updating the declared game version
 
 1. Edit `supported_version` in both descriptors to the same value.
-2. Verify by loading the mod on the target version and confirming that all five modifiers generate, present correctly, and apply their effects.
+2. Verify by loading the mod on the target version and confirming that all six modifiers generate, present correctly, and apply their effects.
 3. Confirm that no referenced vanilla identifier has been renamed; a rename manifests as an unevaluable condition rather than a load error.
 4. Push a `v*.*.*` tag when the Nexus Mods entry or the Steam Workshop item should be updated; `.github/workflows/nexus-mods-release.yml` uploads the tagged content to Nexus Mods and `.github/workflows/steam-workshop-release.yml` uploads it to the workshop item automatically, both after setting the descriptor version from the tag. Either upload can also be triggered manually by dispatching its workflow with the tag to release.
 5. Publish a release; `.github/workflows/github-release.yml` builds the archive from the tagged revision automatically.

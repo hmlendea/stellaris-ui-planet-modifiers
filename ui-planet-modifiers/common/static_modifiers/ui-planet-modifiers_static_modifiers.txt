@@ -40,6 +40,15 @@ ui_swampy = {
     icon_frame = 3
 }
 
+ui_dense_atmosphere = {
+    pop_environment_tolerance = -0.05
+    planet_structures_cost_mult = 0.10
+    planet_jobs_society_research_produces_mult = -0.05
+
+    icon = "gfx/interface/icons/planet_modifiers/pm_ui_dense_atmosphere.dds"
+    icon_frame = 3
+}
+
 ui_thin_atmosphere = {
     pop_environment_tolerance = -0.10
     pop_happiness = -0.05

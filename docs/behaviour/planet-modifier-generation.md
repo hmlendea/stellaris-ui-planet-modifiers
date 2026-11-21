@@ -4,7 +4,7 @@ This document describes what a player observes, and why, when the mod is active 
 
 ## Observation: additional modifiers appear on generated planets
 
-The most direct behavioural change is that planets can carry any of five modifiers the base game does not provide: extreme temperatures, absence of a magnetic field, a thin atmosphere, salinity, and swampland.
+The most direct behavioural change is that planets can carry any of six modifiers the base game does not provide: extreme temperatures, absence of a magnetic field, a thin atmosphere, a dense atmosphere, salinity, and swampland.
 
 Why: the additions file declares a `spawn_chance` for each identifier, so each enters the candidate pool for every generated planet that satisfies its conditions.
 
@@ -27,18 +27,19 @@ Why: barren worlds have no habitability to protect, so these effects are themati
 |----------|----------------------|-----------|
 | `pm_ui_extreme_temperatures` | Bleak | ×2 |
 | `pm_ui_no_magnetic_field` | Low gravity | ×2 |
+| `pm_ui_dense_atmosphere` | Swampy | ×2 |
 
 Why: the multipliers encode narrative compatibility, and because multipliers compound a bleak low-gravity barren world favours both.
 
 ## Observation: contradictory modifiers do not appear together
 
-A planet does not carry both extreme temperatures and a tidal lock, nor two magnetic-field conditions, nor both salinity and swampland.
+A planet does not carry both extreme temperatures and a tidal lock, nor a thin and a dense atmosphere, nor two magnetic-field conditions, nor both salinity and swampland.
 
 Why: each conflicting pair is separated by `factor = 0` exclusion clauses written symmetrically, so the outcome does not depend on assignment order. The tidal-lock pair is one-sided: `pm_ui_extreme_temperatures` excludes `pm_tidal_locked`, but the vanilla definition is no longer re-declared, so a tidal lock can still be rolled after extreme temperatures. The magnetic pair is the only one closed in both directions, through the override file.
 
 ## Observation: new modifiers never join an already-modified planet
 
-All five new definitions carry a `num_modifiers > 1` guard, matching the vanilla convention.
+All six new definitions carry a `num_modifiers > 1` guard, matching the vanilla convention.
 
 Why: the guard limits how many modifiers a planet accumulates. An earlier revision exempted swampy and relaxed the guard for microorganisms; both exceptions were removed so the cap is uniform.
 

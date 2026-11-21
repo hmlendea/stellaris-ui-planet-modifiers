@@ -6,7 +6,7 @@ Define what each new modifier does to a planet, and bind it to the icon that rep
 
 ## Location
 
-`ui-planet-modifiers/common/static_modifiers/ui-planet-modifiers_static_modifiers.txt` — five top-level `ui_*` blocks.
+`ui-planet-modifiers/common/static_modifiers/ui-planet-modifiers_static_modifiers.txt` — six top-level `ui_*` blocks.
 
 ## Structure
 
@@ -74,18 +74,29 @@ Presentation: `icon_frame = 3`.
 
 Presentation: `icon_frame = 3`.
 
+### `ui_dense_atmosphere`
+
+| Effect | Value |
+|--------|-------|
+| `pop_environment_tolerance` | −0.05 |
+| `planet_structures_cost_mult` | +0.10 |
+| `planet_jobs_society_research_produces_mult` | −0.05 |
+
+Presentation: `icon_frame = 3`.
+
 ## Effect coverage
 
 | Effect key | Blocks | Values in use |
 |-----------|-------|---------------|
-| `pop_environment_tolerance` | 5 | −0.10, −0.05 |
+| `pop_environment_tolerance` | 6 | −0.10, −0.05 |
 | `pop_happiness` | 2 | −0.05 |
 | `logistic_growth_mult` | 1 | −0.10 |
 | `planet_jobs_food_produces_mult` | 3 | −0.15, −0.10 |
 | `planet_jobs_energy_produces_mult` | 1 | −0.10 |
 | `planet_jobs_physics_research_produces_mult` | 1 | −0.10 |
+| `planet_jobs_society_research_produces_mult` | 1 | −0.05 |
 | `district_farming_max_add` | 1 | −2 |
-| `planet_structures_cost_mult` | 1 | +0.10 |
+| `planet_structures_cost_mult` | 2 | +0.10 |
 
 Sign convention: every value is expressed as a decimal fraction, and the sign is explicit only where the value is positive. Every magnitude sits inside the vanilla band for the comparable modifier: `hazardous_weather` and `bleak_planet` use a −0.10 habitability penalty, and `weak_magnetic_field` uses −0.05 on tolerance with −0.05 growth.
 
@@ -100,6 +111,7 @@ Each `icon` value is a repository-relative path beginning `gfx/interface/icons/p
 | `ui_salty` | `pm_ui_salty.dds` | Yes |
 | `ui_swampy` | `pm_ui_swampy.dds` | Yes |
 | `ui_thin_atmosphere` | `pm_ui_thin_atmosphere.dds` | Yes |
+| `ui_dense_atmosphere` | `pm_ui_dense_atmosphere.dds` | Yes |
 
 Every reference resolves, and every file in the icon directory is referenced, so the mapping is bijective.
 

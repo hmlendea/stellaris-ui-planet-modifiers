@@ -1,4 +1,6 @@
 ﻿l_english:
+ ui_dense_atmosphere_desc:0 "This world is blanketed in a heavy, crushing atmosphere that makes its surface difficult to build on."
+ ui_dense_atmosphere:0 "Dense Atmosphere"
  ui_extreme_temperatures_desc:0 "This planet has almost no atmosphere to buffer it, so the surface swings between blistering heat in the light and freezing cold in the dark."
  ui_extreme_temperatures:0 "Extreme Temperatures"
  ui_no_magnetic_field_desc:0 "This world has no magnetic field, leaving its surface and its settlers completely exposed to cosmic radiation."

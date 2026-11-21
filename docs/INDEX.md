@@ -4,7 +4,7 @@ Master navigation for the Universum Infinitum: Planet Modifiers knowledge base.
 
 ## Repository summary
 
-Universum Infinitum: Planet Modifiers is a declarative Stellaris mod. It contributes five new planet modifiers, each with a spawn-chance definition, a static modifier effect block, a DDS icon, and an English localisation entry, and it also redefines the spawn chances of ten vanilla or mod-extended planet modifiers so that the new additions can coexist with them. The repository holds no executable code, no build step, and no tests: every artefact is a static definition file or an image asset consumed by the Stellaris engine, which owns all parsing, evaluation, rendering, and persistence.
+Universum Infinitum: Planet Modifiers is a declarative Stellaris mod. It contributes six new planet modifiers, each with a spawn-chance definition, a static modifier effect block, a DDS icon, and an English localisation entry, and it also redefines the spawn chances of ten vanilla or mod-extended planet modifiers so that the new additions can coexist with them. The repository holds no executable code, no build step, and no tests: every artefact is a static definition file or an image asset consumed by the Stellaris engine, which owns all parsing, evaluation, rendering, and persistence.
 
 ## Root document map
 
@@ -45,7 +45,7 @@ Universum Infinitum: Planet Modifiers is a declarative Stellaris mod. It contrib
 | Document | Description |
 |----------|-------------|
 | [components/mod-metadata.md](./components/mod-metadata.md) | Root and local mod descriptors |
-| [components/planet-modifier-definitions.md](./components/planet-modifier-definitions.md) | The five new spawn-chance definitions |
+| [components/planet-modifier-definitions.md](./components/planet-modifier-definitions.md) | The six new spawn-chance definitions |
 | [components/vanilla-spawn-overrides.md](./components/vanilla-spawn-overrides.md) | Re-declarations of two vanilla spawn chances, and exclusions that mutual exclusivity requires |
 | [components/static-modifiers.md](./components/static-modifiers.md) | Effect blocks, icons, and icon frames, with every magnitude kept inside the v4.5 vanilla band |
 | [components/icon-assets.md](./components/icon-assets.md) | DDS icons and the retained GIMP source |

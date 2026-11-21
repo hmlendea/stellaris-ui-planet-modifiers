@@ -38,7 +38,7 @@ This document describes the current architecture of the Stellaris mod "Universum
 
 ## 🎯 Purpose
 
-The mod extends Stellaris planetary generation by contributing five new planet modifiers, each with a spawn-chance definition, a static modifier effect block, a DDS icon, and English localisation. It also overrides selected vanilla planet-modifier spawn definitions to exclude the newly added modifiers from conflicting combinations. The system boundary is the set of data files consumed by the Stellaris engine; the mod executes no code of its own. This document records those boundaries so that contributors can locate ownership, follow the selection process, and evaluate the impact of a change.
+The mod extends Stellaris planetary generation by contributing six new planet modifiers, each with a spawn-chance definition, a static modifier effect block, a DDS icon, and English localisation. It also overrides selected vanilla planet-modifier spawn definitions to exclude the newly added modifiers from conflicting combinations. The system boundary is the set of data files consumed by the Stellaris engine; the mod executes no code of its own. This document records those boundaries so that contributors can locate ownership, follow the selection process, and evaluate the impact of a change.
 
 ## 🌐 System Context
 
@@ -67,7 +67,7 @@ The principal external boundaries are:
 ```mermaid
 flowchart TB
     Descriptors[ui-planet-modifiers.mod + descriptor.mod] -->|Declares identity and path| Engine[Stellaris Engine]
-    NewDefs[common/planet_modifiers/ui-planet-modifiers.txt] -->|Defines 5 new planet modifiers| Engine
+    NewDefs[common/planet_modifiers/ui-planet-modifiers.txt] -->|Defines 6 new planet modifiers| Engine
     Overrides[common/planet_modifiers/ui-planet-modifiers-vanillas.txt] -->|Overrides vanilla spawn definitions| Engine
     Statics[common/static_modifiers/ui-planet-modifiers_static_modifiers.txt] -->|Defines modifier effects and icons| Engine
     Icons[gfx/interface/icons/planet_modifiers/*.dds] -->|Supplies modifier icons| Engine
@@ -76,7 +76,7 @@ flowchart TB
 
 The principal architecture boundaries are:
 - **Mod Metadata:** Declares mod identity, filesystem path, tags, and declared game version; owns no behaviour.
-- **Planet Modifier Definitions:** Owns spawn-chance conditions for the five new modifiers.
+- **Planet Modifier Definitions:** Owns spawn-chance conditions for the six new modifiers.
 - **Vanilla Spawn Overrides:** Owns revised spawn-chance conditions for selected vanilla and mod-extended modifiers.
 - **Static Modifier Definitions:** Owns modifier effects, icon path references, icon frames, and the `important` flag.
 - **Localisation:** Owns English display names and descriptions keyed to the static modifier identifiers.
@@ -113,7 +113,7 @@ The principal runtime sequence is:
 |-----------|----------------|------------------------|-----------------------|
 | `ui-planet-modifiers.mod` | Root mod descriptor: name, path, tags, declared game version | Stellaris launcher mod loader | Static file, owned by mod author |
 | `ui-planet-modifiers/descriptor.mod` | Local mod descriptor with identical metadata | Stellaris launcher mod loader | Static file, owned by mod author |
-| `ui-planet-modifiers/common/planet_modifiers/ui-planet-modifiers.txt` | Defines the five new `pm_ui_*` planet modifiers and their spawn chances | Stellaris planet modifier spawn system | Static file, owned by mod author |
+| `ui-planet-modifiers/common/planet_modifiers/ui-planet-modifiers.txt` | Defines the six new `pm_ui_*` planet modifiers and their spawn chances | Stellaris planet modifier spawn system | Static file, owned by mod author |
 | `ui-planet-modifiers/common/planet_modifiers/ui-planet-modifiers-vanillas.txt` | Overrides spawn chances for selected vanilla and mod-extended modifiers | Stellaris planet modifier spawn system | Static file, owned by mod author |
 | `ui-planet-modifiers/common/static_modifiers/ui-planet-modifiers_static_modifiers.txt` | Defines effects, icons, icon frames, and importance for the new modifiers | Stellaris static modifier system; icon assets | Static file, owned by mod author |
 | `ui-planet-modifiers/gfx/interface/icons/planet_modifiers/*.dds` | Supplies one DDS icon per new modifier | Stellaris icon asset loader | Static binary assets, owned by mod author |
@@ -238,8 +238,8 @@ sequenceDiagram
 
 Ordering and invariants:
 - `add` values establish the base weight; `factor` values then multiply or nullify it, and `factor = 0` always results in the modifier being ineligible.
-- Every one of the five new modifiers caps accumulation through `num_modifiers > 1`, matching the vanilla guard.
-- The mod explicitly excludes combinations that overlap semantically, such as `pm_ui_salty` with `pm_ui_swampy`, `pm_ui_thin_atmosphere` with `pm_ui_extreme_temperatures`, and `pm_ui_no_magnetic_field` with the weak and strong magnetic-field variants.
+- Every one of the six new modifiers caps accumulation through `num_modifiers > 1`, matching the vanilla guard.
+- The mod explicitly excludes combinations that overlap semantically, such as `pm_ui_salty` with `pm_ui_swampy`, `pm_ui_thin_atmosphere`, `pm_ui_dense_atmosphere`, and `pm_ui_extreme_temperatures` with each other, and `pm_ui_no_magnetic_field` with the weak and strong magnetic-field variants.
 - `pm_weak_magnetic_field` and `pm_strong_magnetic_field` are re-declared in the vanilla-override file so their exclusions account for the new modifiers. Each re-declaration reproduces the v4.5 spawn conditions for the same key and adds only the exclusion.
 
 ## ⚙️ Planet Modifier Spawn Weighting

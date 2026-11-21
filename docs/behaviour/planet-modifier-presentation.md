@@ -4,7 +4,7 @@ This document describes what a player observes when inspecting a planet that car
 
 ## Observation: modifiers appear with a name, a description, and an icon
 
-Each of the five new modifiers presents a short name, a one-sentence description, and a distinct icon.
+Each of the six new modifiers presents a short name, a one-sentence description, and a distinct icon.
 
 Why: each effect block declares an `icon` path to a DDS texture, and the engine resolves a name and a `_desc` description from the effect key by convention.
 
@@ -17,6 +17,7 @@ Why: each effect block declares an `icon` path to a DDS texture, and the engine 
 | `ui_salty` | Salty | Saline soils and waters hostile to growth |
 | `ui_swampy` | Swampy | Dense swamps render areas unworkable |
 | `ui_thin_atmosphere` | Thin Atmosphere | A whisper of an atmosphere, too thin to buffer the surface |
+| `ui_dense_atmosphere` | Dense Atmosphere | A heavy, crushing atmosphere that resists construction |
 
 Why: descriptions are written as flavour text rather than as a restatement of numeric effects, so they remain accurate when an effect value is rebalanced.
 
@@ -28,7 +29,7 @@ Why: no effect block sets `important = yes`. The flag is reserved by vanilla for
 
 ## Observation: icons are visually distinct but share a frame style
 
-All five modifiers use icon frame 3. Each has its own texture.
+All six modifiers use icon frame 3. Each has its own texture.
 
 Why: `icon_frame` selects a presentation frame independently of the texture, and frame 3 is the vanilla marker for a net penalty.
 
@@ -36,7 +37,7 @@ Why: `icon_frame` selects a presentation frame independently of the texture, and
 
 The tooltips read consistently because every effect is expressed through a standard host-provided key.
 
-Why: `pop_environment_tolerance`, `pop_happiness`, `logistic_growth_mult`, `planet_jobs_food_produces_mult`, `planet_jobs_energy_produces_mult`, `planet_jobs_physics_research_produces_mult`, `district_farming_max_add`, and `planet_structures_cost_mult` are host-provided effect keys with host-provided wording. The mod adds no custom tooltip and no `custom_tooltip` override.
+Why: `pop_environment_tolerance`, `pop_happiness`, `logistic_growth_mult`, `planet_jobs_food_produces_mult`, `planet_jobs_energy_produces_mult`, `planet_jobs_physics_research_produces_mult`, `planet_jobs_society_research_produces_mult`, `district_farming_max_add`, and `planet_structures_cost_mult` are host-provided effect keys with host-provided wording. The mod adds no custom tooltip and no `custom_tooltip` override.
 
 ## Observation: modifiers integrate with the existing interface
 

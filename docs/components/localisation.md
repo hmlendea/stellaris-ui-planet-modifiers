@@ -2,7 +2,7 @@
 
 ## Responsibility
 
-Supply the human-readable display name and description for each of the five new planet modifiers.
+Supply the human-readable display name and description for each of the six new planet modifiers.
 
 ## Location
 
@@ -14,7 +14,7 @@ Supply the human-readable display name and description for each of the five new 
 |----------|-------|
 | Encoding | UTF-8 with byte-order mark (`EF BB BF`) |
 | Document root | `l_english:` |
-| Entries | 10 (five names, five descriptions) |
+| Entries | 12 (six names, six descriptions) |
 | Language directory | `english/` |
 | Naming | `<mod>_l_<locale>.yml` |
 
@@ -35,6 +35,7 @@ Because resolution is by convention, a key typo produces no parse error. The int
 
 | Name key | Display name | Description key |
 |----------|--------------|-----------------|
+| `ui_dense_atmosphere` | Dense Atmosphere | `ui_dense_atmosphere_desc` |
 | `ui_extreme_temperatures` | Extreme Temperatures | `ui_extreme_temperatures_desc` |
 
 | `ui_no_magnetic_field` | No Magnetic Field | `ui_no_magnetic_field_desc` |
@@ -42,7 +43,7 @@ Because resolution is by convention, a key typo produces no parse error. The int
 | `ui_swampy` | Swampy | `ui_swampy_desc` |
 | `ui_thin_atmosphere` | Thin Atmosphere | `ui_thin_atmosphere_desc` |
 
-All five effect keys have both entries, so key-derived assumptions hold for every display name in the file.
+All six effect keys have both entries, so key-derived assumptions hold for every display name in the file.
 
 ## Ordering
 
@@ -52,6 +53,7 @@ Entries are grouped in pairs and the file order is alphabetical by key, not by t
 
 | Key | Description theme |
 |-----|-------------------|
+| `ui_dense_atmosphere_desc` | A heavy, crushing atmosphere that makes the surface hard to build on |
 | `ui_extreme_temperatures_desc` | Blistering days and freezing nights, with almost no atmosphere to buffer the surface |
 
 | `ui_no_magnetic_field_desc` | No magnetic field, leaving the world exposed to cosmic radiation |

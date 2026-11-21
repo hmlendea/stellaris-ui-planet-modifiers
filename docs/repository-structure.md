@@ -18,14 +18,14 @@ stellaris-ui-planet-modifiers/
 │   ├── descriptor.mod                  # Local mod descriptor
 │   ├── common/
 │   │   ├── planet_modifiers/
-│   │   │   ├── ui-planet-modifiers.txt            # Five new planet modifiers
+│   │   │   ├── ui-planet-modifiers.txt            # Six new planet modifiers
 │   │   │   └── ui-planet-modifiers-vanillas.txt   # two re-declared vanilla spawn chances
 │   │   └── static_modifiers/
-│   │       └── ui-planet-modifiers_static_modifiers.txt  # Five effect blocks
+│   │       └── ui-planet-modifiers_static_modifiers.txt  # Six effect blocks
 │   ├── gfx/
 │   │   └── interface/
 │   │       └── icons/
-│   │           └── planet_modifiers/   # Five DDS icon textures
+│   │           └── planet_modifiers/   # Six DDS icon textures
 │   ├── localisation/
 │   │   └── english/
 │   │       └── ui-planet-modifiers_l_english.yml

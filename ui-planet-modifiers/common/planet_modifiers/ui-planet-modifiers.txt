@@ -30,6 +30,7 @@ pm_ui_extreme_temperatures = {
             factor = 0
             OR = {
                 has_planet_modifier = "pm_ui_extreme_temperatures"
+                has_planet_modifier = "pm_ui_dense_atmosphere"
                 has_planet_modifier = "pm_ui_thin_atmosphere"
                 has_planet_modifier = "pm_tidal_locked"
             }
@@ -156,6 +157,7 @@ pm_ui_thin_atmosphere = {
             OR = {
                 has_planet_modifier = "pm_ui_thin_atmosphere"
                 has_planet_modifier = "pm_ui_extreme_temperatures"
+                has_planet_modifier = "pm_ui_dense_atmosphere"
                 has_planet_modifier = "pm_bleak"
             }
         }
@@ -167,4 +169,37 @@ pm_ui_thin_atmosphere = {
     }
 
     modifier = "ui_thin_atmosphere"
+}
+
+pm_ui_dense_atmosphere = {
+    spawn_chance = {
+        modifier = {
+            add = 10
+            OR = {
+                is_planet_class = "pc_tropical"
+                is_planet_class = "pc_ocean"
+                is_planet_class = "pc_savannah"
+                is_planet_class = "pc_continental"
+            }
+        }
+        modifier = {
+            factor = 2
+            has_planet_modifier = "pm_ui_swampy"
+        }
+        modifier = {
+            factor = 0
+            OR = {
+                has_planet_modifier = "pm_ui_dense_atmosphere"
+                has_planet_modifier = "pm_ui_thin_atmosphere"
+                has_planet_modifier = "pm_ui_extreme_temperatures"
+            }
+        }
+
+        modifier = {
+            factor = 0
+            num_modifiers > 1
+        }
+    }
+
+    modifier = "ui_dense_atmosphere"
 }

@@ -2,11 +2,11 @@
 
 ## Responsibility
 
-Declare the five new planet modifiers and the relative probability with which the engine may assign each to a generated planet.
+Declare the six new planet modifiers and the relative probability with which the engine may assign each to a generated planet.
 
 ## Location
 
-`ui-planet-modifiers/common/planet_modifiers/ui-planet-modifiers.txt` — a single file containing five top-level `pm_ui_*` definitions.
+`ui-planet-modifiers/common/planet_modifiers/ui-planet-modifiers.txt` — a single file containing six top-level `pm_ui_*` definitions.
 
 ## Structure
 
@@ -71,10 +71,19 @@ Only the final `modifier` string and the `spawn_chance` block are structurally r
 |--------|--------|
 | `add = 10` on `pc_barren`, `pc_barren_cold`, `pc_nuked` | Base weight 10 on airless-world classes |
 | `add = 5` on `pc_arid`, `pc_desert` | Base weight 5 on dry worlds |
-| `factor = 0` when the planet already has `pm_ui_thin_atmosphere`, `pm_ui_extreme_temperatures`, or `pm_bleak` | Excludes the duplicate, the atmosphere-absence overlap, and the vanilla bleak concept |
+| `factor = 0` when the planet already has `pm_ui_thin_atmosphere`, `pm_ui_extreme_temperatures`, `pm_ui_dense_atmosphere`, or `pm_bleak` | Excludes the duplicate, the atmosphere-absence overlap, and the vanilla bleak concept |
 | `factor = 0` when `num_modifiers > 1` | Accumulation guard |
 
-All five definitions carry an accumulation guard and at least one exclusion.
+### `pm_ui_dense_atmosphere` → `ui_dense_atmosphere`
+
+| Clause | Effect |
+|--------|--------|
+| `add = 10` on `pc_tropical`, `pc_ocean`, `pc_savannah`, `pc_continental` | Base weight 10 on the wettest, most habitable classes |
+| `factor = 2` when `has_planet_modifier = "pm_ui_swampy"` | Doubled on swampy worlds |
+| `factor = 0` when the planet already has `pm_ui_dense_atmosphere`, `pm_ui_thin_atmosphere`, or `pm_ui_extreme_temperatures` | Excludes the duplicate and the atmosphere-composition overlaps |
+| `factor = 0` when `num_modifiers > 1` | Accumulation guard |
+
+All six definitions carry an accumulation guard and at least one exclusion.
 
 ## Weight calibration
 
@@ -84,15 +93,16 @@ Vanilla v4.5 uses `add = 10` for a common class outcome, `add = 5` for an uncomm
 
 Read each cell as: the row's modifier, when already assigned, causes the column's modifier to be excluded.
 
-| Already assigned ↓ excludes → | extreme temps | no magnetic field | salty | swampy | thin atmosphere |
-|-------------------------------|---------------|-------------------|-------|--------|-----------------|
-| `pm_ui_extreme_temperatures` | yes | no | no | no | yes |
-| `pm_ui_no_magnetic_field` | no | yes | no | no | no |
-| `pm_ui_salty` | no | no | yes | yes | no |
-| `pm_ui_swampy` | no | no | yes | yes | no |
-| `pm_ui_thin_atmosphere` | yes | no | no | no | yes |
+| Already assigned ↓ excludes → | extreme temps | no magnetic field | salty | swampy | thin atmosphere | dense atmosphere |
+|-------------------------------|---------------|-------------------|-------|--------|-----------------|------------------|
+| `pm_ui_extreme_temperatures` | yes | no | no | no | yes | yes |
+| `pm_ui_no_magnetic_field` | no | yes | no | no | no | no |
+| `pm_ui_salty` | no | no | yes | yes | no | no |
+| `pm_ui_swampy` | no | no | yes | yes | no | no |
+| `pm_ui_thin_atmosphere` | yes | no | no | no | yes | yes |
+| `pm_ui_dense_atmosphere` | yes | no | no | no | yes | yes |
 
-Every conflict is symmetric, so no pair depends on evaluation order. `pm_ui_extreme_temperatures` additionally excludes, and is excluded by, the vanilla `pm_tidal_locked` through the override file; `pm_ui_thin_atmosphere` excludes the vanilla `pm_bleak`, which is not re-declared, so that pair is one-sided.
+`pm_ui_thin_atmosphere`, `pm_ui_dense_atmosphere`, and `pm_ui_extreme_temperatures` form a mutually exclusive trio: each excludes the other two. Every other conflict is symmetric, so no pair depends on evaluation order. `pm_ui_extreme_temperatures` additionally excludes, and is excluded by, the vanilla `pm_tidal_locked` through the override file; `pm_ui_thin_atmosphere` excludes the vanilla `pm_bleak`, which is not re-declared, so that pair is one-sided.
 
 ## Dependants
 
