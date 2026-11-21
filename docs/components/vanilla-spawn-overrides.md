@@ -18,10 +18,10 @@ An earlier revision instead introduced parallel `pm_ui_*` keys bound to the host
 
 | Definition key | Bound effect key | Change relative to v4.5 |
 |----------------|------------------|--------------------------|
-| `pm_weak_magnetic_field` | `weak_magnetic_field` | Adds `factor = 0` when `pm_ui_no_magnetic_field` is present |
 | `pm_strong_magnetic_field` | `strong_magnetic_field` | Adds `factor = 0` when `pm_ui_no_magnetic_field` is present |
+| `pm_weak_magnetic_field` | `weak_magnetic_field` | Adds `factor = 0` when `pm_ui_no_magnetic_field` is present |
 
-Every other clause in each block is a copy of the vanilla v4.5 definition, including weights, size multipliers, the moon multiplier, the Gaia exclusion, and the accumulation guard. The only behavioural change is the added exclusion.
+The two definitions are listed alphabetically, matching the file order. Every other clause in each block is a copy of the vanilla v4.5 definition, including weights, size multipliers, the moon multiplier, the Gaia exclusion, and the accumulation guard. The only behavioural change is the added exclusion.
 
 ### Magnetic family
 
@@ -38,8 +38,8 @@ An earlier revision also redefined `hazardous_weather`, `unstable_tectonics`, `a
 | Modifier | Reason for removal |
 |----------|--------------------|
 | `hazardous_weather` | The mod adds no weather modifier, so the duplicate candidate distorted the vanilla pool for no benefit |
-| `unstable_tectonics` | Same: no mod modifier interacts with it |
-| `asteroid_impacts` | Same |
+| `unstable_tectonics` | No mod modifier interacted with it at the time; `pm_ui_geological_instability` now excludes it one-sidedly without a re-declaration |
+| `asteroid_impacts` | Same: no mod modifier interacts with it |
 | `wild_storms` | Same |
 | `low_gravity` | The vanilla definition already covers every habitable class; the parallel key added a second gravity candidate |
 | `high_gravity` | Same |
@@ -47,7 +47,9 @@ An earlier revision also redefined `hazardous_weather`, `unstable_tectonics`, `a
 
 Gravity is now governed solely by the vanilla definition. The mod's own definitions still test `pm_low_gravity` and `pm_high_gravity` when weighting their spawns, which is the intended interaction.
 
-## `pm_null`
+### One-sided exclusions left unclosed
+
+`pm_ui_geological_instability` excludes `pm_unstable_tectonics` and `pm_abundant_geothermal_activity` without either vanilla key being re-declared. The exclusions are therefore one-sided: the vanilla modifier does not exclude the mod's, so the vanilla one can still be assigned after the mod's. The accumulation guard (`num_modifiers > 1`) prevents the two coexisting in practice. Closing the pair would require re-declaring both vanilla keys, which would copy two more host definitions forward for a conflict the guard already prevents.
 
 `pm_null` is not overridden. The vanilla definition applies unchanged.
 

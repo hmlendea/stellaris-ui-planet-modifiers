@@ -7,84 +7,45 @@
 # definition instead of adding a second candidate that applies the same
 # effect.
 
-pm_weak_magnetic_field = {
-    spawn_chance = {
-        modifier = {
-            add = 10
-            OR = {
-                is_planet_class = "pc_desert"
-                is_planet_class = "pc_tropical"
-                is_planet_class = "pc_arid"
-                is_planet_class = "pc_continental"
-                is_planet_class = "pc_ocean"
-                is_planet_class = "pc_tundra"
-                is_planet_class = "pc_arctic"
-                is_planet_class = "pc_alpine"
-                is_planet_class = "pc_savannah"
-                is_planet_class = "pc_volcanic"
-                is_planet_class = "pc_relic"
-            }
-        }
-        modifier = {
-            add = 0
-            is_planet_class = "pc_gaia"
-        }
-        modifier = {
-            factor = 2
-            has_planet_modifier = "pm_low_gravity"
-        }
-        modifier = {
-            factor = 0
-            OR = {
-                has_planet_modifier = "pm_ui_no_magnetic_field"
-                has_planet_modifier = "pm_weak_magnetic_field"
-                has_planet_modifier = "pm_strong_magnetic_field"
-            }
-        }
-        modifier = {
-            factor = 0
-            num_modifiers > 1
-        }
-    }
-
-    modifier = "weak_magnetic_field"
-}
-
 pm_strong_magnetic_field = {
     spawn_chance = {
         modifier = {
             add = 5
             OR = {
-                is_planet_class = "pc_desert"
-                is_planet_class = "pc_tropical"
+                is_planet_class = "pc_alpine"
+                is_planet_class = "pc_arctic"
                 is_planet_class = "pc_arid"
                 is_planet_class = "pc_continental"
+                is_planet_class = "pc_desert"
                 is_planet_class = "pc_ocean"
-                is_planet_class = "pc_tundra"
-                is_planet_class = "pc_arctic"
-                is_planet_class = "pc_alpine"
-                is_planet_class = "pc_savannah"
-                is_planet_class = "pc_volcanic"
                 is_planet_class = "pc_relic"
+                is_planet_class = "pc_savannah"
+                is_planet_class = "pc_tropical"
+                is_planet_class = "pc_tundra"
+                is_planet_class = "pc_volcanic"
             }
         }
+
         modifier = {
             add = 0
             is_planet_class = "pc_gaia"
         }
+
         modifier = {
             factor = 2
             has_planet_modifier = "pm_high_gravity"
         }
+
         modifier = {
             factor = 0
             OR = {
+                has_planet_modifier = "pm_abundant_geothermal_activity"
+                has_planet_modifier = "pm_strong_magnetic_field"
                 has_planet_modifier = "pm_ui_no_magnetic_field"
                 has_planet_modifier = "pm_weak_magnetic_field"
-                has_planet_modifier = "pm_strong_magnetic_field"
-                has_planet_modifier = "pm_abundant_geothermal_activity"
             }
         }
+
         modifier = {
             factor = 0
             num_modifiers > 1
@@ -92,4 +53,51 @@ pm_strong_magnetic_field = {
     }
 
     modifier = "strong_magnetic_field"
+}
+
+pm_weak_magnetic_field = {
+    spawn_chance = {
+        modifier = {
+            add = 10
+            OR = {
+                is_planet_class = "pc_alpine"
+                is_planet_class = "pc_arctic"
+                is_planet_class = "pc_arid"
+                is_planet_class = "pc_continental"
+                is_planet_class = "pc_desert"
+                is_planet_class = "pc_ocean"
+                is_planet_class = "pc_relic"
+                is_planet_class = "pc_savannah"
+                is_planet_class = "pc_tropical"
+                is_planet_class = "pc_tundra"
+                is_planet_class = "pc_volcanic"
+            }
+        }
+
+        modifier = {
+            add = 0
+            is_planet_class = "pc_gaia"
+        }
+
+        modifier = {
+            factor = 2
+            has_planet_modifier = "pm_low_gravity"
+        }
+
+        modifier = {
+            factor = 0
+            OR = {
+                has_planet_modifier = "pm_strong_magnetic_field"
+                has_planet_modifier = "pm_ui_no_magnetic_field"
+                has_planet_modifier = "pm_weak_magnetic_field"
+            }
+        }
+
+        modifier = {
+            factor = 0
+            num_modifiers > 1
+        }
+    }
+
+    modifier = "weak_magnetic_field"
 }

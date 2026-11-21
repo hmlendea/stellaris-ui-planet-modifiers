@@ -29,6 +29,8 @@ ui-planet-modifiers/           # Content directory
 
 The `path` field is relative to the user mod location, so the layout above must be preserved exactly: the descriptor at the root of the delivered unit, and the content directory named `ui-planet-modifiers` beside it.
 
+Outside the delivered unit, `description/steam-workshop.bbcode` holds the BBCode body pasted into the Steam Workshop item description; the publication workflows upload mod content only and do not manage that text.
+
 ## Installation routes
 
 | Route | Artefact | Notes |
@@ -69,7 +71,7 @@ The archive is produced by `.github/workflows/github-release.yml`, which runs wh
 | Services | None |
 | Persistent state | None owned by the mod; assigned modifiers persist in the engine's save file |
 | Scaling | Inherits the host model; multiplayer requires identical mod activation on every client |
-| Resource footprint | Static text plus eight 15 KiB textures and a 400 x 400 thumbnail |
+| Resource footprint | Static text plus ten 15 KiB textures and a 400 x 400 thumbnail |
 | Migration mechanism | None; see [state-and-persistence.md](./state-and-persistence.md) |
 | Rollback | Replace the installed content with an earlier release, or deactivate the mod; existing saves retain any identifiers already recorded |
 

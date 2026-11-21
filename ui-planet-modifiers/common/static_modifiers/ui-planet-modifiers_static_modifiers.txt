@@ -4,12 +4,29 @@
 # modifiers (hazardous_weather, bleak_planet, weak_magnetic_field,
 # unstable_tectonics, rich_mircoflora).
 
+ui_dense_atmosphere = {
+    pop_environment_tolerance = -0.05
+    planet_structures_cost_mult = 0.10
+    planet_jobs_society_research_produces_mult = -0.05
+
+    icon = "gfx/interface/icons/planet_modifiers/pm_ui_dense_atmosphere.dds"
+    icon_frame = 3
+}
+
 ui_extreme_temperatures = {
     pop_environment_tolerance = -0.10
     pop_happiness = -0.05
     planet_jobs_food_produces_mult = -0.10
 
     icon = "gfx/interface/icons/planet_modifiers/pm_ui_extreme_temperatures.dds"
+    icon_frame = 3
+}
+
+ui_geological_instability = {
+    pop_environment_tolerance = -0.05
+    planet_structures_cost_mult = 0.15
+
+    icon = "gfx/interface/icons/planet_modifiers/pm_ui_geological_instability.dds"
     icon_frame = 3
 }
 
@@ -22,6 +39,15 @@ ui_no_magnetic_field = {
     icon_frame = 3
 }
 
+ui_radioactive = {
+    pop_happiness = -0.05
+    logistic_growth_mult = -0.10
+    planet_jobs_society_research_produces_mult = -0.10
+
+    icon = "gfx/interface/icons/planet_modifiers/pm_ui_radioactive.dds"
+    icon_frame = 3
+}
+
 ui_salty = {
     pop_environment_tolerance = -0.05
     planet_jobs_food_produces_mult = -0.15
@@ -31,11 +57,37 @@ ui_salty = {
     icon_frame = 3
 }
 
+ui_superdense_core = {
+    planet_max_districts_add = 1
+    planet_structures_cost_mult = 0.10
+
+    icon = "gfx/interface/icons/planet_modifiers/pm_ui_superdense_core.dds"
+    icon_frame = 2
+}
+
 ui_swampy = {
     pop_environment_tolerance = -0.05
     planet_jobs_food_produces_mult = -0.10
     planet_structures_cost_mult = 0.10
 
     icon = "gfx/interface/icons/planet_modifiers/pm_ui_swampy.dds"
+    icon_frame = 3
+}
+
+ui_thin_atmosphere = {
+    pop_environment_tolerance = -0.10
+    pop_happiness = -0.05
+    planet_jobs_energy_produces_mult = -0.10
+
+    icon = "gfx/interface/icons/planet_modifiers/pm_ui_thin_atmosphere.dds"
+    icon_frame = 3
+}
+
+ui_toxic_soil = {
+    pop_environment_tolerance = -0.10
+    planet_jobs_food_produces_mult = -0.15
+    district_farming_max_add = -1
+
+    icon = "gfx/interface/icons/planet_modifiers/pm_ui_toxic_soil.dds"
     icon_frame = 3
 }

@@ -6,7 +6,7 @@ Rationale for the shape of the definition set, as reconstructed from the artefac
 
 **Decision.** Modifier eligibility is expressed entirely as condition-and-weight clauses rather than as procedural logic.
 
-**Evidence.** All six definitions use `spawn_chance` with `add`, `factor`, and condition tests.
+**Evidence.** All ten definitions use `spawn_chance` with `add`, `factor`, and condition tests.
 
 **Why.** The format offers no procedural alternative. The consequence, however, is architectural: every exclusion is multiplication by zero, so the repository's correctness depends on authors remembering to write exclusions rather than on any guard.
 
@@ -50,7 +50,7 @@ Rationale for the shape of the definition set, as reconstructed from the artefac
 
 **Decision.** Where the mod introduces a conflict, both conflicting definitions exclude each other.
 
-**Evidence.** `pm_ui_salty` and `pm_ui_swampy` exclude each other; the magnetic family shares an identical identifier list, closed from the vanilla side by the override file.
+**Evidence.** `pm_ui_thin_atmosphere` and `pm_ui_extreme_temperatures` exclude each other, and `pm_ui_salty` and `pm_ui_swampy` exclude each other; the magnetic family shares an identical identifier list, closed from the vanilla side by the override file. The exclusions against the vanilla `pm_bleak` and `pm_tidal_locked` are one-sided, because neither vanilla key is re-declared.
 
 **Why.** Selection can evaluate one candidate before or after another, so a one-sided exclusion would fire inconsistently. Symmetry removes the dependence on evaluation order. See [concurrency-and-scheduling.md](./concurrency-and-scheduling.md).
 
@@ -66,11 +66,19 @@ Rationale for the shape of the definition set, as reconstructed from the artefac
 
 ## Decision: make the new modifiers predominantly penalties
 
-**Decision.** Every new modifier is negative; none carries a bonus.
+**Decision.** Nine of the ten new modifiers are negative. `pm_ui_superdense_core` is a deliberate exception: it grants one extra district at the cost of a construction penalty, and is presented with the mixed-block icon frame.
 
-**Evidence.** The effect-block inventory shows negative habitability, happiness, growth, food, physics, farming-district, and building-cost values only.
+**Evidence.** The effect-block inventory shows negative habitability, happiness, growth, food, physics, and building-cost values almost everywhere, with `planet_max_districts_add` as the single positive effect, present only in `ui_superdense_core`.
 
-**Why.** The mod's stated purpose is diversity of planetary generation. Adding powerful positive modifiers would change game balance rather than flavour. Every magnitude stays inside the vanilla band for a comparable modifier so the new entries do not dominate the pool.
+**Why.** The mod's stated purpose is diversity of planetary generation. Adding powerful positive modifiers would change game balance rather than flavour, so only one modest, trade-off-bearing bonus was admitted. Every magnitude stays inside the vanilla band for a comparable modifier so the new entries do not dominate the pool.
+
+## Decision: order keys and conditions alphabetically
+
+**Decision.** Top-level definitions and effect blocks are ordered alphabetically by key; localisation entry pairs follow the same order; and the alternatives inside an `OR` block are sorted alphabetically.
+
+**Evidence.** Every file's key sequence is already monotonic, and every `OR` block lists its identifiers in ascending order.
+
+**Why.** The format gives a reader no index. A stable alphabetical order makes a missing, duplicated, or misspelled key visible by position and makes the exclusion lists directly comparable between definitions. The engine does not read order, so this is purely a reviewability convention.
 
 ## Decision: drop modifiers that duplicate a vanilla concept
 
@@ -78,7 +86,7 @@ Rationale for the shape of the definition set, as reconstructed from the artefac
 
 **Evidence.** Vanilla v4.5 already provides `pm_tidal_locked` (a twilight terminator with an unusable half-planet), `pm_rich_mircoflora` (microbial soil with farming and society research), `pm_subterranean_wildlife` (burrowing fauna with mining and society research), and `pm_dangerous_wildlife` / `pm_titanic_life` (large fauna with a habitability penalty and society research).
 
-**Why.** A new modifier that only duplicates an existing one consumes a pool slot, dilutes the weights of genuinely new outcomes, and forces a long exclusion list to keep the two apart. Removing them leaves four modifiers with no vanilla equivalent, and the exclusion lists shrink to what the magnetic family and the salinity/swampland conflict require.
+**Why.** A new modifier that only duplicates an existing one consumes a pool slot, dilutes the weights of genuinely new outcomes, and forces a long exclusion list to keep the two apart. Removing them left a set of modifiers with no vanilla equivalent, and the exclusion lists shrink to what the magnetic family, the salinity/swampland conflict, and the thin-atmosphere/bleak overlap require.
 
 **Cost.** Removing an identifier is save-breaking for a planet that already carries it; the affected saves lose the modifier and its localisation.
 

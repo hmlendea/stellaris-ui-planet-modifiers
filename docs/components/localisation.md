@@ -2,7 +2,7 @@
 
 ## Responsibility
 
-Supply the human-readable display name and description for each of the four new planet modifiers.
+Supply the human-readable display name and description for each of the ten new planet modifiers.
 
 ## Location
 
@@ -14,7 +14,7 @@ Supply the human-readable display name and description for each of the four new 
 |----------|-------|
 | Encoding | UTF-8 with byte-order mark (`EF BB BF`) |
 | Document root | `l_english:` |
-| Entries | 8 (four names, four descriptions) |
+| Entries | 20 (ten names, ten descriptions) |
 | Language directory | `english/` |
 | Naming | `<mod>_l_<locale>.yml` |
 
@@ -35,27 +35,37 @@ Because resolution is by convention, a key typo produces no parse error. The int
 
 | Name key | Display name | Description key |
 |----------|--------------|-----------------|
+| `ui_dense_atmosphere` | Dense Atmosphere | `ui_dense_atmosphere_desc` |
 | `ui_extreme_temperatures` | Extreme Temperatures | `ui_extreme_temperatures_desc` |
-
+| `ui_geological_instability` | Geological Instability | `ui_geological_instability_desc` |
 | `ui_no_magnetic_field` | No Magnetic Field | `ui_no_magnetic_field_desc` |
+| `ui_radioactive` | Radioactive | `ui_radioactive_desc` |
 | `ui_salty` | Salty | `ui_salty_desc` |
+| `ui_superdense_core` | Superdense Core | `ui_superdense_core_desc` |
 | `ui_swampy` | Swampy | `ui_swampy_desc` |
+| `ui_thin_atmosphere` | Thin Atmosphere | `ui_thin_atmosphere_desc` |
+| `ui_toxic_soil` | Toxic Soil | `ui_toxic_soil_desc` |
 
-All four effect keys have both entries, so key-derived assumptions hold for every display name in the file.
+All ten effect keys have both entries, so key-derived assumptions hold for every display name in the file.
 
 ## Ordering
 
-Entries are grouped in pairs and the file order is alphabetical by key, not by the order the definitions appear in the eligibility file. The engine does not depend on localisation ordering.
+Entries are grouped in pairs, ordered alphabetically by key within each pair and across pairs, matching the definition and effect files. The engine does not depend on localisation ordering, so the arrangement is a convention the repository keeps for reviewability.
 
 ## Description content
 
 | Key | Description theme |
 |-----|-------------------|
+| `ui_dense_atmosphere_desc` | A heavy, crushing atmosphere that makes the surface hard to build on |
 | `ui_extreme_temperatures_desc` | Blistering days and freezing nights, with almost no atmosphere to buffer the surface |
-
+| `ui_geological_instability_desc` | A restless crust, with tremors and shifting ground that hinder construction |
 | `ui_no_magnetic_field_desc` | No magnetic field, leaving the world exposed to cosmic radiation |
+| `ui_radioactive_desc` | Radioactive isotopes that sicken settlers and distort organic research |
 | `ui_salty_desc` | Extremely saline soils and waters, hostile to growth |
+| `ui_superdense_core_desc` | An extraordinarily dense core whose minerals support wider development |
 | `ui_swampy_desc` | Dense swamps rendering large areas dangerous and unworkable |
+| `ui_thin_atmosphere_desc` | A whisper of an atmosphere, too thin to buffer the surface or hold heat |
+| `ui_toxic_soil_desc` | Toxic compounds in the soil poison the ground and leave it barren |
 
 Descriptions are thematic narrative rather than a statement of numeric effects, so they do not need to be revised when an effect value changes in the [static modifier component](./static-modifiers.md). They were revised alongside the v4.5 rebalance wherever the concept sharpened, and they should be revised again if a modifier's concept changes.
 

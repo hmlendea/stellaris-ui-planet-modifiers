@@ -2,11 +2,11 @@
 
 ## Responsibility
 
-Declare the four new planet modifiers and the relative probability with which the engine may assign each to a generated planet.
+Declare the ten new planet modifiers and the relative probability with which the engine may assign each to a generated planet.
 
 ## Location
 
-`ui-planet-modifiers/common/planet_modifiers/ui-planet-modifiers.txt` — a single file containing four top-level `pm_ui_*` definitions.
+`ui-planet-modifiers/common/planet_modifiers/ui-planet-modifiers.txt` — a single file containing ten top-level `pm_ui_*` definitions, ordered alphabetically by key.
 
 ## Structure
 
@@ -28,14 +28,32 @@ Only the final `modifier` string and the `spawn_chance` block are structurally r
 
 ## Per-modifier specification
 
+### `pm_ui_dense_atmosphere` → `ui_dense_atmosphere`
+
+| Clause | Effect |
+|--------|--------|
+| `add = 10` on `pc_continental`, `pc_ocean`, `pc_savannah`, `pc_tropical` | Base weight 10 on the wettest, most habitable classes |
+| `factor = 2` when `has_planet_modifier = "pm_ui_swampy"` | Doubled on swampy worlds |
+| `factor = 0` when the planet already has `pm_ui_dense_atmosphere`, `pm_ui_extreme_temperatures`, or `pm_ui_thin_atmosphere` | Excludes the duplicate and the atmosphere-composition overlaps |
+| `factor = 0` when `num_modifiers > 1` | Accumulation guard |
+
 ### `pm_ui_extreme_temperatures` → `ui_extreme_temperatures`
 
 | Clause | Effect |
 |--------|--------|
-| `add = 10` on `pc_desert`, `pc_arid`, `pc_alpine`, `pc_nuked` | Base weight 10 on the hottest classes |
+| `add = 10` on `pc_alpine`, `pc_arid`, `pc_desert`, `pc_nuked` | Base weight 10 on the hottest classes |
 | `add = 5` on `pc_barren`, `pc_barren_cold` | Base weight 5 on barren worlds |
 | `factor = 2` when `has_planet_modifier = "pm_bleak"` | Doubled on bleak worlds |
-| `factor = 0` when the planet already has `pm_ui_extreme_temperatures` or `pm_tidal_locked` | Excludes the duplicate and the tidal-lock overlap |
+| `factor = 0` when the planet already has `pm_tidal_locked`, `pm_ui_dense_atmosphere`, `pm_ui_extreme_temperatures`, or `pm_ui_thin_atmosphere` | Excludes the duplicate, the atmosphere-composition overlaps, and the tidal-lock overlap |
+| `factor = 0` when `num_modifiers > 1` | Accumulation guard |
+
+### `pm_ui_geological_instability` → `ui_geological_instability`
+
+| Clause | Effect |
+|--------|--------|
+| `add = 10` on `pc_volcanic` | Base weight 10 on volcanic worlds |
+| `add = 5` on `pc_alpine`, `pc_arid`, `pc_desert` | Base weight 5 elsewhere |
+| `factor = 0` when the planet already has `pm_abundant_geothermal_activity`, `pm_ui_geological_instability`, `pm_ui_superdense_core`, or `pm_unstable_tectonics` | Excludes the duplicate, the core/instability conflict, and the vanilla tectonic and geothermal concepts |
 | `factor = 0` when `num_modifiers > 1` | Accumulation guard |
 
 ### `pm_ui_no_magnetic_field` → `ui_no_magnetic_field`
@@ -44,7 +62,16 @@ Only the final `modifier` string and the `spawn_chance` block are structurally r
 |--------|--------|
 | `add = 10` on `pc_barren`, `pc_barren_cold` | Base weight 10 on barren worlds |
 | `factor = 2` when `has_planet_modifier = "pm_low_gravity"` | Doubled on low-gravity worlds |
-| `factor = 0` when any of `pm_ui_no_magnetic_field`, `pm_weak_magnetic_field`, `pm_strong_magnetic_field` is present | Excludes the magnetic-field family |
+| `factor = 0` when any of `pm_strong_magnetic_field`, `pm_ui_no_magnetic_field`, `pm_ui_radioactive`, `pm_weak_magnetic_field` is present | Excludes the magnetic-field family |
+| `factor = 0` when `num_modifiers > 1` | Accumulation guard |
+
+### `pm_ui_radioactive` → `ui_radioactive`
+
+| Clause | Effect |
+|--------|--------|
+| `add = 10` on `pc_nuked` | Base weight 10 on irradiated worlds |
+| `add = 5` on `pc_barren`, `pc_barren_cold` | Base weight 5 on barren worlds |
+| `factor = 0` when the planet already has `pm_ui_no_magnetic_field`, `pm_ui_radioactive`, or `pm_ui_toxic_soil` | Excludes the duplicate, the magnetic overlap, and the soil-concept overlap |
 | `factor = 0` when `num_modifiers > 1` | Accumulation guard |
 
 ### `pm_ui_salty` → `ui_salty`
@@ -52,8 +79,16 @@ Only the final `modifier` string and the `spawn_chance` block are structurally r
 | Clause | Effect |
 |--------|--------|
 | `add = 10` on `pc_barren` | Base weight 10 on barren worlds |
-| `add = 5` on `pc_barren_cold`, `pc_desert`, `pc_arid`, `pc_ocean` | Base weight 5 elsewhere |
-| `factor = 0` when the planet already has `pm_ui_salty` or `pm_ui_swampy` | Excludes the water-quality conflict |
+| `add = 5` on `pc_arid`, `pc_barren_cold`, `pc_desert`, `pc_ocean` | Base weight 5 elsewhere |
+| `factor = 0` when the planet already has `pm_ui_salty`, `pm_ui_swampy`, or `pm_ui_toxic_soil` | Excludes the soil-quality trio |
+| `factor = 0` when `num_modifiers > 1` | Accumulation guard |
+
+### `pm_ui_superdense_core` → `ui_superdense_core`
+
+| Clause | Effect |
+|--------|--------|
+| `add = 1` on `pc_barren`, `pc_molten`, `pc_volcanic` | Rare base weight 1 on heavy, dense worlds |
+| `factor = 0` when the planet already has `pm_ui_geological_instability` or `pm_ui_superdense_core` | Excludes the duplicate and the core/instability conflict |
 | `factor = 0` when `num_modifiers > 1` | Accumulation guard |
 
 ### `pm_ui_swampy` → `ui_swampy`
@@ -62,10 +97,28 @@ Only the final `modifier` string and the `spawn_chance` block are structurally r
 |--------|--------|
 | `add = 10` on `pc_tropical` | Base weight 10 on tropical worlds |
 | `add = 5` on `pc_ocean` | Base weight 5 on ocean worlds |
-| `factor = 0` when the planet already has `pm_ui_swampy` or `pm_ui_salty` | Excludes the water-quality conflict |
+| `factor = 0` when the planet already has `pm_ui_salty`, `pm_ui_swampy`, or `pm_ui_toxic_soil` | Excludes the soil-quality trio |
 | `factor = 0` when `num_modifiers > 1` | Accumulation guard |
 
-All four definitions carry an accumulation guard and at least one exclusion.
+### `pm_ui_thin_atmosphere` → `ui_thin_atmosphere`
+
+| Clause | Effect |
+|--------|--------|
+| `add = 10` on `pc_barren`, `pc_barren_cold`, `pc_nuked` | Base weight 10 on airless-world classes |
+| `add = 5` on `pc_arid`, `pc_desert` | Base weight 5 on dry worlds |
+| `factor = 0` when the planet already has `pm_bleak`, `pm_ui_dense_atmosphere`, `pm_ui_extreme_temperatures`, or `pm_ui_thin_atmosphere` | Excludes the duplicate, the atmosphere-composition overlaps, and the vanilla bleak concept |
+| `factor = 0` when `num_modifiers > 1` | Accumulation guard |
+
+### `pm_ui_toxic_soil` → `ui_toxic_soil`
+
+| Clause | Effect |
+|--------|--------|
+| `add = 10` on `pc_barren`, `pc_nuked` | Base weight 10 on irradiated, lifeless worlds |
+| `add = 5` on `pc_volcanic` | Base weight 5 on volcanic worlds |
+| `factor = 0` when the planet already has `pm_ui_radioactive`, `pm_ui_salty`, `pm_ui_swampy`, or `pm_ui_toxic_soil` | Excludes the duplicate, the soil-quality trio, and the radioactive overlap |
+| `factor = 0` when `num_modifiers > 1` | Accumulation guard |
+
+All ten definitions carry an accumulation guard and at least one exclusion.
 
 ## Weight calibration
 
@@ -75,14 +128,20 @@ Vanilla v4.5 uses `add = 10` for a common class outcome, `add = 5` for an uncomm
 
 Read each cell as: the row's modifier, when already assigned, causes the column's modifier to be excluded.
 
-| Already assigned ↓ excludes → | extreme temps | no magnetic field | salty | swampy |
-|-------------------------------|---------------|-------------------|-------|--------|
-| `pm_ui_extreme_temperatures` | yes | no | no | no |
-| `pm_ui_no_magnetic_field` | no | yes | no | no |
-| `pm_ui_salty` | no | no | yes | yes |
-| `pm_ui_swampy` | no | no | yes | yes |
+| Already assigned ↓ excludes → | dense atm. | extreme temps | geo. instability | no magnetic field | radioactive | salty | superdense core | swampy | thin atm. | toxic soil |
+|-------------------------------|-----------|---------------|--------------------|-------------------|-------------|-------|-----------------|--------|-----------|-----------|
+| `pm_ui_dense_atmosphere` | yes | yes | no | no | no | no | no | no | yes | no |
+| `pm_ui_extreme_temperatures` | yes | yes | no | no | no | no | no | no | yes | no |
+| `pm_ui_geological_instability` | no | no | yes | no | no | no | yes | no | no | no |
+| `pm_ui_no_magnetic_field` | no | no | no | yes | yes | no | no | no | no | no |
+| `pm_ui_radioactive` | no | no | no | yes | yes | no | no | no | no | yes |
+| `pm_ui_salty` | no | no | no | no | no | yes | no | yes | no | yes |
+| `pm_ui_superdense_core` | no | no | yes | no | no | no | yes | no | no | no |
+| `pm_ui_swampy` | no | no | no | no | no | yes | no | yes | no | yes |
+| `pm_ui_thin_atmosphere` | yes | yes | no | no | no | no | no | no | yes | no |
+| `pm_ui_toxic_soil` | no | no | no | no | yes | yes | no | yes | no | yes |
 
-Every conflict is symmetric, so no pair depends on evaluation order. `pm_ui_extreme_temperatures` additionally excludes, and is excluded by, the vanilla `pm_tidal_locked` through the override file.
+Several mutually exclusive groups exist. `pm_ui_dense_atmosphere`, `pm_ui_extreme_temperatures`, and `pm_ui_thin_atmosphere` form the atmosphere-composition trio; `pm_ui_salty`, `pm_ui_swampy`, and `pm_ui_toxic_soil` form the soil-quality trio. `pm_ui_geological_instability` and `pm_ui_superdense_core` form a symmetric pair, since a stable and a restless crust are incompatible. `pm_ui_radioactive` joins the magnetic family through `pm_ui_no_magnetic_field` and additionally excludes `pm_ui_toxic_soil`. Every mod-to-mod conflict is symmetric. Four exclusions against vanilla keys are one-sided, because those vanilla keys are not re-declared: `pm_ui_extreme_temperatures` against `pm_tidal_locked`, `pm_ui_thin_atmosphere` against `pm_bleak`, and `pm_ui_geological_instability` against `pm_unstable_tectonics` and `pm_abundant_geothermal_activity`. Each of those vanilla modifiers can still be assigned after the mod's modifier occupies the slot, which the accumulation guard prevents in practice.
 
 ## Dependants
 

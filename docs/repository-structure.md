@@ -12,18 +12,20 @@ stellaris-ui-planet-modifiers/
 │       └── steam-workshop-release.yml  # Uploads the mod to the Steam Workshop
 ├── src/
 │   └── planet_modifier.xcf             # Editable GIMP source for the icon set
+├── description/
+│   └── steam-workshop.bbcode           # Steam Workshop page body (BBCode)
 ├── ui-planet-modifiers/
 │   ├── descriptor.mod                  # Local mod descriptor
 │   ├── common/
 │   │   ├── planet_modifiers/
-│   │   │   ├── ui-planet-modifiers.txt            # Four new planet modifiers
+│   │   │   ├── ui-planet-modifiers.txt            # Ten new planet modifiers
 │   │   │   └── ui-planet-modifiers-vanillas.txt   # two re-declared vanilla spawn chances
 │   │   └── static_modifiers/
-│   │       └── ui-planet-modifiers_static_modifiers.txt  # Eight effect blocks
+│   │       └── ui-planet-modifiers_static_modifiers.txt  # Ten effect blocks
 │   ├── gfx/
 │   │   └── interface/
 │   │       └── icons/
-│   │           └── planet_modifiers/   # Eight DDS icon textures
+│   │           └── planet_modifiers/   # Ten DDS icon textures
 │   ├── localisation/
 │   │   └── english/
 │   │       └── ui-planet-modifiers_l_english.yml
@@ -44,11 +46,12 @@ stellaris-ui-planet-modifiers/
 | Directory or file | Purpose |
 |-------------------|---------|
 | `src/` | Holds the editable GIMP source `planet_modifier.xcf` (60 x 60, RGB) from which the icon set is produced. Not consumed by the game. |
+| `description/` | Holds the Steam Workshop page body `steam-workshop.bbcode`, which is pasted into the workshop item description. Not consumed by the game. |
 | `ui-planet-modifiers/` | The mod content directory. The descriptor `path` field names this directory, so its name is part of the delivery contract. |
 | `ui-planet-modifiers/common/` | Clausewitz definition files that the engine parses at initialisation. |
 | `ui-planet-modifiers/common/planet_modifiers/` | Spawn-chance definitions. Two files: new additions and redefinitions. |
 | `ui-planet-modifiers/common/static_modifiers/` | Effect definitions bound to icons and localisation keys. |
-| `ui-planet-modifiers/gfx/interface/icons/planet_modifiers/` | DDS icon textures, one per new modifier, named `pm_ui_<name>.dds`. |
+| `ui-planet-modifiers/gfx/interface/icons/planet_modifiers/` | DDS icon textures named `pm_ui_<name>.dds`, one per new modifier. |
 | `ui-planet-modifiers/localisation/english/` | English localisation, one language directory per locale. |
 | `.github/` | GitHub platform configuration: the funding declaration and the `github-release.yml` release-packaging workflow, the `nexus-mods-release.yml` Nexus Mods publication workflow, and the `steam-workshop-release.yml` workshop-publication workflow. |
 | `docs/` | This knowledge base. Not shipped with the mod. |

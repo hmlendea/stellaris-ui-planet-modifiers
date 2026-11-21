@@ -8,19 +8,25 @@ Provide the visual representation of each new planet modifier in the interface, 
 
 | Path | Role |
 |------|------|
-| `ui-planet-modifiers/gfx/interface/icons/planet_modifiers/` | Four DDS textures consumed by the engine |
+| `ui-planet-modifiers/gfx/interface/icons/planet_modifiers/` | Ten DDS textures consumed by the engine |
 | `src/planet_modifier.xcf` | Editable GIMP source, outside the content directory |
 
 ## Inventory
 
 | File | Size | Format | Dimensions | Referenced by |
 |------|------|--------|-----------|---------------|
+| `pm_ui_dense_atmosphere.dds` | 14,528 bytes | DDS, 32-bit ARGB8888 | 60 x 60 | `ui_dense_atmosphere` |
 | `pm_ui_extreme_temperatures.dds` | 14,528 bytes | DDS, 32-bit ARGB8888 | 60 x 60 | `ui_extreme_temperatures` |
+| `pm_ui_geological_instability.dds` | 14,528 bytes | DDS, 32-bit ARGB8888 | 60 x 60 | `ui_geological_instability` |
 | `pm_ui_no_magnetic_field.dds` | 14,528 bytes | DDS, 32-bit ARGB8888 | 60 x 60 | `ui_no_magnetic_field` |
+| `pm_ui_radioactive.dds` | 14,528 bytes | DDS, 32-bit ARGB8888 | 60 x 60 | `ui_radioactive` |
 | `pm_ui_salty.dds` | 14,528 bytes | DDS, 32-bit ARGB8888 | 60 x 60 | `ui_salty` |
+| `pm_ui_superdense_core.dds` | 14,528 bytes | DDS, 32-bit ARGB8888 | 60 x 60 | `ui_superdense_core` |
 | `pm_ui_swampy.dds` | 14,528 bytes | DDS, 32-bit ARGB8888 | 60 x 60 | `ui_swampy` |
+| `pm_ui_thin_atmosphere.dds` | 14,528 bytes | DDS, 32-bit ARGB8888 | 60 x 60 | `ui_thin_atmosphere` |
+| `pm_ui_toxic_soil.dds` | 14,528 bytes | DDS, 32-bit ARGB8888 | 60 x 60 | `ui_toxic_soil` |
 
-Every file is the same size and format, and all four are referenced, so the asset set and the effect set are in exact correspondence.
+Every file is the same size and format, and all ten are referenced, so the asset set and the effect set are in exact correspondence.
 
 ## Source artwork
 
