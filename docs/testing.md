@@ -87,7 +87,7 @@ These replace an automated validator and take only a minute each.
 |--------|------------|
 | The format has no schema the repository could validate against locally | A host-format validator would have to be written from scratch |
 | The engine is the only authority on semantics | Offline validation could confirm syntax but not behaviour |
-| The mod is small | Four new definitions and two overrides are tractable to review by eye |
+| The mod is small | Five new definitions and two overrides are tractable to review by eye |
 | The cost of a defect is low | A wrong weight is a flavour defect, not a correctness failure |
 
 The gaps are therefore acceptable in practice while remaining the repository's principal quality exposure. A future contributor implementing a cross-file consistency script would remove most of them without needing the host.

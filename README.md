@@ -4,40 +4,39 @@
 
 # Universum Infinitum - Planet Modifiers
 
-A Stellaris mod that adds four new planet modifiers — extreme temperatures, absence of a magnetic field, salinity, and swampland — each with its own icon and English localisation, weighted to match the vanilla v4.5 planet modifier pool.
+A Stellaris mod that adds five new planet modifiers — extreme temperatures, absence of a magnetic field, a thin atmosphere, salinity, and swampland — each with its own icon and English localisation, weighted to match the vanilla v4.5 planet modifier pool.
 
 ## 📑 Table of Contents
 
-- [Table of Contents](#-table-of-contents)
-- [Capabilities](#-capabilities)
-- [Usage](#-usage)
-- [Known Limitations](#-known-limitations)
-- [System Requirements](#-system-requirements)
-- [Installation](#-installation)
+- [Capabilities](#capabilities)
+- [Usage](#usage)
+- [Known Limitations](#known-limitations)
+- [System Requirements](#system-requirements)
+- [Installation](#installation)
   - [Manual Installation](#manual-installation)
   - [Verification](#verification)
   - [Uninstallation](#uninstallation)
-- [Localisation](#-localisation)
-- [Compatibility](#-compatibility)
-- [Privacy and Data](#-privacy-and-data)
-- [GitHub Actions](#-github-actions)
-- [Project Structure](#-project-structure)
+- [Localisation](#localisation)
+- [Compatibility](#compatibility)
+- [Privacy and Data](#privacy-and-data)
+- [GitHub Actions](#github-actions)
+- [Project Structure](#project-structure)
   - [Directories](#directories)
-- [Architecture](#-architecture)
-- [Documentation](#-documentation)
-- [Troubleshooting](#-troubleshooting)
-- [FAQ](#-faq)
-- [Contributing](#-contributing)
-- [Code of Conduct](#-code-of-conduct)
-- [Related Projects](#-related-projects)
-- [Security](#-security)
-- [Support](#-support)
-- [Project Engagement](#-project-engagement)
-- [License](#-license)
+- [Architecture](#architecture)
+- [Documentation](#documentation)
+- [Troubleshooting](#troubleshooting)
+- [FAQ](#faq)
+- [Contributing](#contributing)
+- [Code of Conduct](#code-of-conduct)
+- [Related Projects](#related-projects)
+- [Security](#security)
+- [Support](#support)
+- [Project Engagement](#project-engagement)
+- [License](#license)
 
 ## ✨ Capabilities
 
-- Adds four new planet modifiers with distinct names, descriptions, and icons.
+- Adds five new planet modifiers with distinct names, descriptions, and icons.
 - Gates each new modifier with planet-class and star-system conditions so that it appears on thematically plausible worlds.
 - Excludes mutually contradictory modifiers, so a planet never carries both a tidal lock and extreme temperatures, or two magnetic-field variants.
 - Excludes the new modifiers from vanilla modifiers that already cover the same theme, so no duplicate concept enters the pool.
@@ -94,7 +93,7 @@ Display names and descriptions are supplied through the host localisation system
 
 | Language | Locale | Status |
 |----------|--------|--------|
-| English | `en` | Complete: one name and one description for each of the four new modifiers |
+| English | `en` | Complete: one name and one description for each of the five new modifiers |
 
 ## 🧩 Compatibility
 
@@ -129,18 +128,19 @@ The repository is a Stellaris mod: a descriptor plus a content directory of defi
 | Directory | Purpose |
 |-----------|---------|
 | `ui-planet-modifiers/` | The mod content directory named by the descriptor `path` field |
-| `ui-planet-modifiers/common/planet_modifiers/` | Spawn-chance definitions: four new modifiers and two vanilla redefinitions |
+| `ui-planet-modifiers/common/planet_modifiers/` | Spawn-chance definitions: five new modifiers and two vanilla redefinitions |
 | `ui-planet-modifiers/common/static_modifiers/` | Effect blocks, icon bindings, icon frames, and importance flags |
 | `ui-planet-modifiers/gfx/interface/icons/planet_modifiers/` | DDS icon textures, one per new modifier |
 | `ui-planet-modifiers/localisation/english/` | English display names and descriptions |
 | `src/` | Editable GIMP source for the icon set; not shipped with the mod |
+| `description/` | Steam Workshop page body (`steam-workshop.bbcode`); not shipped with the mod |
 | `docs/` | Documentation knowledge base |
 
 ## 🏗️ Architecture
 
 Universum Infinitum - Planet Modifiers is a declarative Stellaris mod that defines planet modifiers, their spawn conditions, static effects, icons, and localisation through static data files consumed by the game engine.
 
-See the [Architecture Documentation](./ARCHITECTURE.md) for the system context, principal components, runtime flows, ownership boundaries, dependencies, constraints, and extension points.
+See the [Architecture Documentation](./ARCHITECTURE.md) for the system context, principal components, runtime processes, ownership boundaries, dependencies, constraints, and extension points.
 
 ## 📚 Documentation
 
@@ -163,13 +163,14 @@ See [Troubleshooting Guide](./docs/troubleshooting.md) for diagnostic procedures
 
 ## ❓ FAQ
 
-See the [Frequently Asked Questions](./docs/faq.md) for responses to frequently raised inquiries.
+See the [FAQ](./docs/faq.md) for responses to frequently raised inquiries.
 
 ## 🤝 Contributing
 
 You are welcome to submit any suggestion, feedback, or modification to this project.
 
 When doing so, please:
+- Preserve the existing public contract unless a breaking change is intentional
 - Submit focused pull requests that conform to the existing code style
 - Maintain your branch synchronised with `master`
 - Revise the documentation when functionality changes
@@ -183,11 +184,12 @@ See the [Code of Conduct](./CODE_OF_CONDUCT.md) for the standards of conduct exp
 
 ## 🔗 Related Projects
 
+- [Universum Infinitum - Character Traits](https://github.com/hmlendea/stellaris-ui-character-traits): Adds many new character traits to the game.
 - [Universum Infinitum - Deposit Blockers](https://github.com/hmlendea/stellaris-ui-deposit-blockers): Adds seven planet deposit blockers and one matching society technology to clear each of them.
 - [Universum Infinitum - Flags](https://github.com/hmlendea/stellaris-ui-flags): Adds hundreds of new flag designs matching the vanilla flag style.
 - [Universum Infinitum - Galaxy Sizes](https://github.com/hmlendea/stellaris-ui-galaxy-sizes): Adds six galaxy sizes ranging from 100 to 2,000 stars, with scaled generation defaults.
 - [Universum Infinitum - Name Lists](https://github.com/hmlendea/stellaris-ui-name-lists): Provides numerous detailed name lists, including the Human - Extended variant.
-- [Universum Infinitum - Planet Modifiers](https://github.com/hmlendea/stellaris-ui-planet-modifiers): Adds four new planet modifiers with their own icons and English localisation.
+- [Universum Infinitum - Planet Modifiers](https://github.com/hmlendea/stellaris-ui-planet-modifiers): Adds five new planet modifiers with their own icons and English localisation.
 - [Universum Infinitum - Prescripted Countries](https://github.com/hmlendea/stellaris-ui-prescripted-countries): Adds prescripted countries for players to select or for the AI to use.
 - [Universum Infinitum - Species Names](https://github.com/hmlendea/stellaris-ui-species-names): Adds hundreds of new species names to the game.
 - [Universum Infinitum - Species Traits](https://github.com/hmlendea/stellaris-ui-species-traits): Adds 58 custom species traits and extends several trait families with additional tiers.

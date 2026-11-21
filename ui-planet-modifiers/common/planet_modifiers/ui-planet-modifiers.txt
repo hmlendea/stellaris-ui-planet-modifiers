@@ -30,6 +30,7 @@ pm_ui_extreme_temperatures = {
             factor = 0
             OR = {
                 has_planet_modifier = "pm_ui_extreme_temperatures"
+                has_planet_modifier = "pm_ui_thin_atmosphere"
                 has_planet_modifier = "pm_tidal_locked"
             }
         }
@@ -131,4 +132,39 @@ pm_ui_swampy = {
     }
 
     modifier = "ui_swampy"
+}
+
+pm_ui_thin_atmosphere = {
+    spawn_chance = {
+        modifier = {
+            add = 10
+            OR = {
+                is_planet_class = "pc_barren"
+                is_planet_class = "pc_barren_cold"
+                is_planet_class = "pc_nuked"
+            }
+        }
+        modifier = {
+            add = 5
+            OR = {
+                is_planet_class = "pc_arid"
+                is_planet_class = "pc_desert"
+            }
+        }
+        modifier = {
+            factor = 0
+            OR = {
+                has_planet_modifier = "pm_ui_thin_atmosphere"
+                has_planet_modifier = "pm_ui_extreme_temperatures"
+                has_planet_modifier = "pm_bleak"
+            }
+        }
+
+        modifier = {
+            factor = 0
+            num_modifiers > 1
+        }
+    }
+
+    modifier = "ui_thin_atmosphere"
 }

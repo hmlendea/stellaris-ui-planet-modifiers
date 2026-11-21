@@ -7,3 +7,5 @@
  ui_salty:0 "Salty"
  ui_swampy_desc:0 "This world is littered with dense swamps, rendering large portions of it dangerous and unworkable."
  ui_swampy:0 "Swampy"
+ ui_thin_atmosphere_desc:0 "This world has only a whisper of an atmosphere, too little to buffer its surface or hold on to the heat it receives."
+ ui_thin_atmosphere:0 "Thin Atmosphere"

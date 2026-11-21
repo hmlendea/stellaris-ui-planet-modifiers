@@ -4,7 +4,7 @@ This document describes what a player observes, and why, when the mod is active 
 
 ## Observation: additional modifiers appear on generated planets
 
-The most direct behavioural change is that planets can carry any of four modifiers the base game does not provide: extreme temperatures, absence of a magnetic field, salinity, and swampland.
+The most direct behavioural change is that planets can carry any of five modifiers the base game does not provide: extreme temperatures, absence of a magnetic field, a thin atmosphere, salinity, and swampland.
 
 Why: the additions file declares a `spawn_chance` for each identifier, so each enters the candidate pool for every generated planet that satisfies its conditions.
 
@@ -17,6 +17,7 @@ The class conditions of three new modifiers include barren or cold-barren worlds
 | `pm_ui_no_magnetic_field` | `add = 10` |
 | `pm_ui_salty` | `add = 10` on barren, `add = 5` on cold barren |
 | `pm_ui_extreme_temperatures` | `add = 5` |
+| `pm_ui_thin_atmosphere` | `add = 10` on barren and cold barren |
 
 Why: barren worlds have no habitability to protect, so these effects are thematically appropriate there. The weights match vanilla's `add = 10` common and `add = 5` uncommon tiers.
 
@@ -37,7 +38,7 @@ Why: each conflicting pair is separated by `factor = 0` exclusion clauses writte
 
 ## Observation: new modifiers never join an already-modified planet
 
-All four new definitions carry a `num_modifiers > 1` guard, matching the vanilla convention.
+All five new definitions carry a `num_modifiers > 1` guard, matching the vanilla convention.
 
 Why: the guard limits how many modifiers a planet accumulates. An earlier revision exempted swampy and relaxed the guard for microorganisms; both exceptions were removed so the cap is uniform.
 

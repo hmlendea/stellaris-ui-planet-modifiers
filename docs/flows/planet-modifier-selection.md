@@ -8,7 +8,7 @@ From the engine generating a planet to the assignment of a set of planet modifie
 
 - The mod is active and its content loaded, as described in [game-startup-and-loading.md](./game-startup-and-loading.md).
 - A planet is being generated or re-evaluated, so its class, size, moon status, and solar system are known.
-- The candidate pool consists of every definition the engine can resolve, combining vanilla definitions with this mod's four new definitions. The mod's two vanilla re-declarations replace their host counterparts rather than adding candidates.
+- The candidate pool consists of every definition the engine can resolve, combining vanilla definitions with this mod's five new definitions. The mod's two vanilla re-declarations replace their host counterparts rather than adding candidates.
 
 ## Sequence
 
@@ -55,11 +55,13 @@ sequenceDiagram
 | Pair | Clause on the first side | Clause on the second side | Symmetric |
 |------|--------------------------|---------------------------|-----------|
 | `pm_ui_salty` / `pm_ui_swampy` | excludes | excludes | Yes |
+| `pm_ui_thin_atmosphere` / `pm_ui_extreme_temperatures` | excludes | excludes | Yes |
 | `pm_ui_no_magnetic_field` / `pm_weak_magnetic_field` | excludes | excludes, via the re-declaration | Yes |
 | `pm_ui_no_magnetic_field` / `pm_strong_magnetic_field` | excludes | excludes, via the re-declaration | Yes |
 | `pm_ui_extreme_temperatures` / `pm_tidal_locked` | excludes | not declared; the vanilla key is not re-declared | No |
+| `pm_ui_thin_atmosphere` / `pm_bleak` | excludes | not declared; the vanilla key is not re-declared | No |
 
-The last row is the one asymmetric pair. It cannot produce a contradictory planet in practice, because the accumulation guard excludes the mod's modifier once a tidal lock occupies the slot; it is recorded here rather than hidden.
+The last two rows are the asymmetric pairs. It cannot produce a contradictory planet in practice, because the accumulation guard excludes the mod's modifier once a tidal lock occupies the slot; it is recorded here rather than hidden.
 
 ## Weighting consequences
 

@@ -14,7 +14,7 @@ Only the host game. There are no third-party libraries, no package manifest, and
 
 ## What does it add?
 
-Four new planet modifiers — extreme temperatures, absence of a magnetic field, salinity, and swampland — each with its own icon and English localisation, plus two vanilla magnetic-field redefinitions so the new entry cannot coexist with them.
+Five new planet modifiers — extreme temperatures, absence of a magnetic field, a thin atmosphere, salinity, and swampland — each with its own icon and English localisation, plus two vanilla magnetic-field redefinitions so the new entry cannot coexist with them.
 
 ## Do the new modifiers make planets better?
 
@@ -22,7 +22,7 @@ They make planets worse. Every new modifier reduces habitability, and most also 
 
 ## Why does a planet already carrying a modifier seem to reject the new ones?
 
-All four definitions carry a `num_modifiers > 1` condition evaluated with `factor = 0`, which excludes the modifier once another is present. This matches the vanilla convention and is uniform across the set.
+All five definitions carry a `num_modifiers > 1` condition evaluated with `factor = 0`, which excludes the modifier once another is present. This matches the vanilla convention and is uniform across the set.
 
 ## Can two contradictory modifiers appear together?
 
