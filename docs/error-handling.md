@@ -27,7 +27,7 @@ A descriptor with an invalid `path` leaves the mod registered with no content. A
 
 ### Definition-parser boundary
 
-Parsing is per-definition. A malformed block invalidates its own definition without discarding siblings, so a syntax error in one modifier does not remove the other seven. This segmentation is helpful: a missing modifier usually means exactly one definition failed.
+Parsing is per-definition. A malformed block invalidates its own definition without discarding siblings, so a syntax error in one modifier does not remove the others. This segmentation is helpful: a missing modifier usually means exactly one definition failed.
 
 Duplicate keys behave differently. If two files declare the same key, the later file wins and the other is unobservable, with no error. The repository relies on this deliberately: the three keys in the override file are vanilla keys, re-declared so the mod's exclusions replace the host's definition.
 

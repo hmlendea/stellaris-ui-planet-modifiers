@@ -73,7 +73,7 @@ The two files under `common/planet_modifiers/` are not parallel halves of one co
 | Aspect | `ui-planet-modifiers.txt` | `ui-planet-modifiers-vanillas.txt` |
 |--------|---------------------------|-------------------------------------|
 | Purpose | Introduce new modifiers | Replace a few host definitions so their spawn conditions exclude the new modifiers |
-| Keys | Eight brand-new `pm_ui_*` keys | Two vanilla keys: `pm_weak_magnetic_field`, `pm_strong_magnetic_field` |
+| Keys | Ten brand-new `pm_ui_*` keys | Two vanilla keys: `pm_weak_magnetic_field`, `pm_strong_magnetic_field` |
 | `modifier` target | Newly defined `ui_*` effect keys | The matching vanilla effect keys |
 | Effect tier owned here | Yes, in the sibling static modifier file | No, effects belong to the host |
 | Exclusions | Exclude the new modifiers and relevant vanilla modifiers | Exclude the new modifier that overlaps the same theme |
@@ -119,7 +119,7 @@ Each boundary has its own failure mode. Recording them together establishes the 
 The invariants that must hold for the architecture to remain coherent are enumerated with their evidence and verification method in [invariants.md](./invariants.md). The three most consequential are:
 
 1. A definition's `modifier` field equals an existing effect-tier key.
-2. Every effect-tier `icon` path resolves to an existing file, and every icon file is referenced.
+2. Every effect-tier `icon` path resolves to an existing file, and every icon file has exactly one reference.
 3. Mutually exclusive modifier pairs exclude each other in both directions.
 
 ## Extension model

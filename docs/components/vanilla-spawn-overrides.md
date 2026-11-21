@@ -18,10 +18,10 @@ An earlier revision instead introduced parallel `pm_ui_*` keys bound to the host
 
 | Definition key | Bound effect key | Change relative to v4.5 |
 |----------------|------------------|--------------------------|
-| `pm_weak_magnetic_field` | `weak_magnetic_field` | Adds `factor = 0` when `pm_ui_no_magnetic_field` is present |
 | `pm_strong_magnetic_field` | `strong_magnetic_field` | Adds `factor = 0` when `pm_ui_no_magnetic_field` is present |
+| `pm_weak_magnetic_field` | `weak_magnetic_field` | Adds `factor = 0` when `pm_ui_no_magnetic_field` is present |
 
-Every other clause in each block is a copy of the vanilla v4.5 definition, including weights, size multipliers, the moon multiplier, the Gaia exclusion, and the accumulation guard. The only behavioural change is the added exclusion.
+The two definitions are listed alphabetically, matching the file order. Every other clause in each block is a copy of the vanilla v4.5 definition, including weights, size multipliers, the moon multiplier, the Gaia exclusion, and the accumulation guard. The only behavioural change is the added exclusion.
 
 ### Magnetic family
 

@@ -18,10 +18,10 @@ stellaris-ui-planet-modifiers/
 │   ├── descriptor.mod                  # Local mod descriptor
 │   ├── common/
 │   │   ├── planet_modifiers/
-│   │   │   ├── ui-planet-modifiers.txt            # Eight new planet modifiers
+│   │   │   ├── ui-planet-modifiers.txt            # Ten new planet modifiers
 │   │   │   └── ui-planet-modifiers-vanillas.txt   # two re-declared vanilla spawn chances
 │   │   └── static_modifiers/
-│   │       └── ui-planet-modifiers_static_modifiers.txt  # Eight effect blocks
+│   │       └── ui-planet-modifiers_static_modifiers.txt  # Ten effect blocks
 │   ├── gfx/
 │   │   └── interface/
 │   │       └── icons/
@@ -51,7 +51,7 @@ stellaris-ui-planet-modifiers/
 | `ui-planet-modifiers/common/` | Clausewitz definition files that the engine parses at initialisation. |
 | `ui-planet-modifiers/common/planet_modifiers/` | Spawn-chance definitions. Two files: new additions and redefinitions. |
 | `ui-planet-modifiers/common/static_modifiers/` | Effect definitions bound to icons and localisation keys. |
-| `ui-planet-modifiers/gfx/interface/icons/planet_modifiers/` | DDS icon textures, one per new modifier, named `pm_ui_<name>.dds`. |
+| `ui-planet-modifiers/gfx/interface/icons/planet_modifiers/` | DDS icon textures named `pm_ui_<name>.dds`, one per new modifier. |
 | `ui-planet-modifiers/localisation/english/` | English localisation, one language directory per locale. |
 | `.github/` | GitHub platform configuration: the funding declaration and the `github-release.yml` release-packaging workflow, the `nexus-mods-release.yml` Nexus Mods publication workflow, and the `steam-workshop-release.yml` workshop-publication workflow. |
 | `docs/` | This knowledge base. Not shipped with the mod. |

@@ -2,17 +2,53 @@
 # Additional planet modifiers, calibrated against Stellaris v4.5 vanilla weights:
 # add = 10 is a common outcome, add = 5 uncommon, add = 1 rare.
 
+pm_ui_dense_atmosphere = {
+    spawn_chance = {
+        modifier = {
+            add = 10
+            OR = {
+                is_planet_class = "pc_continental"
+                is_planet_class = "pc_ocean"
+                is_planet_class = "pc_savannah"
+                is_planet_class = "pc_tropical"
+            }
+        }
+
+        modifier = {
+            factor = 2
+            has_planet_modifier = "pm_ui_swampy"
+        }
+
+        modifier = {
+            factor = 0
+            OR = {
+                has_planet_modifier = "pm_ui_dense_atmosphere"
+                has_planet_modifier = "pm_ui_extreme_temperatures"
+                has_planet_modifier = "pm_ui_thin_atmosphere"
+            }
+        }
+
+        modifier = {
+            factor = 0
+            num_modifiers > 1
+        }
+    }
+
+    modifier = "ui_dense_atmosphere"
+}
+
 pm_ui_extreme_temperatures = {
     spawn_chance = {
         modifier = {
             add = 10
             OR = {
-                is_planet_class = "pc_desert"
-                is_planet_class = "pc_arid"
                 is_planet_class = "pc_alpine"
+                is_planet_class = "pc_arid"
+                is_planet_class = "pc_desert"
                 is_planet_class = "pc_nuked"
             }
         }
+
         modifier = {
             add = 5
             OR = {
@@ -29,10 +65,10 @@ pm_ui_extreme_temperatures = {
         modifier = {
             factor = 0
             OR = {
-                has_planet_modifier = "pm_ui_extreme_temperatures"
-                has_planet_modifier = "pm_ui_dense_atmosphere"
-                has_planet_modifier = "pm_ui_thin_atmosphere"
                 has_planet_modifier = "pm_tidal_locked"
+                has_planet_modifier = "pm_ui_dense_atmosphere"
+                has_planet_modifier = "pm_ui_extreme_temperatures"
+                has_planet_modifier = "pm_ui_thin_atmosphere"
             }
         }
 
@@ -45,6 +81,41 @@ pm_ui_extreme_temperatures = {
     modifier = "ui_extreme_temperatures"
 }
 
+pm_ui_geological_instability = {
+    spawn_chance = {
+        modifier = {
+            add = 10
+            is_planet_class = "pc_volcanic"
+        }
+
+        modifier = {
+            add = 5
+            OR = {
+                is_planet_class = "pc_alpine"
+                is_planet_class = "pc_arid"
+                is_planet_class = "pc_desert"
+            }
+        }
+
+        modifier = {
+            factor = 0
+            OR = {
+                has_planet_modifier = "pm_abundant_geothermal_activity"
+                has_planet_modifier = "pm_ui_geological_instability"
+                has_planet_modifier = "pm_ui_superdense_core"
+                has_planet_modifier = "pm_unstable_tectonics"
+            }
+        }
+
+        modifier = {
+            factor = 0
+            num_modifiers > 1
+        }
+    }
+
+    modifier = "ui_geological_instability"
+}
+
 pm_ui_no_magnetic_field = {
     spawn_chance = {
         modifier = {
@@ -54,16 +125,19 @@ pm_ui_no_magnetic_field = {
                 is_planet_class = "pc_barren_cold"
             }
         }
+
         modifier = {
             factor = 2
             has_planet_modifier = "pm_low_gravity"
         }
+
         modifier = {
             factor = 0
             OR = {
-                has_planet_modifier = "pm_ui_no_magnetic_field"
-                has_planet_modifier = "pm_weak_magnetic_field"
                 has_planet_modifier = "pm_strong_magnetic_field"
+                has_planet_modifier = "pm_ui_no_magnetic_field"
+                has_planet_modifier = "pm_ui_radioactive"
+                has_planet_modifier = "pm_weak_magnetic_field"
             }
         }
 
@@ -76,21 +150,56 @@ pm_ui_no_magnetic_field = {
     modifier = "ui_no_magnetic_field"
 }
 
+pm_ui_radioactive = {
+    spawn_chance = {
+        modifier = {
+            add = 10
+            is_planet_class = "pc_nuked"
+        }
+
+        modifier = {
+            add = 5
+            OR = {
+                is_planet_class = "pc_barren"
+                is_planet_class = "pc_barren_cold"
+            }
+        }
+
+        modifier = {
+            factor = 0
+            OR = {
+                has_planet_modifier = "pm_ui_no_magnetic_field"
+                has_planet_modifier = "pm_ui_radioactive"
+                has_planet_modifier = "pm_ui_toxic_soil"
+            }
+        }
+
+        modifier = {
+            factor = 0
+            num_modifiers > 1
+        }
+    }
+
+    modifier = "ui_radioactive"
+}
+
 pm_ui_salty = {
     spawn_chance = {
         modifier = {
             add = 10
             is_planet_class = "pc_barren"
         }
+
         modifier = {
             add = 5
             OR = {
+                is_planet_class = "pc_arid"
                 is_planet_class = "pc_barren_cold"
                 is_planet_class = "pc_desert"
-                is_planet_class = "pc_arid"
                 is_planet_class = "pc_ocean"
             }
         }
+
         modifier = {
             factor = 0
             OR = {
@@ -109,21 +218,51 @@ pm_ui_salty = {
     modifier = "ui_salty"
 }
 
+pm_ui_superdense_core = {
+    spawn_chance = {
+        modifier = {
+            add = 1
+            OR = {
+                is_planet_class = "pc_barren"
+                is_planet_class = "pc_molten"
+                is_planet_class = "pc_volcanic"
+            }
+        }
+
+        modifier = {
+            factor = 0
+            OR = {
+                has_planet_modifier = "pm_ui_geological_instability"
+                has_planet_modifier = "pm_ui_superdense_core"
+            }
+        }
+
+        modifier = {
+            factor = 0
+            num_modifiers > 1
+        }
+    }
+
+    modifier = "ui_superdense_core"
+}
+
 pm_ui_swampy = {
     spawn_chance = {
         modifier = {
             add = 10
             is_planet_class = "pc_tropical"
         }
+
         modifier = {
             add = 5
             is_planet_class = "pc_ocean"
         }
+
         modifier = {
             factor = 0
             OR = {
-                has_planet_modifier = "pm_ui_swampy"
                 has_planet_modifier = "pm_ui_salty"
+                has_planet_modifier = "pm_ui_swampy"
                 has_planet_modifier = "pm_ui_toxic_soil"
             }
         }
@@ -147,6 +286,7 @@ pm_ui_thin_atmosphere = {
                 is_planet_class = "pc_nuked"
             }
         }
+
         modifier = {
             add = 5
             OR = {
@@ -154,13 +294,14 @@ pm_ui_thin_atmosphere = {
                 is_planet_class = "pc_desert"
             }
         }
+
         modifier = {
             factor = 0
             OR = {
-                has_planet_modifier = "pm_ui_thin_atmosphere"
-                has_planet_modifier = "pm_ui_extreme_temperatures"
-                has_planet_modifier = "pm_ui_dense_atmosphere"
                 has_planet_modifier = "pm_bleak"
+                has_planet_modifier = "pm_ui_dense_atmosphere"
+                has_planet_modifier = "pm_ui_extreme_temperatures"
+                has_planet_modifier = "pm_ui_thin_atmosphere"
             }
         }
 
@@ -173,58 +314,28 @@ pm_ui_thin_atmosphere = {
     modifier = "ui_thin_atmosphere"
 }
 
-pm_ui_dense_atmosphere = {
-    spawn_chance = {
-        modifier = {
-            add = 10
-            OR = {
-                is_planet_class = "pc_tropical"
-                is_planet_class = "pc_ocean"
-                is_planet_class = "pc_savannah"
-                is_planet_class = "pc_continental"
-            }
-        }
-        modifier = {
-            factor = 2
-            has_planet_modifier = "pm_ui_swampy"
-        }
-        modifier = {
-            factor = 0
-            OR = {
-                has_planet_modifier = "pm_ui_dense_atmosphere"
-                has_planet_modifier = "pm_ui_thin_atmosphere"
-                has_planet_modifier = "pm_ui_extreme_temperatures"
-            }
-        }
-
-        modifier = {
-            factor = 0
-            num_modifiers > 1
-        }
-    }
-
-    modifier = "ui_dense_atmosphere"
-}
-
 pm_ui_toxic_soil = {
     spawn_chance = {
         modifier = {
             add = 10
             OR = {
-                is_planet_class = "pc_nuked"
                 is_planet_class = "pc_barren"
+                is_planet_class = "pc_nuked"
             }
         }
+
         modifier = {
             add = 5
             is_planet_class = "pc_volcanic"
         }
+
         modifier = {
             factor = 0
             OR = {
-                has_planet_modifier = "pm_ui_toxic_soil"
+                has_planet_modifier = "pm_ui_radioactive"
                 has_planet_modifier = "pm_ui_salty"
                 has_planet_modifier = "pm_ui_swampy"
+                has_planet_modifier = "pm_ui_toxic_soil"
             }
         }
 
@@ -235,36 +346,4 @@ pm_ui_toxic_soil = {
     }
 
     modifier = "ui_toxic_soil"
-}
-
-pm_ui_geological_instability = {
-    spawn_chance = {
-        modifier = {
-            add = 10
-            is_planet_class = "pc_volcanic"
-        }
-        modifier = {
-            add = 5
-            OR = {
-                is_planet_class = "pc_arid"
-                is_planet_class = "pc_desert"
-                is_planet_class = "pc_alpine"
-            }
-        }
-        modifier = {
-            factor = 0
-            OR = {
-                has_planet_modifier = "pm_ui_geological_instability"
-                has_planet_modifier = "pm_unstable_tectonics"
-                has_planet_modifier = "pm_abundant_geothermal_activity"
-            }
-        }
-
-        modifier = {
-            factor = 0
-            num_modifiers > 1
-        }
-    }
-
-    modifier = "ui_geological_instability"
 }

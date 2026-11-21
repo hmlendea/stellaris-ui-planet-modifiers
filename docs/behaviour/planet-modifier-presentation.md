@@ -4,7 +4,7 @@ This document describes what a player observes when inspecting a planet that car
 
 ## Observation: modifiers appear with a name, a description, and an icon
 
-Each of the eight new modifiers presents a short name, a one-sentence description, and a distinct icon.
+Each of the ten new modifiers presents a short name, a one-sentence description, and a distinct icon.
 
 Why: each effect block declares an `icon` path to a DDS texture, and the engine resolves a name and a `_desc` description from the effect key by convention.
 
@@ -14,12 +14,14 @@ Why: each effect block declares an `icon` path to a DDS texture, and the engine 
 |----------|--------------|-------------------|
 | `ui_extreme_temperatures` | Extreme Temperatures | Sub-zero nights, blazing days |
 | `ui_no_magnetic_field` | No Magnetic Field | Exposed to cosmic radiation |
+| `ui_radioactive` | Radioactive | Isotopes that sicken settlers and distort organic research |
 | `ui_salty` | Salty | Saline soils and waters hostile to growth |
 | `ui_swampy` | Swampy | Dense swamps render areas unworkable |
 | `ui_thin_atmosphere` | Thin Atmosphere | A whisper of an atmosphere, too thin to buffer the surface |
 | `ui_dense_atmosphere` | Dense Atmosphere | A heavy, crushing atmosphere that resists construction |
 | `ui_toxic_soil` | Toxic Soil | Toxic compounds poison the ground and leave it barren |
 | `ui_geological_instability` | Geological Instability | A restless crust whose tremors hinder construction |
+| `ui_superdense_core` | Superdense Core | A dense core whose minerals support wider development |
 
 Why: descriptions are written as flavour text rather than as a restatement of numeric effects, so they remain accurate when an effect value is rebalanced.
 
@@ -29,9 +31,9 @@ None of the new modifiers is presented in the prominent form.
 
 Why: no effect block sets `important = yes`. The flag is reserved by vanilla for modifiers that must show a planet nameplate, such as terraforming candidates.
 
-## Observation: icons are visually distinct but share a frame style
+## Observation: icons share a frame style except one
 
-All eight modifiers use icon frame 3. Each has its own texture.
+Nine of the ten modifiers use icon frame 3, the vanilla marker for a net penalty. `ui_superdense_core` uses frame 2, the mixed-block frame, because it carries an offsetting bonus. Each has its own texture.
 
 Why: `icon_frame` selects a presentation frame independently of the texture, and frame 3 is the vanilla marker for a net penalty.
 

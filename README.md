@@ -4,7 +4,7 @@
 
 # Universum Infinitum - Planet Modifiers
 
-A Stellaris mod that adds eight new planet modifiers — extreme temperatures, absence of a magnetic field, a thin atmosphere, a dense atmosphere, toxic soil, geological instability, salinity, and swampland — each with its own icon and English localisation, weighted to match the vanilla v4.5 planet modifier pool.
+A Stellaris mod that adds ten new planet modifiers — extreme temperatures, absence of a magnetic field, a thin atmosphere, a dense atmosphere, toxic soil, geological instability, a superdense core, radioactivity, salinity, and swampland — each with its own icon and English localisation, weighted to match the vanilla v4.5 planet modifier pool.
 
 ## 📑 Table of Contents
 
@@ -36,7 +36,7 @@ A Stellaris mod that adds eight new planet modifiers — extreme temperatures, a
 
 ## ✨ Capabilities
 
-- Adds eight new planet modifiers with distinct names, descriptions, and icons.
+- Adds ten new planet modifiers with distinct names, descriptions, and icons.
 - Gates each new modifier with planet-class and star-system conditions so that it appears on thematically plausible worlds.
 - Excludes mutually contradictory modifiers, so a planet never carries both a tidal lock and extreme temperatures, or two magnetic-field variants.
 - Excludes the new modifiers from vanilla modifiers that already cover the same theme, so no duplicate concept enters the pool.
@@ -93,7 +93,7 @@ Display names and descriptions are supplied through the host localisation system
 
 | Language | Locale | Status |
 |----------|--------|--------|
-| English | `en` | Complete: one name and one description for each of the eight new modifiers |
+| English | `en` | Complete: one name and one description for each of the ten new modifiers |
 
 ## 🧩 Compatibility
 
@@ -128,7 +128,7 @@ The repository is a Stellaris mod: a descriptor plus a content directory of defi
 | Directory | Purpose |
 |-----------|---------|
 | `ui-planet-modifiers/` | The mod content directory named by the descriptor `path` field |
-| `ui-planet-modifiers/common/planet_modifiers/` | Spawn-chance definitions: eight new modifiers and two vanilla redefinitions |
+| `ui-planet-modifiers/common/planet_modifiers/` | Spawn-chance definitions: ten new modifiers and two vanilla redefinitions |
 | `ui-planet-modifiers/common/static_modifiers/` | Effect blocks, icon bindings, icon frames, and importance flags |
 | `ui-planet-modifiers/gfx/interface/icons/planet_modifiers/` | DDS icon textures, one per new modifier |
 | `ui-planet-modifiers/localisation/english/` | English display names and descriptions |
@@ -189,7 +189,7 @@ See the [Code of Conduct](./CODE_OF_CONDUCT.md) for the standards of conduct exp
 - [Universum Infinitum - Flags](https://github.com/hmlendea/stellaris-ui-flags): Adds hundreds of new flag designs matching the vanilla flag style.
 - [Universum Infinitum - Galaxy Sizes](https://github.com/hmlendea/stellaris-ui-galaxy-sizes): Adds six galaxy sizes ranging from 100 to 2,000 stars, with scaled generation defaults.
 - [Universum Infinitum - Name Lists](https://github.com/hmlendea/stellaris-ui-name-lists): Provides numerous detailed name lists, including the Human - Extended variant.
-- [Universum Infinitum - Planet Modifiers](https://github.com/hmlendea/stellaris-ui-planet-modifiers): Adds eight new planet modifiers with their own icons and English localisation.
+- [Universum Infinitum - Planet Modifiers](https://github.com/hmlendea/stellaris-ui-planet-modifiers): Adds ten new planet modifiers with their own icons and English localisation.
 - [Universum Infinitum - Prescripted Countries](https://github.com/hmlendea/stellaris-ui-prescripted-countries): Adds prescripted countries for players to select or for the AI to use.
 - [Universum Infinitum - Species Names](https://github.com/hmlendea/stellaris-ui-species-names): Adds hundreds of new species names to the game.
 - [Universum Infinitum - Species Traits](https://github.com/hmlendea/stellaris-ui-species-traits): Adds 58 custom species traits and extends several trait families with additional tiers.

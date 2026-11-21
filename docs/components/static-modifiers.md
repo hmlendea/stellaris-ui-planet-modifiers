@@ -6,7 +6,7 @@ Define what each new modifier does to a planet, and bind it to the icon that rep
 
 ## Location
 
-`ui-planet-modifiers/common/static_modifiers/ui-planet-modifiers_static_modifiers.txt` — eight top-level `ui_*` blocks.
+`ui-planet-modifiers/common/static_modifiers/ui-planet-modifiers_static_modifiers.txt` — ten top-level `ui_*` blocks, ordered alphabetically by key.
 
 ## Structure
 
@@ -20,9 +20,19 @@ ui_<name> = {
 
 `icon` and `icon_frame` appear in every block, and so does at least one effect key: every new modifier now has a mechanical effect.
 
-`icon_frame` follows the vanilla convention: `3` for a net penalty, `2` for a mixed block with an offsetting bonus.
+`icon_frame` follows the vanilla convention: `3` for a net penalty, `2` for a mixed block with an offsetting bonus. Nine of the ten blocks use frame 3; `ui_superdense_core` uses frame 2.
 
 ## Per-modifier specification
+
+### `ui_dense_atmosphere`
+
+| Effect | Value |
+|--------|-------|
+| `pop_environment_tolerance` | −0.05 |
+| `planet_structures_cost_mult` | +0.10 |
+| `planet_jobs_society_research_produces_mult` | −0.05 |
+
+Presentation: `icon_frame = 3`.
 
 ### `ui_extreme_temperatures`
 
@@ -34,6 +44,15 @@ ui_<name> = {
 
 Presentation: `icon_frame = 3`.
 
+### `ui_geological_instability`
+
+| Effect | Value |
+|--------|-------|
+| `pop_environment_tolerance` | −0.05 |
+| `planet_structures_cost_mult` | +0.15 |
+
+Presentation: `icon_frame = 3`. This block carries the largest structure-cost penalty in the set.
+
 ### `ui_no_magnetic_field`
 
 | Effect | Value |
@@ -44,6 +63,16 @@ Presentation: `icon_frame = 3`.
 
 Presentation: `icon_frame = 3`. The growth effect uses `logistic_growth_mult`, the current replacement for the removed `pop_growth_speed`, which the previous revision set to no effect.
 
+### `ui_radioactive`
+
+| Effect | Value |
+|--------|-------|
+| `pop_happiness` | −0.05 |
+| `logistic_growth_mult` | −0.10 |
+| `planet_jobs_society_research_produces_mult` | −0.10 |
+
+Presentation: `icon_frame = 3`. This block carries the only habitability-free penalty set: it reduces happiness, growth, and organic research without touching environment tolerance.
+
 ### `ui_salty`
 
 | Effect | Value |
@@ -53,6 +82,15 @@ Presentation: `icon_frame = 3`. The growth effect uses `logistic_growth_mult`, t
 | `district_farming_max_add` | −2 |
 
 Presentation: `icon_frame = 3`. This block carries the largest food penalty in the set.
+
+### `ui_superdense_core`
+
+| Effect | Value |
+|--------|-------|
+| `planet_max_districts_add` | +1 |
+| `planet_structures_cost_mult` | +0.10 |
+
+Presentation: `icon_frame = 2`, the mixed block with an offsetting bonus. This is the only positive-net modifier in the set.
 
 ### `ui_swampy`
 
@@ -74,16 +112,6 @@ Presentation: `icon_frame = 3`.
 
 Presentation: `icon_frame = 3`.
 
-### `ui_dense_atmosphere`
-
-| Effect | Value |
-|--------|-------|
-| `pop_environment_tolerance` | −0.05 |
-| `planet_structures_cost_mult` | +0.10 |
-| `planet_jobs_society_research_produces_mult` | −0.05 |
-
-Presentation: `icon_frame = 3`.
-
 ### `ui_toxic_soil`
 
 | Effect | Value |
@@ -94,28 +122,20 @@ Presentation: `icon_frame = 3`.
 
 Presentation: `icon_frame = 3`. This block shares the largest food penalty in the set with `ui_salty`.
 
-### `ui_geological_instability`
-
-| Effect | Value |
-|--------|-------|
-| `pop_environment_tolerance` | −0.05 |
-| `planet_structures_cost_mult` | +0.15 |
-
-Presentation: `icon_frame = 3`. This block carries the largest structure-cost penalty in the set.
-
 ## Effect coverage
 
 | Effect key | Blocks | Values in use |
 |-----------|-------|---------------|
 | `pop_environment_tolerance` | 8 | −0.10, −0.05 |
-| `pop_happiness` | 2 | −0.05 |
-| `logistic_growth_mult` | 1 | −0.10 |
+| `pop_happiness` | 3 | −0.05 |
+| `logistic_growth_mult` | 2 | −0.10 |
 | `planet_jobs_food_produces_mult` | 4 | −0.15, −0.10 |
 | `planet_jobs_energy_produces_mult` | 1 | −0.10 |
 | `planet_jobs_physics_research_produces_mult` | 1 | −0.10 |
-| `planet_jobs_society_research_produces_mult` | 1 | −0.05 |
+| `planet_jobs_society_research_produces_mult` | 2 | −0.10, −0.05 |
 | `district_farming_max_add` | 2 | −2, −1 |
-| `planet_structures_cost_mult` | 3 | +0.15, +0.10 |
+| `planet_max_districts_add` | 1 | +1 |
+| `planet_structures_cost_mult` | 4 | +0.15, +0.10 |
 
 Sign convention: every value is expressed as a decimal fraction, and the sign is explicit only where the value is positive. Every magnitude sits inside the vanilla band for the comparable modifier: `hazardous_weather` and `bleak_planet` use a −0.10 habitability penalty, and `weak_magnetic_field` uses −0.05 on tolerance with −0.05 growth.
 
@@ -125,16 +145,18 @@ Each `icon` value is a repository-relative path beginning `gfx/interface/icons/p
 
 | Block | Icon reference | File exists |
 |-------|----------------|-------------|
+| `ui_dense_atmosphere` | `pm_ui_dense_atmosphere.dds` | Yes |
 | `ui_extreme_temperatures` | `pm_ui_extreme_temperatures.dds` | Yes |
+| `ui_geological_instability` | `pm_ui_geological_instability.dds` | Yes |
 | `ui_no_magnetic_field` | `pm_ui_no_magnetic_field.dds` | Yes |
+| `ui_radioactive` | `pm_ui_radioactive.dds` | Yes |
 | `ui_salty` | `pm_ui_salty.dds` | Yes |
+| `ui_superdense_core` | `pm_ui_superdense_core.dds` | Yes |
 | `ui_swampy` | `pm_ui_swampy.dds` | Yes |
 | `ui_thin_atmosphere` | `pm_ui_thin_atmosphere.dds` | Yes |
-| `ui_dense_atmosphere` | `pm_ui_dense_atmosphere.dds` | Yes |
 | `ui_toxic_soil` | `pm_ui_toxic_soil.dds` | Yes |
-| `ui_geological_instability` | `pm_ui_geological_instability.dds` | Yes |
 
-Every reference resolves, and every file in the icon directory is referenced, so the mapping is bijective.
+Every reference resolves, and every file in the icon directory is referenced by exactly one block, so the mapping is bijective.
 
 ## Host-owned effects referenced through redefinitions
 

@@ -14,19 +14,19 @@ Only the host game. There are no third-party libraries, no package manifest, and
 
 ## What does it add?
 
-Eight new planet modifiers — extreme temperatures, absence of a magnetic field, a thin atmosphere, a dense atmosphere, toxic soil, geological instability, salinity, and swampland — each with its own icon and English localisation, plus two vanilla magnetic-field redefinitions so the new entry cannot coexist with them.
+Ten new planet modifiers — extreme temperatures, absence of a magnetic field, a thin atmosphere, a dense atmosphere, toxic soil, geological instability, a superdense core, radioactivity, salinity, and swampland — each with its own icon and English localisation, plus two vanilla magnetic-field redefinitions so the new entry cannot coexist with them.
 
 ## Do the new modifiers make planets better?
 
-They make planets worse. Every new modifier reduces habitability, and most also reduce happiness, growth, food production, or physics research. The mod adds variety and difficulty rather than power.
+Mostly, but one is a boon. Nine of the ten new modifiers reduce habitability, and most of those also reduce happiness, growth, food production, or research. The exception is `pm_ui_superdense_core`, which grants one extra district at the cost of a construction penalty. The mod adds variety and difficulty rather than broad power.
 
 ## Why does a planet already carrying a modifier seem to reject the new ones?
 
-All eight definitions carry a `num_modifiers > 1` condition evaluated with `factor = 0`, which excludes the modifier once another is present. This matches the vanilla convention and is uniform across the set.
+All ten definitions carry a `num_modifiers > 1` condition evaluated with `factor = 0`, which excludes the modifier once another is present. This matches the vanilla convention and is uniform across the set.
 
 ## Can two contradictory modifiers appear together?
 
-Not for the pairs the mod declares. Salty, swampy, and toxic soil exclude each other as a trio, as do thin atmosphere, dense atmosphere, and extreme temperatures, and the magnetic-field variants share an exclusion list. Geological instability excludes the vanilla tectonic and geothermal modifiers in one direction only, as extreme temperatures excludes `pm_tidal_locked`, because those vanilla definitions are not re-declared.
+Not for the pairs the mod declares. Salty, swampy, and toxic soil exclude each other as a trio, as do dense atmosphere, extreme temperatures, and thin atmosphere. Radioactive excludes the no-magnetic-field and toxic-soil modifiers, and geological instability excludes the vanilla tectonic and geothermal modifiers in one direction only, because those vanilla definitions are not re-declared.
 
 ## Why can high gravity never appear on a small planet?
 

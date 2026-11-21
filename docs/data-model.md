@@ -73,23 +73,25 @@ A static modifier is a top-level key of the form `ui_<name>` whose body contains
 
 | Effect key | Direction | Modifiers using it |
 |-----------|-----------|--------------------|
-| `pop_environment_tolerance` | Negative | All eight blocks |
-| `pop_happiness` | Negative | `ui_extreme_temperatures`, `ui_thin_atmosphere` |
-| `logistic_growth_mult` | Negative | `ui_no_magnetic_field` |
+| `pop_environment_tolerance` | Negative | Eight blocks |
+| `pop_happiness` | Negative | `ui_extreme_temperatures`, `ui_radioactive`, `ui_thin_atmosphere` |
+| `logistic_growth_mult` | Negative | `ui_no_magnetic_field`, `ui_radioactive` |
 | `planet_jobs_food_produces_mult` | Negative | `ui_extreme_temperatures`, `ui_salty`, `ui_swampy`, `ui_toxic_soil` |
 | `planet_jobs_energy_produces_mult` | Negative | `ui_thin_atmosphere` |
 | `planet_jobs_physics_research_produces_mult` | Negative | `ui_no_magnetic_field` |
-| `planet_jobs_society_research_produces_mult` | Negative | `ui_dense_atmosphere` |
+| `planet_jobs_society_research_produces_mult` | Negative | `ui_dense_atmosphere`, `ui_radioactive` |
 | `district_farming_max_add` | Negative | `ui_salty`, `ui_toxic_soil` |
-| `planet_structures_cost_mult` | Positive | `ui_swampy`, `ui_dense_atmosphere`, `ui_geological_instability` |
+| `planet_max_districts_add` | Positive | `ui_superdense_core` |
+| `planet_structures_cost_mult` | Positive | `ui_swampy`, `ui_dense_atmosphere`, `ui_geological_instability`, `ui_superdense_core` |
 
 ### Icon frames in use
 
 | `icon_frame` | Modifiers | Count |
 |--------------|-----------|-------|
-| `3` | `ui_extreme_temperatures`, `ui_no_magnetic_field`, `ui_salty`, `ui_swampy`, `ui_thin_atmosphere`, `ui_dense_atmosphere`, `ui_toxic_soil`, `ui_geological_instability` | 8 |
+| `3` | `ui_dense_atmosphere`, `ui_extreme_temperatures`, `ui_geological_instability`, `ui_no_magnetic_field`, `ui_radioactive`, `ui_salty`, `ui_swampy`, `ui_thin_atmosphere`, `ui_toxic_soil` | 9 |
+| `2` | `ui_superdense_core` | 1 |
 
-Every block uses frame 3, the vanilla convention for a net penalty.
+Frame 3 is the vanilla convention for a net penalty; `ui_superdense_core` uses frame 2, the mixed block with an offsetting bonus.
 
 ## Record type: localisation key
 
@@ -110,22 +112,24 @@ Keys are resolved by name convention from the effect-tier key; no field referenc
 | Naming | `pm_ui_<name>.dds` |
 | Format | Microsoft DirectDraw Surface, 32-bit ARGB8888 |
 | Dimensions | 60 x 60 |
-| Count | Eight, one per new modifier |
+| Count | Ten, one per new modifier |
 
 ## Full inventory of new modifiers
 
 | Definition key | Effect key | Icon file | `icon_frame` | `important` | Accumulation guard |
 |----------------|-----------|-----------|--------------|-------------|--------------------|
+| `pm_ui_dense_atmosphere` | `ui_dense_atmosphere` | `pm_ui_dense_atmosphere.dds` | 3 | No | `num_modifiers > 1` |
 | `pm_ui_extreme_temperatures` | `ui_extreme_temperatures` | `pm_ui_extreme_temperatures.dds` | 3 | No | `num_modifiers > 1` |
+| `pm_ui_geological_instability` | `ui_geological_instability` | `pm_ui_geological_instability.dds` | 3 | No | `num_modifiers > 1` |
 | `pm_ui_no_magnetic_field` | `ui_no_magnetic_field` | `pm_ui_no_magnetic_field.dds` | 3 | No | `num_modifiers > 1` |
+| `pm_ui_radioactive` | `ui_radioactive` | `pm_ui_radioactive.dds` | 3 | No | `num_modifiers > 1` |
 | `pm_ui_salty` | `ui_salty` | `pm_ui_salty.dds` | 3 | No | `num_modifiers > 1` |
+| `pm_ui_superdense_core` | `ui_superdense_core` | `pm_ui_superdense_core.dds` | 2 | No | `num_modifiers > 1` |
 | `pm_ui_swampy` | `ui_swampy` | `pm_ui_swampy.dds` | 3 | No | `num_modifiers > 1` |
 | `pm_ui_thin_atmosphere` | `ui_thin_atmosphere` | `pm_ui_thin_atmosphere.dds` | 3 | No | `num_modifiers > 1` |
-| `pm_ui_dense_atmosphere` | `ui_dense_atmosphere` | `pm_ui_dense_atmosphere.dds` | 3 | No | `num_modifiers > 1` |
 | `pm_ui_toxic_soil` | `ui_toxic_soil` | `pm_ui_toxic_soil.dds` | 3 | No | `num_modifiers > 1` |
-| `pm_ui_geological_instability` | `ui_geological_instability` | `pm_ui_geological_instability.dds` | 3 | No | `num_modifiers > 1` |
 
-All eight definition keys, effect keys, and icon file stems agree. One further icon, `pm_ui_radioactive.dds`, is present but unreferenced, staged for a future modifier.
+All ten definition keys, effect keys, and icon file stems agree, and every row is listed in alphabetical order by definition key.
 
 ## Full inventory of spawn-chance redefinitions
 
