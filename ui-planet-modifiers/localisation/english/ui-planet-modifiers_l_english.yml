@@ -11,3 +11,5 @@
  ui_swampy:0 "Swampy"
  ui_thin_atmosphere_desc:0 "This world has only a whisper of an atmosphere, too little to buffer its surface or hold on to the heat it receives."
  ui_thin_atmosphere:0 "Thin Atmosphere"
+ ui_toxic_soil_desc:0 "This world's soils are laced with toxic compounds, poisoning the ground and leaving it barren of anything worth growing."
+ ui_toxic_soil:0 "Toxic Soil"

@@ -2,7 +2,7 @@
 
 ## Responsibility
 
-Supply the human-readable display name and description for each of the six new planet modifiers.
+Supply the human-readable display name and description for each of the seven new planet modifiers.
 
 ## Location
 
@@ -14,7 +14,7 @@ Supply the human-readable display name and description for each of the six new p
 |----------|-------|
 | Encoding | UTF-8 with byte-order mark (`EF BB BF`) |
 | Document root | `l_english:` |
-| Entries | 12 (six names, six descriptions) |
+| Entries | 14 (seven names, seven descriptions) |
 | Language directory | `english/` |
 | Naming | `<mod>_l_<locale>.yml` |
 
@@ -42,8 +42,9 @@ Because resolution is by convention, a key typo produces no parse error. The int
 | `ui_salty` | Salty | `ui_salty_desc` |
 | `ui_swampy` | Swampy | `ui_swampy_desc` |
 | `ui_thin_atmosphere` | Thin Atmosphere | `ui_thin_atmosphere_desc` |
+| `ui_toxic_soil` | Toxic Soil | `ui_toxic_soil_desc` |
 
-All six effect keys have both entries, so key-derived assumptions hold for every display name in the file.
+All seven effect keys have both entries, so key-derived assumptions hold for every display name in the file.
 
 ## Ordering
 
@@ -60,6 +61,7 @@ Entries are grouped in pairs and the file order is alphabetical by key, not by t
 | `ui_salty_desc` | Extremely saline soils and waters, hostile to growth |
 | `ui_swampy_desc` | Dense swamps rendering large areas dangerous and unworkable |
 | `ui_thin_atmosphere_desc` | A whisper of an atmosphere, too thin to buffer the surface or hold heat |
+| `ui_toxic_soil_desc` | Toxic compounds in the soil poison the ground and leave it barren |
 
 Descriptions are thematic narrative rather than a statement of numeric effects, so they do not need to be revised when an effect value changes in the [static modifier component](./static-modifiers.md). They were revised alongside the v4.5 rebalance wherever the concept sharpened, and they should be revised again if a modifier's concept changes.
 

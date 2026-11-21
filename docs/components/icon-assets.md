@@ -8,7 +8,7 @@ Provide the visual representation of each new planet modifier in the interface, 
 
 | Path | Role |
 |------|------|
-| `ui-planet-modifiers/gfx/interface/icons/planet_modifiers/` | Six DDS textures consumed by the engine |
+| `ui-planet-modifiers/gfx/interface/icons/planet_modifiers/` | Seven DDS textures consumed by the engine |
 | `src/planet_modifier.xcf` | Editable GIMP source, outside the content directory |
 
 ## Inventory
@@ -21,8 +21,9 @@ Provide the visual representation of each new planet modifier in the interface, 
 | `pm_ui_swampy.dds` | 14,528 bytes | DDS, 32-bit ARGB8888 | 60 x 60 | `ui_swampy` |
 | `pm_ui_thin_atmosphere.dds` | 14,528 bytes | DDS, 32-bit ARGB8888 | 60 x 60 | `ui_thin_atmosphere` |
 | `pm_ui_dense_atmosphere.dds` | 14,528 bytes | DDS, 32-bit ARGB8888 | 60 x 60 | `ui_dense_atmosphere` |
+| `pm_ui_toxic_soil.dds` | 14,528 bytes | DDS, 32-bit ARGB8888 | 60 x 60 | `ui_toxic_soil` |
 
-Every file is the same size and format, and all six are referenced, so the asset set and the effect set are in exact correspondence.
+Every file is the same size and format, and all seven are referenced, so the asset set and the effect set are in exact correspondence.
 
 ## Source artwork
 

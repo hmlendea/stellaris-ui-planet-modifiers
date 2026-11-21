@@ -96,6 +96,7 @@ pm_ui_salty = {
             OR = {
                 has_planet_modifier = "pm_ui_salty"
                 has_planet_modifier = "pm_ui_swampy"
+                has_planet_modifier = "pm_ui_toxic_soil"
             }
         }
 
@@ -123,6 +124,7 @@ pm_ui_swampy = {
             OR = {
                 has_planet_modifier = "pm_ui_swampy"
                 has_planet_modifier = "pm_ui_salty"
+                has_planet_modifier = "pm_ui_toxic_soil"
             }
         }
 
@@ -202,4 +204,35 @@ pm_ui_dense_atmosphere = {
     }
 
     modifier = "ui_dense_atmosphere"
+}
+
+pm_ui_toxic_soil = {
+    spawn_chance = {
+        modifier = {
+            add = 10
+            OR = {
+                is_planet_class = "pc_nuked"
+                is_planet_class = "pc_barren"
+            }
+        }
+        modifier = {
+            add = 5
+            is_planet_class = "pc_volcanic"
+        }
+        modifier = {
+            factor = 0
+            OR = {
+                has_planet_modifier = "pm_ui_toxic_soil"
+                has_planet_modifier = "pm_ui_salty"
+                has_planet_modifier = "pm_ui_swampy"
+            }
+        }
+
+        modifier = {
+            factor = 0
+            num_modifiers > 1
+        }
+    }
+
+    modifier = "ui_toxic_soil"
 }

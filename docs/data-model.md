@@ -73,21 +73,21 @@ A static modifier is a top-level key of the form `ui_<name>` whose body contains
 
 | Effect key | Direction | Modifiers using it |
 |-----------|-----------|--------------------|
-| `pop_environment_tolerance` | Negative | All six blocks |
+| `pop_environment_tolerance` | Negative | All seven blocks |
 | `pop_happiness` | Negative | `ui_extreme_temperatures`, `ui_thin_atmosphere` |
 | `logistic_growth_mult` | Negative | `ui_no_magnetic_field` |
-| `planet_jobs_food_produces_mult` | Negative | `ui_extreme_temperatures`, `ui_salty`, `ui_swampy` |
+| `planet_jobs_food_produces_mult` | Negative | `ui_extreme_temperatures`, `ui_salty`, `ui_swampy`, `ui_toxic_soil` |
 | `planet_jobs_energy_produces_mult` | Negative | `ui_thin_atmosphere` |
 | `planet_jobs_physics_research_produces_mult` | Negative | `ui_no_magnetic_field` |
 | `planet_jobs_society_research_produces_mult` | Negative | `ui_dense_atmosphere` |
-| `district_farming_max_add` | Negative | `ui_salty` |
+| `district_farming_max_add` | Negative | `ui_salty`, `ui_toxic_soil` |
 | `planet_structures_cost_mult` | Positive | `ui_swampy`, `ui_dense_atmosphere` |
 
 ### Icon frames in use
 
 | `icon_frame` | Modifiers | Count |
 |--------------|-----------|-------|
-| `3` | `ui_extreme_temperatures`, `ui_no_magnetic_field`, `ui_salty`, `ui_swampy`, `ui_thin_atmosphere`, `ui_dense_atmosphere` | 6 |
+| `3` | `ui_extreme_temperatures`, `ui_no_magnetic_field`, `ui_salty`, `ui_swampy`, `ui_thin_atmosphere`, `ui_dense_atmosphere`, `ui_toxic_soil` | 7 |
 
 Every block uses frame 3, the vanilla convention for a net penalty.
 
@@ -110,7 +110,7 @@ Keys are resolved by name convention from the effect-tier key; no field referenc
 | Naming | `pm_ui_<name>.dds` |
 | Format | Microsoft DirectDraw Surface, 32-bit ARGB8888 |
 | Dimensions | 60 x 60 |
-| Count | Six, one per new modifier |
+| Count | Seven, one per new modifier |
 
 ## Full inventory of new modifiers
 
@@ -122,8 +122,9 @@ Keys are resolved by name convention from the effect-tier key; no field referenc
 | `pm_ui_swampy` | `ui_swampy` | `pm_ui_swampy.dds` | 3 | No | `num_modifiers > 1` |
 | `pm_ui_thin_atmosphere` | `ui_thin_atmosphere` | `pm_ui_thin_atmosphere.dds` | 3 | No | `num_modifiers > 1` |
 | `pm_ui_dense_atmosphere` | `ui_dense_atmosphere` | `pm_ui_dense_atmosphere.dds` | 3 | No | `num_modifiers > 1` |
+| `pm_ui_toxic_soil` | `ui_toxic_soil` | `pm_ui_toxic_soil.dds` | 3 | No | `num_modifiers > 1` |
 
-All six definition keys, effect keys, and icon file stems agree.
+All seven definition keys, effect keys, and icon file stems agree.
 
 ## Full inventory of spawn-chance redefinitions
 

@@ -73,7 +73,7 @@ The two files under `common/planet_modifiers/` are not parallel halves of one co
 | Aspect | `ui-planet-modifiers.txt` | `ui-planet-modifiers-vanillas.txt` |
 |--------|---------------------------|-------------------------------------|
 | Purpose | Introduce new modifiers | Replace a few host definitions so their spawn conditions exclude the new modifiers |
-| Keys | Six brand-new `pm_ui_*` keys | Two vanilla keys: `pm_weak_magnetic_field`, `pm_strong_magnetic_field` |
+| Keys | Seven brand-new `pm_ui_*` keys | Two vanilla keys: `pm_weak_magnetic_field`, `pm_strong_magnetic_field` |
 | `modifier` target | Newly defined `ui_*` effect keys | The matching vanilla effect keys |
 | Effect tier owned here | Yes, in the sibling static modifier file | No, effects belong to the host |
 | Exclusions | Exclude the new modifiers and relevant vanilla modifiers | Exclude the new modifier that overlaps the same theme |

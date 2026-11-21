@@ -14,7 +14,7 @@ Only the host game. There are no third-party libraries, no package manifest, and
 
 ## What does it add?
 
-Six new planet modifiers — extreme temperatures, absence of a magnetic field, a thin atmosphere, a dense atmosphere, salinity, and swampland — each with its own icon and English localisation, plus two vanilla magnetic-field redefinitions so the new entry cannot coexist with them.
+Seven new planet modifiers — extreme temperatures, absence of a magnetic field, a thin atmosphere, a dense atmosphere, toxic soil, salinity, and swampland — each with its own icon and English localisation, plus two vanilla magnetic-field redefinitions so the new entry cannot coexist with them.
 
 ## Do the new modifiers make planets better?
 
@@ -22,11 +22,11 @@ They make planets worse. Every new modifier reduces habitability, and most also 
 
 ## Why does a planet already carrying a modifier seem to reject the new ones?
 
-All six definitions carry a `num_modifiers > 1` condition evaluated with `factor = 0`, which excludes the modifier once another is present. This matches the vanilla convention and is uniform across the set.
+All seven definitions carry a `num_modifiers > 1` condition evaluated with `factor = 0`, which excludes the modifier once another is present. This matches the vanilla convention and is uniform across the set.
 
 ## Can two contradictory modifiers appear together?
 
-Not for the pairs the mod declares. Salty and swampy exclude each other, and the magnetic-field variants share an exclusion list. Extreme temperatures excludes `pm_tidal_locked` in one direction only, because the vanilla definition is no longer re-declared.
+Not for the pairs the mod declares. Salty, swampy, and toxic soil exclude each other as a trio, as do thin atmosphere, dense atmosphere, and extreme temperatures, and the magnetic-field variants share an exclusion list. Extreme temperatures excludes `pm_tidal_locked` in one direction only, because the vanilla definition is no longer re-declared.
 
 ## Why can high gravity never appear on a small planet?
 

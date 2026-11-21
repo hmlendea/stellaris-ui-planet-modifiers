@@ -2,11 +2,11 @@
 
 ## Responsibility
 
-Declare the six new planet modifiers and the relative probability with which the engine may assign each to a generated planet.
+Declare the seven new planet modifiers and the relative probability with which the engine may assign each to a generated planet.
 
 ## Location
 
-`ui-planet-modifiers/common/planet_modifiers/ui-planet-modifiers.txt` — a single file containing six top-level `pm_ui_*` definitions.
+`ui-planet-modifiers/common/planet_modifiers/ui-planet-modifiers.txt` — a single file containing seven top-level `pm_ui_*` definitions.
 
 ## Structure
 
@@ -53,7 +53,16 @@ Only the final `modifier` string and the `spawn_chance` block are structurally r
 |--------|--------|
 | `add = 10` on `pc_barren` | Base weight 10 on barren worlds |
 | `add = 5` on `pc_barren_cold`, `pc_desert`, `pc_arid`, `pc_ocean` | Base weight 5 elsewhere |
-| `factor = 0` when the planet already has `pm_ui_salty` or `pm_ui_swampy` | Excludes the water-quality conflict |
+| `factor = 0` when the planet already has `pm_ui_salty`, `pm_ui_swampy`, or `pm_ui_toxic_soil` | Excludes the soil-quality trio |
+| `factor = 0` when `num_modifiers > 1` | Accumulation guard |
+
+### `pm_ui_toxic_soil` → `ui_toxic_soil`
+
+| Clause | Effect |
+|--------|--------|
+| `add = 10` on `pc_nuked`, `pc_barren` | Base weight 10 on irradiated, lifeless worlds |
+| `add = 5` on `pc_volcanic` | Base weight 5 on volcanic worlds |
+| `factor = 0` when the planet already has `pm_ui_toxic_soil`, `pm_ui_salty`, or `pm_ui_swampy` | Excludes the duplicate and the soil-quality trio |
 | `factor = 0` when `num_modifiers > 1` | Accumulation guard |
 
 ### `pm_ui_swampy` → `ui_swampy`
@@ -62,7 +71,7 @@ Only the final `modifier` string and the `spawn_chance` block are structurally r
 |--------|--------|
 | `add = 10` on `pc_tropical` | Base weight 10 on tropical worlds |
 | `add = 5` on `pc_ocean` | Base weight 5 on ocean worlds |
-| `factor = 0` when the planet already has `pm_ui_swampy` or `pm_ui_salty` | Excludes the water-quality conflict |
+| `factor = 0` when the planet already has `pm_ui_salty`, `pm_ui_swampy`, or `pm_ui_toxic_soil` | Excludes the soil-quality trio |
 | `factor = 0` when `num_modifiers > 1` | Accumulation guard |
 
 ### `pm_ui_thin_atmosphere` → `ui_thin_atmosphere`
@@ -83,7 +92,7 @@ Only the final `modifier` string and the `spawn_chance` block are structurally r
 | `factor = 0` when the planet already has `pm_ui_dense_atmosphere`, `pm_ui_thin_atmosphere`, or `pm_ui_extreme_temperatures` | Excludes the duplicate and the atmosphere-composition overlaps |
 | `factor = 0` when `num_modifiers > 1` | Accumulation guard |
 
-All six definitions carry an accumulation guard and at least one exclusion.
+All seven definitions carry an accumulation guard and at least one exclusion.
 
 ## Weight calibration
 
@@ -93,16 +102,17 @@ Vanilla v4.5 uses `add = 10` for a common class outcome, `add = 5` for an uncomm
 
 Read each cell as: the row's modifier, when already assigned, causes the column's modifier to be excluded.
 
-| Already assigned ↓ excludes → | extreme temps | no magnetic field | salty | swampy | thin atmosphere | dense atmosphere |
-|-------------------------------|---------------|-------------------|-------|--------|-----------------|------------------|
-| `pm_ui_extreme_temperatures` | yes | no | no | no | yes | yes |
-| `pm_ui_no_magnetic_field` | no | yes | no | no | no | no |
-| `pm_ui_salty` | no | no | yes | yes | no | no |
-| `pm_ui_swampy` | no | no | yes | yes | no | no |
-| `pm_ui_thin_atmosphere` | yes | no | no | no | yes | yes |
-| `pm_ui_dense_atmosphere` | yes | no | no | no | yes | yes |
+| Already assigned ↓ excludes → | extreme temps | no magnetic field | salty | swampy | thin atmosphere | dense atmosphere | toxic soil |
+|-------------------------------|---------------|-------------------|-------|--------|-----------------|------------------|-----------|
+| `pm_ui_extreme_temperatures` | yes | no | no | no | yes | yes | no |
+| `pm_ui_no_magnetic_field` | no | yes | no | no | no | no | no |
+| `pm_ui_salty` | no | no | yes | yes | no | no | yes |
+| `pm_ui_swampy` | no | no | yes | yes | no | no | yes |
+| `pm_ui_thin_atmosphere` | yes | no | no | no | yes | yes | no |
+| `pm_ui_dense_atmosphere` | yes | no | no | no | yes | yes | no |
+| `pm_ui_toxic_soil` | no | no | yes | yes | no | no | yes |
 
-`pm_ui_thin_atmosphere`, `pm_ui_dense_atmosphere`, and `pm_ui_extreme_temperatures` form a mutually exclusive trio: each excludes the other two. Every other conflict is symmetric, so no pair depends on evaluation order. `pm_ui_extreme_temperatures` additionally excludes, and is excluded by, the vanilla `pm_tidal_locked` through the override file; `pm_ui_thin_atmosphere` excludes the vanilla `pm_bleak`, which is not re-declared, so that pair is one-sided.
+Two mutually exclusive trios exist. `pm_ui_thin_atmosphere`, `pm_ui_dense_atmosphere`, and `pm_ui_extreme_temperatures` form the atmosphere-composition trio; `pm_ui_salty`, `pm_ui_swampy`, and `pm_ui_toxic_soil` form the soil-quality trio. Within each trio every member excludes the other two, and every other conflict is symmetric, so no pair depends on evaluation order. `pm_ui_extreme_temperatures` additionally excludes, and is excluded by, the vanilla `pm_tidal_locked` through the override file; `pm_ui_thin_atmosphere` excludes the vanilla `pm_bleak`, which is not re-declared, so that pair is one-sided.
 
 ## Dependants
 
